@@ -37,12 +37,6 @@ public class Util {
         HttpMethod method =HttpMethod.POST;
         // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
         MultiValueMap<String, String> params= new LinkedMultiValueMap<String, String>();
-        params.add("data", "-----BEGIN PUBLIC KEY-----\n" +
-                "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbJ2QYNdiFlzE0mcyq7tcZc5dP\n" +
-                "vof6696l2cJJM8kOxeXT8EonfvLzfsEGmwjNp3gvAyF14LvqT6w7oH40sFFnX358\n" +
-                "Eb+HZXx6CZ4LOkaTW0KNS6yodsRv0uwJhFMwREqEVbqd6jcCxTGKDOieendC8x1f\n" +
-                "sg3Muagyfawc+o+tewIDAQAB\n" +
-                "-----END PUBLIC KEY-----^^^"+upass);
         params.add("data", VolunteerProperties.getRsa()+upass);
         params.add("type", "rsapubkey");
         params.add("arg", "pad=1_s=gb2312_t=0");
