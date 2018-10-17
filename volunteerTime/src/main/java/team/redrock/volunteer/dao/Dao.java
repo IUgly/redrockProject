@@ -1,9 +1,6 @@
 package team.redrock.volunteer.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import team.redrock.volunteer.vo.Record;
 import team.redrock.volunteer.vo.User;
@@ -27,4 +24,7 @@ public interface Dao {
 
     @Update("update id_account set account=#{account},password=#{password} where uid = #{uid}")
     Boolean updateUser(User user);
+
+    @Delete("delete from record where uid = #{uid}")
+    Boolean deleteRecord(String uid);
 }

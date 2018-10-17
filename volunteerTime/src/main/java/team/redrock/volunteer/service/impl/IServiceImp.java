@@ -62,4 +62,9 @@ public class IServiceImp implements IService {
         String code = jsonObject.get("code").getAsString();
         return code;
     }
+
+    @Override
+    public Boolean deleteRecord(String uid) {
+        return this.dao.deleteRecord(uid);
+    }
 }

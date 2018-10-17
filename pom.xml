@@ -109,7 +109,7 @@
         <defaultGoal>compile</defaultGoal>
     </build>
     <modules>
-        <module>cxzy</module>
+        <module>volunteerTime</module>
         <module>wzdq</module>
     </modules>
 </project>

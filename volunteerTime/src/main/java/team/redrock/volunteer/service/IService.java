@@ -18,4 +18,6 @@ public interface IService {
 
     public String login(String account, String password);
 
+    public Boolean deleteRecord(String uid);
+
 }

@@ -2,38 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>team.redrock</groupId>
         <artifactId>redrockProject</artifactId>
+        <groupId>team.redrock</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>wzdq</artifactId>
     <packaging>war</packaging>
-    <artifactId>microboot-volunteerTime</artifactId>
-    <name>microboot-volunteer</name>
+    <name>microboot-wzdq</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.10.3</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.0</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -48,9 +30,9 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>druid</artifactId>
-    </dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -109,20 +91,15 @@
             <artifactId>weixin-java-mp</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.mks.api</groupId>
-            <artifactId>mksapi-jar</artifactId>
-            <version>4.10.9049</version>
-        </dependency>
     </dependencies>
     <build>
-        <finalName>zycx</finalName>
+        <finalName>Demo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>volunteerTime</warName>
+                    <warName>cxzy</warName>
                 </configuration>
             </plugin>
         </plugins>

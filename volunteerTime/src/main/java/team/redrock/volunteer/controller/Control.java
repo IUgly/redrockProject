@@ -34,19 +34,25 @@ public class Control extends AbstractBaseController {
         if (resp!=null){
             return resp;
         }
-        List<Record> recordList = this.iServiceImp.selectRecordList(uid);
-        if (recordList.size()==0){
-             String code = this.iServiceImp.login(user.getAccount(), user.getPassword());
-             if (!code.equals("0")){
-                 return Util.assembling("3", "该志愿者账号密码被修改，请重新绑定", "");
-             }
-            recordList =  ReptileUtil.detail(user.getAccount(), user.getPassword());
+        String code = this.iServiceImp.login(user.getAccount(), user.getPassword());
+        if (!code.equals("0")){
+            return Util.assembling("3", "该志愿者账号密码被修改，请重新绑定", "");
+        }
+        List<Record> recordList =  ReptileUtil.detail(user.getAccount(), user.getPassword());
+
+        if (recordList==null){
+            recordList = this.iServiceImp.selectRecordList(uid);
+        }else {
+            this.iServiceImp.deleteRecord(uid);
+            for (int i = 0; i < recordList.size(); i++) {
+                Record record = recordList.get(i);
+                record.setUid(uid);
+                this.iServiceImp.insertRecord(record);
+            }
         }
         double allHours = 0.0;
         for (int i=0; i<recordList.size(); i++){
             Record record = recordList.get(i);
-            record.setUid(uid);
-            this.iServiceImp.insertRecord(record);
 
             allHours = allHours+Double.parseDouble(record.getHours());
         }

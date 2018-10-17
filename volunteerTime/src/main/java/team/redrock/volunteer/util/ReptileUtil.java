@@ -19,6 +19,9 @@ public class ReptileUtil {
         String html = ImitateLogin.ImitateLogin(account,pswd);
         Document doc = Jsoup.parse(html);//解析HTML字符串返回一个Document实现
         Element content = doc.select("table").first();//查找第一个a元素
+        if (content==null){
+            return null;
+        }
         Elements links = content.getElementsByTag("tr");
 
         Element linkFirst = links.first();
