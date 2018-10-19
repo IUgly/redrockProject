@@ -9,7 +9,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import team.redrock.volunteer.config.Config;
-import team.redrock.volunteer.config.VolunteerProperties;
 
 import javax.annotation.PostConstruct;
 
@@ -25,9 +24,6 @@ public class ImitateLogin {
     }
 
     public static String ImitateLogin(String name, String pswd) {
-//        String loginUrl = VolunteerProperties.getLoginUrl();
-//        // 需登陆后访问的 Url
-//        String dataUrl = VolunteerProperties.getTimeUrl();
         String loginUrl = configDouble.getLoginUrl();
         String dataUrl = configDouble.getTimeUrl();
 

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import team.redrock.volunteer.config.Config;
-import team.redrock.volunteer.config.VolunteerProperties;
 import team.redrock.volunteer.dao.Dao;
 import team.redrock.volunteer.util.HttpClient;
 import team.redrock.volunteer.service.IService;
@@ -52,7 +51,6 @@ public class IServiceImp implements IService {
     @Override
     public String login(String account, String password) {
 
-//        String url = VolunteerProperties.getLoginUrl();
         String url = config.getLoginUrl();
         HttpMethod method = HttpMethod.POST;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
