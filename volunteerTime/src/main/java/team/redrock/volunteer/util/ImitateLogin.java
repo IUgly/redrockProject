@@ -6,13 +6,30 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import team.redrock.volunteer.config.Config;
 import team.redrock.volunteer.config.VolunteerProperties;
 
+import javax.annotation.PostConstruct;
+
+@Component
 public class ImitateLogin {
+    @Autowired
+    private Config config;
+    private static Config configDouble;
+
+    @PostConstruct
+    public void init(){
+        configDouble = config;
+    }
+
     public static String ImitateLogin(String name, String pswd) {
-        String loginUrl = VolunteerProperties.getLoginUrl();
-        // 需登陆后访问的 Url
-        String dataUrl = VolunteerProperties.getTimeUrl();
+//        String loginUrl = VolunteerProperties.getLoginUrl();
+//        // 需登陆后访问的 Url
+//        String dataUrl = VolunteerProperties.getTimeUrl();
+        String loginUrl = configDouble.getLoginUrl();
+        String dataUrl = configDouble.getTimeUrl();
 
         HttpClient httpClient = new HttpClient();
 
