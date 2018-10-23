@@ -4,8 +4,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -13,7 +21,11 @@ import org.springframework.util.MultiValueMap;
 import team.redrock.volunteer.config.Config;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class Util {
@@ -47,7 +59,7 @@ public class Util {
         return json.toString();
     }
 
-    public static String getRSA(String upass){
+    public static String getRSA(String upass) throws IOException {
         String url = "http://tool.chacuo.net/cryptrsapubkey";
         HttpMethod method =HttpMethod.POST;
         // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
@@ -56,12 +68,72 @@ public class Util {
         params.add("data", configDouble.getRsa() + upass);
         params.add("type", "rsapubkey");
         params.add("arg", "pad=1_s=gb2312_t=0");
-        //发送http请求并返回结果
-        String str = HttpClient.client(url, method, params);
+
+        Map<String, String> map= new HashMap<>();
+
+        map.put("data", configDouble.getRsa() + upass);
+        map.put("type", "rsapubkey");
+        map.put("arg", "pad=1_s=gb2312_t=0");
+
+        String str = send(url, map, "utf-8");
 
         JsonObject returnData = new JsonParser().parse(str).getAsJsonObject();
         String json = String.valueOf(returnData.get("data"));
         return json.substring(2, json.length()-2);
+    }
+
+    public static String login(String account, String password) throws IOException {
+
+        String url = configDouble.getLoginUrl();
+
+        Map<String, String> map= new HashMap<>();
+
+        map.put("uname", account);
+        map.put("upass", Util.getRSA(password));
+        map.put("referer", "http%253A%252F%252Fwww.zycq.org%252Fapp%252Fuser%252Fhour.php");
+
+        String str = send(url, map, "utf-8");
+
+        JsonObject jsonObject = new JsonParser().parse(str).getAsJsonObject();
+        String code = jsonObject.get("code").getAsString();
+        return code;
+    }
+
+    public static String send(String url, Map<String,String> map, String encoding) throws ParseException, IOException {
+        String body = "";
+
+        //创建httpclient对象
+        CloseableHttpClient client = HttpClients.createDefault();
+        //创建post方式请求对象
+        HttpPost httpPost = new HttpPost(url);
+
+        //装填参数
+        List<BasicNameValuePair> nvps = new ArrayList<>();
+        if(map!=null){
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+            }
+        }
+        //设置参数到请求对象中
+        httpPost.setEntity(new UrlEncodedFormEntity(nvps, encoding));
+
+        //设置header信息
+        //指定报文头【Content-type】、【User-Agent】
+        httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
+        httpPost.setHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+
+        //执行请求操作，并拿到结果（同步阻塞）
+        CloseableHttpResponse response = client.execute(httpPost);
+        //获取结果实体
+        HttpEntity entity = response.getEntity();
+        if (entity != null) {
+            //按指定编码转换结果实体为String类型
+            body = (String) EntityUtils.toString((org.apache.http.HttpEntity) entity, encoding);
+        }
+        EntityUtils.consume((org.apache.http.HttpEntity) entity);
+        //释放链接
+        response.close();
+        return body;
     }
 
 }

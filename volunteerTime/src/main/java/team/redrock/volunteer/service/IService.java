@@ -16,7 +16,7 @@ public interface IService {
 
     public Boolean updateUser(User user);
 
-    public String login(String account, String password);
+//    public String login(String account, String password) throws IOException;
 
     public Boolean deleteRecord(String uid);
 

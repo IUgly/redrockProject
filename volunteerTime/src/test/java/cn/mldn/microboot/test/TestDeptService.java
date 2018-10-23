@@ -9,11 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.volunteer.StartSpringBootMain;
 import team.redrock.volunteer.service.impl.IServiceImp;
-import team.redrock.volunteer.util.ReptileUtil;
-import team.redrock.volunteer.util.Util;
-import team.redrock.volunteer.vo.Record;
-
-import java.util.List;
 
 @SpringBootTest(classes = StartSpringBootMain.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,14 +22,15 @@ public class TestDeptService {
 
     @Test
     public void testList() throws Exception {
-//        System.out.println(this.redisTemplate.opsForValue().get("2017211903"));
-//        this.redisTemplate.delete("2017211903");
+        System.out.println(this.redisTemplate.opsForValue().get("2017211903"));
+        this.redisTemplate.delete("2017211903");
         System.out.println(this.redisTemplate.opsForValue().get("2017211903"));
 
 //        String code = this.iServiceImp.login("15223166166", "kk123456");
 //        if (!code.equals("0")){
 //            System.out.println(Util.assembling("3", "该志愿者账号密码被修改，请重新绑定", ""));
 //        }
+//        System.out.println(Util.getRSA("kk123456"));
     }
 
 }
