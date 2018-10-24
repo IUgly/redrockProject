@@ -11,6 +11,12 @@ public class User {
         this.uid=uid;
     }
 
+    public User(String uid, String account, String password) {
+        this.uid = uid;
+        this.account = account;
+        this.password = password;
+    }
+
     public String getUid() {
         return uid;
     }
@@ -43,4 +49,5 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

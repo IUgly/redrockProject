@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author kuangjunlin
+ */
 @RestController
 public class Control extends AbstractBaseController {
     @Autowired
@@ -38,7 +41,7 @@ public class Control extends AbstractBaseController {
             return resp;
         }
         String code = Util.login(user.getAccount(), user.getPassword());
-        if (!code.equals("0")){
+        if (!"0".equals(code)){
             return Util.assembling("3", "该志愿者账号密码被修改，请重新绑定", "");
         }
         List<Record> recordList =  ReptileUtil.detail(user.getAccount(), user.getPassword());
@@ -70,7 +73,7 @@ public class Control extends AbstractBaseController {
     @ResponseBody
     public String binding(User user) throws IOException {
         String code = Util.login(user.getAccount(), user.getPassword());
-        if (code.equals("0")){
+        if ("0".equals(code)){
             if (this.iServiceImp.selectUser(user.getUid())==null){
                 this.iServiceImp.insertBind(user);
             }else {

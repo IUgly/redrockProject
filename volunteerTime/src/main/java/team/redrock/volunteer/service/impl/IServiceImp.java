@@ -9,6 +9,9 @@ import team.redrock.volunteer.vo.User;
 
 import java.util.List;
 
+/**
+ * @author kuangjunlin
+ */
 @Service
 public class IServiceImp implements IService {
 
@@ -38,30 +41,6 @@ public class IServiceImp implements IService {
     public Boolean updateUser(User user) {
         return this.dao.updateUser(user);
     }
-
-//    @Override
-//    public String login(String account, String password) throws IOException {
-//
-//        String url = config.getLoginUrl();
-//        HttpMethod method = HttpMethod.POST;
-//        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-//        params.add("uname", account);
-//        params.add("upass", Util.getRSA(password));
-//        params.add("referer", "http%253A%252F%252Fwww.zycq.org%252Fapp%252Fuser%252Fhour.php");
-//
-//        Map<String, String> map= new HashMap<>();
-//
-//        map.put("uname", account);
-//        map.put("upass", Util.getRSA(password));
-//        map.put("referer", "http%253A%252F%252Fwww.zycq.org%252Fapp%252Fuser%252Fhour.php");
-//
-////        String str = HttpClient.client(url, method, params);
-//        String str = send(url, map, "utf-8");
-//
-//        JsonObject jsonObject = new JsonParser().parse(str).getAsJsonObject();
-//        String code = jsonObject.get("code").getAsString();
-//        return code;
-//    }
 
     @Override
     public Boolean deleteRecord(String uid) {

@@ -18,8 +18,10 @@ public class ReptileUtil {
         List<Record> recordList = new ArrayList<>();
 
         String html = ImitateLogin.ImitateLogin(account,pswd);
-        Document doc = Jsoup.parse(html);//解析HTML字符串返回一个Document实现
-        Element content = doc.select("table").first();//查找第一个a元素
+        //解析HTML字符串返回一个Document实现
+        Document doc = Jsoup.parse(html);
+        //查找第一个a元素
+        Element content = doc.select("table").first();
         if (content==null){
             return null;
         }

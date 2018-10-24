@@ -40,8 +40,7 @@ public class ImitateLogin {
         try {
             // 设置 HttpClient 接收 Cookie,用与浏览器一样的策略
             httpClient.getState().setCookiePolicy(CookiePolicy.getDefaultPolicy());
-//            httpClient.getParams().setCookiePolicy(
-//                    CookiePolicy.BROWSER_COMPATIBILITY);
+
             httpClient.executeMethod(postMethod);
             // 获得登陆后的 Cookie
             Cookie[] cookies = httpClient.getState().getCookies();
