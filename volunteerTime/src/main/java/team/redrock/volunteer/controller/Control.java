@@ -35,14 +35,14 @@ public class Control extends AbstractBaseController {
         String resp = this.redisTemplate.opsForValue().get(uid);
         User user = this.iServiceImp.selectUser(uid);
         if (user==null){
-            return Util.assembling("-2", "该学号还没有绑定志愿者账号", "");
+            return Util.assembling(-2, "该学号还没有绑定志愿者账号", "");
         }
         if (resp!=null){
             return resp;
         }
         String code = Util.login(user.getAccount(), user.getPassword());
         if (!"0".equals(code)){
-            return Util.assembling("3", "该志愿者账号密码被修改，请重新绑定", "");
+            return Util.assembling(3, "该志愿者账号密码被修改，请重新绑定", "");
         }
         List<Record> recordList =  ReptileUtil.detail(user.getAccount(), user.getPassword());
 
@@ -71,7 +71,8 @@ public class Control extends AbstractBaseController {
     }
     @PostMapping(value = "/binding", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String binding(User user) throws IOException {
+    public String binding(String uid, String account, String password) throws Exception {
+        User user = new User(uid, account, password);
         String code = Util.login(user.getAccount(), user.getPassword());
         if ("0".equals(code)){
             if (this.iServiceImp.selectUser(user.getUid())==null){
@@ -79,9 +80,9 @@ public class Control extends AbstractBaseController {
             }else {
                 this.iServiceImp.updateUser(user);
             }
-            return Util.assembling("0","success", "");
+            return Util.assembling(0,"success", "");
         }else {
-            return Util.assembling("-1", "志愿者账号密码错误","");
+            return Util.assembling(-1, "志愿者账号密码错误","");
         }
     }
 }

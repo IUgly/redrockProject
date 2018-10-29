@@ -1,20 +1,20 @@
 package team.redrock.volunteer.vo;
 
+import team.redrock.volunteer.util.Util;
+
 public class User {
     private String uid;
     private String account;
     private String password;
 
-    public void user(String uid, String account, String password){
-        this.account=account;
-        this.password=password;
-        this.uid=uid;
+    public User(){
+
     }
 
-    public User(String uid, String account, String password) {
+    public User(String uid, String account, String password) throws Exception {
         this.uid = uid;
-        this.account = account;
-        this.password = password;
+        this.account = Util.messageDecrypt(account);
+        this.password = Util.messageDecrypt(password);
     }
 
     public String getUid() {

@@ -16,6 +16,16 @@ public class Config {
     private String timeUrl;
     @Value("${volunteer.rsa}")
     private String rsa;
+    @Value("${volunteer.str_priK}")
+    private String str_priK;
+
+    public String getStr_priK() {
+        return str_priK;
+    }
+
+    public void setStr_priK(String str_priK) {
+        this.str_priK = str_priK;
+    }
 
     public String getLoginUrl() {
         return loginUrl;
