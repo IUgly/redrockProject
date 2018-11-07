@@ -1,0 +1,7 @@
+webSite.upload.photo=
+//上传文件保存的服务器目录，且必须是英文目录
+webSite.upload.photo.url=
+webSite.alter.recomList=/webSite/recommend.js
+webSite.alter.hotList=/webSite/hot.js
+webSite.photo.banner=/webSite/banner.js
+webSite.photo.abouts=/webSite/abouts.js
