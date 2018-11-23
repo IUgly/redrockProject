@@ -1,0 +1,87 @@
+package team.redrock.running.vo;
+
+import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
+import org.springframework.web.client.RestTemplate;
+import team.redrock.running.util.Token;
+import team.redrock.running.util.Util;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by huangds on 2017/10/28.
+ */
+@Data
+public class User {
+
+    private int id;
+
+    private String student_id;
+
+    private String name;
+
+    private String nickname;
+
+    private String class_id;
+
+    private String token;
+
+    private String college;
+
+    private String password;
+
+    private double total;
+
+    private String idNum;
+    private String stuId;
+
+    public User(String student_id, String name, String nickname, String class_id, String token, String college) {
+        this.student_id = student_id;
+        this.name = name;
+        this.nickname = nickname;
+        this.class_id = class_id;
+        this.token = token;
+        this.college = college;
+    }
+    @Override
+    public String toString() {
+        return "{" +
+                "\"student_id\":" + "\""+student_id +"\""+
+                ",\"nickname\":" + "\""+nickname  +"\""+
+                ",\"total\":" + total +
+                ",\"college\":" + "\""+college  +"\""+
+//                ",\"rank\":" + rank +
+                '}';
+    }
+
+
+    public User(){}
+
+    public static void main(String[] args) {
+        RestTemplate restT = new RestTemplate();
+        Map<String, String> map = new HashMap<>();
+        map.put("stuNum","2017211903");
+        map.put("idNum", "289112");
+
+        JSONObject responseEntity = restT.postForObject("http://hongyan.cqupt.edu.cn/api/verify", map, JSONObject.class);
+        JSONObject json = responseEntity.getJSONObject("data");
+        User user = new User(json);
+        if (true){
+            Token token = new Token("2017211903", new Date());
+            user.setToken(token.CreateToken());
+            System.out.println(user.getStudent_id()+user.getToken());
+        }
+        System.out.println(Util.response("200","OK",json));;
+
+
+
+    }
+    public User(JSONObject json){
+        this.class_id = json.get("classNum").toString();
+        this.college = json.get("college").toString();
+        this.name = json.get("name").toString();
+        this.student_id = json.get("stuNum").toString();
+    }
+}
