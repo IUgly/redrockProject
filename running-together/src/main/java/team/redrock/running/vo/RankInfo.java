@@ -7,10 +7,12 @@ import org.springframework.data.redis.core.ZSetOperations;
 public class RankInfo implements ZSetOperations.TypedTuple<String>{
     private String student_id;
     private String nickname;
-    private long total;
+    private double total;
     private long rank;
     private String prev_difference;
     private double distance;
+    private String college;
+    private String duration;
 
     private String class_id;
 
@@ -41,16 +43,24 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
         this.class_id = class_id;
     }
 
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "\""+"student_id\":" +"\""+ student_id + "\"" +
+//                ", \"nickname\":" +"\""+ nickname + "\"" +
+//                ",\"college\":"+"\""+ college+ "\""+
+//                ", \"class_id\":" + "\""+class_id + "\"" +
+//                ",\"duration\":"+"\""+duration+"\""+
+//                '}';
+//    }
+
     @Override
     public String toString() {
-        return "RankInfo{" +
-                "student_id='" + student_id + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", total=" + total +
-                ", rank=" + rank +
-                ", prev_difference=" + prev_difference +
-                ", class_id='" + class_id + '\'' +
-                '}';
+        return this.student_id;
+    }
+
+    public String getInfo(){
+        return this.toString();
     }
 
     @Override

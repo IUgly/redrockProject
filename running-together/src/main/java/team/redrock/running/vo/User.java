@@ -1,7 +1,7 @@
 package team.redrock.running.vo;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -41,37 +41,37 @@ public class User implements Serializable {
         this.token = token;
         this.college = college;
     }
-//    @Override
-//    public String toString() {
-//        return "{" +
-//                "\"student_id\":" + "\""+student_id +"\""+
-//                ",\"nickname\":" + "\""+nickname  +"\""+
-//                ",\"total\":" + total +
-//                ",\"college\":" + "\""+college  +"\""+
-////                ",\"rank\":" + rank +
-//                '}';
-//    }
-
     @Override
     public String toString() {
-        return "User{" +
-                "student_id='" + student_id + '\'' +
-                ", name='" + name + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", class_id='" + class_id + '\'' +
-                ", token='" + token + '\'' +
-                ", college='" + college + '\'' +
-                ", total=" + total +
+        return "{" +
+                "\"student_id\":" + "\""+student_id +"\""+
+                ",\"nickname\":" + "\""+nickname  +"\""+
+//                ",\"total\":" + total +
+                ",\"college\":" + "\""+college  +"\""+
+//                ",\"rank\":" + rank +
                 '}';
     }
+//
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "student_id='" + student_id + '\'' +
+//                ", name='" + name + '\'' +
+//                ", nickname='" + nickname + '\'' +
+//                ", class_id='" + class_id + '\'' +
+//                ", token='" + token + '\'' +
+//                ", college='" + college + '\'' +
+//                ", total=" + total +
+//                '}';
+//    }
 
     public User(){}
 
     public static void main(String[] args) {
-        String info = "{\"id\":0,\"student_id\":\"2017211903\",\"name\":\"匡俊霖\",\"nickname\":\"crown\",\"class_id\":\"04031702\",\"token\":\"mcPu7uHiLT6-rEeechpgZ8V_K-z7KhXCL54_xNRMIprF-bh46phnPO0dZl1wClDeWAZ-IkDOdyEn8hZ5E8YLpR8FFW49JfjuKAYj_VHNaJFtrA29p6ni0JeFsMG7DU0O_QrdP2kvKGX9v7krXN8gPgg9zAoU1YnZ5MZsm-WE7iA\\u003d\",\"college\":\"计算机科学与技术学院\",\"total\":0.0}";
-        Gson gson = new Gson();
-        User user = gson.fromJson(info, User.class);
-        System.out.println(user.getToken());
+        String info = "[{\"total\":3140,\"nickname\":\"无名氏0号\",\"student_id\":\"2017211900\",\"rank\":1},{\"college\":\"计算机科学与技术学院\",\"total\":3020,\"nickname\":\"crown\",\"student_id\":\"2017211903\",\"rank\":2},{\"total\":1520,\"nickname\":\"无名氏2号\",\"student_id\":\"2017211902\",\"rank\":3}]";
+//        Gson gson = new Gson();
+        JSONArray jsonArray = JSONArray.parseArray(info);
+        System.out.println(jsonArray.toJSONString());
     }
     public User(JSONObject json){
         this.class_id = json.get("classNum").toString();

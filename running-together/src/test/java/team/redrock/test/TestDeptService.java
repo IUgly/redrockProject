@@ -108,12 +108,14 @@ public class TestDeptService {
 //        System.out.println("获取到的排行列表:" + gson.toJson(range));
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = redisTemplate.opsForZSet().reverseRangeWithScores(SCORE_RANK, 0, 10);
 //        Set<ZSetOperations.TypedTuple<String>> rangeWithScores = redisTemplate.opsForZSet().rangeByScoreWithScores(SCORE_RANK, 0, 10);
+        Long total = this.redisTemplate.opsForZSet().zCard(SCORE_RANK);
         Iterator<ZSetOperations.TypedTuple<String>> it = rangeWithScores.iterator();
         JSONArray jsonArray = new JSONArray();
         while (it.hasNext()) {
             ZSetOperations.TypedTuple str = it.next();
             JSONObject json = JSONObject.parseObject(str.getValue().toString());
             json.put("rank", start+1);
+            json.put("total", total);
             jsonArray.add(json);
             start++;
         }

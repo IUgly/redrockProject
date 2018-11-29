@@ -75,9 +75,6 @@ public class UserControl extends AbstractBaseController {
         RankInfo rankInfo = new RankInfo(record);
         this.updateRunDataImp.insertOnceDayRunToRedis(rankInfo);
 
-        System.out.println(this.userServiceImp.selectUserInfo(json.getString("student_id")));
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
-
-
 }
