@@ -21,6 +21,8 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
     public RankInfo(User user){
         this.nickname=user.getNickname();
         this.student_id=user.getStudent_id();
+        this.college = user.getCollege();
+        this.class_id =user.getClass_id();
     }
     public RankInfo(Record record){
         this.student_id = record.getStudent_id();
