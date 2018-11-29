@@ -22,8 +22,8 @@ public class LoginAdapter extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
  
 		registry.addInterceptor(loginInterceptor)
-				.addPathPatterns("/**")
-				.excludePathPatterns("/login")
+//				.addPathPatterns("/**")
+				.excludePathPatterns("/**")
 				.excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
  
 		super.addInterceptors(registry);

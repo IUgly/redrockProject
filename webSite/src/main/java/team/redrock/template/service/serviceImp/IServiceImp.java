@@ -150,6 +150,7 @@ public class IServiceImp implements IService {
             jsonObject = this.iServiceImp.selectWebsByKind(str);
             jsonArray.add(jsonObject);
         }
+
         return jsonArray.toJSONString();
 
     }
@@ -309,6 +310,33 @@ public class IServiceImp implements IService {
             this.dao.insertPhoto(photo);
         }
         return true;
+    }
+
+    @Override
+    public String getHotWebs() {
+        List<Web> hotWebList = this.dao.selectHotWebs();
+        Gson gson = new Gson();
+        return gson.toJson(hotWebList);
+    }
+
+    @Override
+    public String getBanner() {
+        Photo photo = new Photo();
+        photo.setType("banner");
+        List<Photo> photoList = null;
+        photoList = this.dao.selectBanner(photo);
+        Gson gson=new Gson();
+        return gson.toJson(photoList);
+    }
+
+    @Override
+    public String getAboutUs() {
+        Photo photo = new Photo();
+        photo.setType("aboutus");
+        List<Photo> photoList = null;
+        photoList = this.dao.selectAbouts(photo);
+        Gson gson=new Gson();
+        return gson.toJson(photoList);
     }
 
     @Override

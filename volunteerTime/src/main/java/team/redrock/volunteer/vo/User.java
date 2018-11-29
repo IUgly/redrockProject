@@ -13,7 +13,7 @@ public class User {
 
     public User(String uid, String account, String password) throws Exception {
         this.uid = uid;
-        this.account = Util.messageDecrypt(account);
+        this.account = account;
         this.password = Util.messageDecrypt(password);
     }
 

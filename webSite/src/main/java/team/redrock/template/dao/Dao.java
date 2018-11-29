@@ -9,6 +9,7 @@ import team.redrock.template.vo.Photo;
 import team.redrock.template.vo.User;
 import team.redrock.template.vo.Web;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,6 +44,10 @@ public interface Dao {
 
     @Select("select kindname from webs")
     Set<String> selectKindNames();
+
+    @Select("select kindname from webs")
+    LinkedHashSet selectLinkHashSetKindName();
+
     @Select("Select * from webs where kindname = #{kindname}")
     List<Web> selectWebFromKindName(Web web);
 

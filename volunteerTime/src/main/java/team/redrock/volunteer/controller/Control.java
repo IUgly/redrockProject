@@ -15,7 +15,6 @@ import team.redrock.volunteer.util.Util;
 import team.redrock.volunteer.vo.Record;
 import team.redrock.volunteer.vo.User;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +29,7 @@ public class Control extends AbstractBaseController {
     private RedisTemplate<String, String> redisTemplate;
 
     @PostMapping(value = "/select", produces = "application/json;charset=UTF-8")
-    public String Record(String uid) throws IOException {
+    public String Record(String uid) throws Exception {
 
         String resp = this.redisTemplate.opsForValue().get(uid);
         User user = this.iServiceImp.selectUser(uid);

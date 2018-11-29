@@ -1,0 +1,4 @@
+volunteer.loginUrl=http://www.zycq.org/app/user/login.php?m=login
+volunteer.timeUrl=http://www.zycq.org/app/user/hour.php
+volunteer.rsa=
+volunteer.str_priK=

@@ -57,5 +57,11 @@ public interface IService {
 
     public Boolean updatePhotoToDataBase(JSONObject infoJSONObject);
 
+    public String getHotWebs();
+
+    public String getBanner();
+
+    public String getAboutUs();
+
 
 }

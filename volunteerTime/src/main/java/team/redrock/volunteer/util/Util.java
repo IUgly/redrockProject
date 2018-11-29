@@ -15,10 +15,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import sun.misc.BASE64Decoder;
 import team.redrock.volunteer.config.Config;
 
@@ -27,7 +24,9 @@ import javax.crypto.Cipher;
 import java.io.IOException;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,10 +34,10 @@ import java.util.Map;
 
 @Component
 public class Util {
+
     @Autowired
     private Config config;
     private static Config configDouble;
-    public static String str_priK = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKo++i9J9dzAFtbxwowKDCo2mxi7MXxE8A8VvssaydWjjgmEz/HHMPLOhi1182a1si4pWL0/MizKnquD7T2Bu4jpQbAFnkNYEMEyq/kw904Xl0JCQHYFuvnI99RE8Q3KlTP6kEUGDjV34EL6vBGJcQvArLtj1xoP8y0nIfJ2Pw5TAgMBAAECgYAGGB8IllMwxceLhjf6n1l0IWRH7FuHIUieoZ6k0p6rASHSgWiYNRMxfecbtX8zDAoG0QAWNi7rn40ygpR5gS1fWDAKhmnhKgQIT6wW0VmD4hraaeyP78iy8BLhlvblri2nCPIhDH5+l96v7D47ZZi3ZSOzcj89s1eS/k7/N4peEQJBAPEtGGJY+lBoCxQMhGyzuzDmgcS1Un1ZE2pt+XNCVl2b+T8fxWJH3tRRR8wOY5uvtPiK1HM/IjT0T5qwQeH8Yk0CQQC0tcv3d/bDb7bOe9QzUFDQkUSpTdPWAgMX2OVPxjdq3Sls9oA5+fGNYEy0OgyqTjde0b4iRzlD1O0OhLqPSUMfAkEAh5FIvqezdRU2/PsYSR4yoAdCdLdT+h/jGRVefhqQ/6eYUJJkWp15tTFHQX3pIe9/s6IeT/XyHYAjaxmevxAmlQJBAKSdhvQjf9KAjZKDEsa7vyJ/coCXuQUWSCMNHbcR5aGfXgE4e45UtUoIE1eKGcd6AM6LWhx3rR6xdFDpb9je8BkCQB0SpevGfOQkMk5i8xkEt9eeYP0fi8nv6eOUcK96EXbzs4jV2SAoQJ9oJegPtPROHbhIvVUmNQTbuP10Yjg59+8=";
 
     @PostConstruct
     public void init(){
@@ -68,14 +67,6 @@ public class Util {
 
     public static String getRSA(String upass) throws IOException {
         String url = "http://tool.chacuo.net/cryptrsapubkey";
-        HttpMethod method =HttpMethod.POST;
-        // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
-        MultiValueMap<String, String> params= new LinkedMultiValueMap<String, String>();
-
-        params.add("data", configDouble.getRsa() + upass);
-        params.add("type", "rsapubkey");
-        params.add("arg", "pad=1_s=gb2312_t=0");
-
         Map<String, String> map= new HashMap<>();
 
         map.put("data", configDouble.getRsa() + upass);
@@ -89,14 +80,14 @@ public class Util {
         return json.substring(2, json.length()-2);
     }
 
-    public static String login(String account, String password) throws IOException {
+    public static String login(String account, String password) throws Exception {
 
         String url = configDouble.getLoginUrl();
 
         Map<String, String> map= new HashMap<>();
 
         map.put("uname", account);
-        map.put("upass", Util.getRSA(password));
+        map.put("upass", Base64.encodeBase64String(Util.encrypt(password.getBytes(), configDouble.getRsa_pubK()) ));
         map.put("referer", "http%253A%252F%252Fwww.zycq.org%252Fapp%252Fuser%252Fhour.php");
 
         String str = send(url, map, "utf-8");
@@ -147,16 +138,41 @@ public class Util {
 
         byte[] bt = Base64.decodeBase64(Base64String);
 
-        byte[] bt_original = decrypt(bt);
+
+        byte[] bt_original = decrypt(bt, configDouble.getStr_priK());
         String str_original = new String(bt_original);
         return str_original;
     }
-    public static byte[] decrypt(byte[] bt_encrypted)throws Exception{
-        PrivateKey privateKey = getPrivateKey(configDouble.getStr_priK());
+
+    public static byte[] decrypt(byte[] bt_encrypted, String str_key)throws Exception{
+        PrivateKey privateKey = getPrivateKey(str_key);
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         byte[] bt_original = cipher.doFinal(bt_encrypted);
         return bt_original;
+    }
+
+    /**
+     *
+     * @param bt_plaintext  公匙加密
+     * @return
+     * @throws Exception
+     */
+
+    public static byte[] encrypt(byte[] bt_plaintext, String str_key)throws Exception{
+        PublicKey publicKey = getPublicKey(str_key);
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+        byte[] bt_encrypted = cipher.doFinal(bt_plaintext);
+        return bt_encrypted;
+    }
+    public static PublicKey getPublicKey(String key) throws Exception {
+        byte[] keyBytes;
+        keyBytes = (new BASE64Decoder()).decodeBuffer(key);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey publicKey = keyFactory.generatePublic(keySpec);
+        return publicKey;
     }
     /**
      * 转换私钥

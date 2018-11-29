@@ -7,8 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="microboot-mybatis" />
+        <module name="microboot-template" />
         <module name="microboot-volunteerTime" />
-        <module name="wzdq" />
+        <module name="microboot-webSite" />
+        <module name="running-together" />
+        <module name="template" />
+        <module name="webSite" />
       </profile>
       <profile name="Annotation profile for microboot-mybatis" enabled="true">
         <sourceOutputDir name="../weixin/target/generated-sources/annotations" />
@@ -19,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="test" target="1.8" />
+      <module name="wzdq" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

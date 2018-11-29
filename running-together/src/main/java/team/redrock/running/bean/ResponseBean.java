@@ -1,11 +1,13 @@
 package team.redrock.running.bean;
 
+import lombok.Data;
 import team.redrock.running.enums.UnicomResponseEnums;
 
+@Data
 public class ResponseBean <T>{
 //	private boolean success;
 	private T data;
-	private String status;
+	private int status;
 	private String message;
  
 	public ResponseBean(){}
@@ -14,7 +16,6 @@ public class ResponseBean <T>{
 		super();
 		this.data = data;
 	}
-
 	@Override
 	public String toString() {
 		return "{" +
@@ -23,16 +24,13 @@ public class ResponseBean <T>{
 				", message='" + message + '\'' +
 				'}';
 	}
-
-	public ResponseBean(T data, String errCode, String errMsg) {
+	public ResponseBean(T data, int errCode, String errMsg) {
 		super();
-//		this.success = success;
 		this.data = data;
 		this.status = errCode;
-		this.status = errMsg;
+		this.message = errMsg;
 	}
- 
-	public ResponseBean(String errCode, String errMsg) {
+	public ResponseBean(int errCode, String errMsg) {
 		this.status= errCode;
 		this.message = errMsg;
 	}
@@ -44,28 +42,6 @@ public class ResponseBean <T>{
 		this.data=data;
 		this.status=enums.getStatus();
 		this.message=enums.getMessage();
-	}
-	public T getData() {
-		return data;
-	}
-	public void setData(T data) {
-		this.data = data;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 }

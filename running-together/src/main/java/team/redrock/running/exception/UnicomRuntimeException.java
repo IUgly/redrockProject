@@ -4,7 +4,7 @@ import team.redrock.running.enums.UnicomResponseEnums;
 
 public class UnicomRuntimeException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-	protected String status;
+	protected int status;
  
 	protected String message;
  

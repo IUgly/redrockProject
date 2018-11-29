@@ -18,6 +18,26 @@ public class Config {
     private String rsa;
     @Value("${volunteer.str_priK}")
     private String str_priK;
+    @Value("${volunteer.rsa_pubK}")
+    private String rsa_pubK;
+    @Value("${volunteer.str_pubK}")
+    private String str_pubK;
+
+    public String getRsa_pubK() {
+        return rsa_pubK;
+    }
+
+    public void setRsa_pubK(String rsa_pubK) {
+        this.rsa_pubK = rsa_pubK;
+    }
+
+    public String getStr_pubK() {
+        return str_pubK;
+    }
+
+    public void setStr_pubK(String str_pubK) {
+        this.str_pubK = str_pubK;
+    }
 
     public String getStr_priK() {
         return str_priK;
