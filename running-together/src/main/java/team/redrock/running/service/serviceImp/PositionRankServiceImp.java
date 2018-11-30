@@ -24,13 +24,19 @@ public class PositionRankServiceImp  implements PositionRankInterface {
         Long rankNum = redisTemplate.opsForZSet().reverseRank(SCORE_RANK, user.getStudent_id());
         Double score = redisTemplate.opsForZSet().score(SCORE_RANK, user.getStudent_id());
 
+        if (rankNum==0){
+            rankInfo.setRank(rankNum+1);
+            rankInfo.setPrev_difference("0");
+            rankInfo.setTotal(score);
+            return rankInfo;
+        }
         Set<ZSetOperations.TypedTuple<String>> range = redisTemplate.opsForZSet().reverseRangeWithScores(SCORE_RANK, rankNum-1, rankNum-1);
         Iterator<ZSetOperations.TypedTuple<String>> it = range.iterator();
         while (it.hasNext()) {//求出和前一名的差距
             ZSetOperations.TypedTuple str = it.next();
             rankInfo.setPrev_difference(String.valueOf(score-str.getScore()));
         }
-        rankInfo.setRank(rankNum);
+        rankInfo.setRank(rankNum+1);
         rankInfo.setTotal(score);
 
         return rankInfo;

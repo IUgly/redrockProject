@@ -34,7 +34,6 @@ public class RankControl {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
         }
     }
-    //sanzou/{student_id}/list/{page?}
     @GetMapping(value = "sanzou/ranklist/student/distance", produces = "application/json")
     public String getStuRankList(String page){
         int num = this.rankListServerImp.rankListNum();
