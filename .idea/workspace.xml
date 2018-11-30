@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50a51bb5-7d7d-428f-a787-6d0d8f55b4df" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/PositionRankInterface.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -192,23 +188,23 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="3" />
-          <entry key="java" value="42" />
+          <entry key="java" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="42" />
+          <entry key="JAVA" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3200" />
+          <entry key="java" value="3228" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3200" />
+          <entry key="JAVA" value="3228" />
         </counts>
       </usages-collector>
     </session>
@@ -221,8 +217,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="38" column="58" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="58" />
+            <state relative-caret-position="201">
+              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,18 +260,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
               <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -332,8 +328,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="33" column="27" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+            <state relative-caret-position="79">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1308#1309#0" expanded="true" />
@@ -424,13 +420,13 @@
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java" />
       </list>
     </option>
@@ -1319,7 +1315,7 @@
       <workItem from="1543470663891" duration="4422000" />
       <workItem from="1543475602635" duration="1524000" />
       <workItem from="1543487321138" duration="11770000" />
-      <workItem from="1543548642125" duration="10368000" />
+      <workItem from="1543548642125" duration="11396000" />
     </task>
     <servers />
   </component>
@@ -1356,7 +1352,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="425480000" />
+    <option name="totallyTimeSpent" value="426508000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1465,7 +1461,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java</url>
-          <line>33</line>
+          <line>36</line>
           <properties />
           <option name="timeStamp" value="62" />
         </line-breakpoint>
@@ -1677,20 +1673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1642#1643#0" expanded="true" />
-            <element signature="e#1669#1670#0" expanded="true" />
-            <element signature="e#1741#1742#0" expanded="true" />
-            <element signature="e#1768#1769#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -1834,8 +1816,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="33" column="27" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+        <state relative-caret-position="79">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1308#1309#0" expanded="true" />
@@ -1844,10 +1826,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="38" column="58" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="58" />
+        <state relative-caret-position="201">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

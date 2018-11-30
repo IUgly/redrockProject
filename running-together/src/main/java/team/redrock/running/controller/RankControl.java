@@ -28,7 +28,7 @@ public class RankControl {
     public String getStuRankNum(String student_id, String kind_ran){
         User user = this.userServiceImp.selectUserInfo(student_id);
         if (user!=null){
-            RankInfo rankInfo = this.positionRankServiceImp.dayNumRankByStudentId(user);
+            RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_ran);
             return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
