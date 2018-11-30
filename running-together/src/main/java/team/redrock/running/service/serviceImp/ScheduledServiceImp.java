@@ -3,6 +3,7 @@ package team.redrock.running.service.serviceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.ScheduledDao;
@@ -34,5 +35,13 @@ public class ScheduledServiceImp {
             rankInfo.setDistance(str.getScore());
             this.scheduledDao.insertRankInfoToMysql(rankInfo);
         }
+    }
+    @Async
+    public void updateWeekDistance(){
+        this.scheduledDao.updateWeekScore();
+    }
+    @Async
+    public void updateMonthDistance(){
+        this.scheduledDao.updateMonthScore();
     }
 }

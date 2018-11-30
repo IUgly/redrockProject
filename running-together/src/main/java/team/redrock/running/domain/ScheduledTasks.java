@@ -23,4 +23,13 @@ public class ScheduledTasks {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
 
+    @Scheduled(cron = "0 30 23 ? * SUN")
+    public void updateWeekDistance(){
+        this.scheduledServiceImp.updateWeekDistance();
+    }
+    @Scheduled(cron = "0 30 23 L * ?")
+    public void updateMonthDistance(){
+        this.scheduledServiceImp.updateMonthDistance();
+    }
+
 }
