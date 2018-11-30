@@ -85,4 +85,7 @@ public class User implements Serializable {
     public User(String nickname){
         this.nickname = nickname;
     }
+    public User(RankInfo rankInfo){
+        this.student_id=rankInfo.getStudent_id();
+    }
 }

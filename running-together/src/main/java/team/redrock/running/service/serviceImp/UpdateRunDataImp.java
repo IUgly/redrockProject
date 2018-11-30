@@ -18,7 +18,7 @@ public class UpdateRunDataImp {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    public static final String SCORE_RANK = "dayRankTEST";
+    public static final String DaySCORE_RANK = "dayRankTEST";
 
     @Async
     public void notInvitedUpdate(Record record) {
@@ -34,6 +34,6 @@ public class UpdateRunDataImp {
         /**
          * 更新个人每日路程排行榜redis
          */
-        this.redisTemplate.opsForZSet().incrementScore(SCORE_RANK, rankInfo.getStudent_id(), rankInfo.getScore());
+        this.redisTemplate.opsForZSet().incrementScore(DaySCORE_RANK, rankInfo.getStudent_id(), rankInfo.getScore());
     }
 }

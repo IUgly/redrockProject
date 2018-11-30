@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import team.redrock.running.dao.RankDao;
 import team.redrock.running.vo.User;
 
 import java.util.Iterator;
@@ -15,17 +16,22 @@ import java.util.Set;
 @Service
 @Component
 public class RankListServerImp {
-    public static final String SCORE_RANK = "dayRankTEST";
+    public static final String dayDistanceRank = "dayRankTEST";
+    public static final String weekDistanceRank = "weekDistanceRank000";
+    public static final String monthDistanceRank = "monthDistanceRank000";
+    public static final String allDistanceRank = "allDistanceRank000";
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private UserServiceImp userServiceImp;
+    @Autowired
+    private RankDao rankDao;
 
-    public int rankListNum(){
-        return Math.toIntExact(this.redisTemplate.opsForZSet().zCard(SCORE_RANK));
+    public int rankListNum(String kindRank){
+        return Math.toIntExact(this.redisTemplate.opsForZSet().zCard(kindRank));
     }
 
-    public String getDayRankDistance(String pageParam){
+    public String getRankDistance(String pageParam, String kindRank){
         int page = 1;
         if (pageParam!=null){
             page = Integer.valueOf(pageParam);
@@ -36,8 +42,9 @@ public class RankListServerImp {
             start = 15*(page-1);
             end = start+14;
         }
+
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = this.redisTemplate.opsForZSet().reverseRangeWithScores
-                (SCORE_RANK, start, end);
+                (kindRank, start, end);
         Iterator<ZSetOperations.TypedTuple<String>> it = rangeWithScores.iterator();
         int rankStart = 0;
         JSONArray jsonArray = new JSONArray();
@@ -54,7 +61,6 @@ public class RankListServerImp {
                 rankStart++;
             }
             else {
-                System.out.println(user.toString());
                 com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(user.toString());
                 json.put("rank", rankStart+1);
                 json.put("total", str.getScore());

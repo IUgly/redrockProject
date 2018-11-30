@@ -35,9 +35,9 @@ public class RankControl {
         }
     }
     @GetMapping(value = "sanzou/ranklist/student/distance", produces = "application/json")
-    public String getStuRankList(String page){
-        int num = this.rankListServerImp.rankListNum();
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getDayRankDistance(page));
+    public String getStuRankList(String page,String kindRank){
+        int num = this.rankListServerImp.rankListNum(kindRank);
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getRankDistance(page,kindRank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
     }
 }

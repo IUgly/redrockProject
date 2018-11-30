@@ -16,7 +16,7 @@ import java.util.Set;
 @Service
 @Component
 public class ScheduledServiceImp {
-    public static final String SCORE_RANK = "dayRankTEST";
+    public static final String DaySCORE_RANK = "dayRankTEST";
     @Autowired
     private ScheduledDao scheduledDao;
     @Autowired
@@ -25,7 +25,7 @@ public class ScheduledServiceImp {
     private RedisTemplate<String, String> redisTemplate;
     public void insertDayDistanceToWeekRank() {
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = this.redisTemplate.opsForZSet().reverseRangeWithScores
-                (SCORE_RANK, 0, this.redisTemplate.opsForZSet().zCard(SCORE_RANK));
+                (DaySCORE_RANK, 0, this.redisTemplate.opsForZSet().zCard(DaySCORE_RANK));
         Iterator<ZSetOperations.TypedTuple<String>> it = rangeWithScores.iterator();
 
         while (it.hasNext()) {
@@ -37,11 +37,11 @@ public class ScheduledServiceImp {
         }
     }
     @Async
-    public void updateWeekDistance(){
+    public void updateWeekDistanceToMysql(){
         this.scheduledDao.updateWeekScore();
     }
     @Async
-    public void updateMonthDistance(){
+    public void updateMonthDistanceToMysql(){
         this.scheduledDao.updateMonthScore();
     }
 }

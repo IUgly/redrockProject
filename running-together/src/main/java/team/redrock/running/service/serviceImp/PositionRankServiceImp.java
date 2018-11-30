@@ -17,12 +17,12 @@ import java.util.Set;
 public class PositionRankServiceImp  implements PositionRankInterface {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-    public static final String SCORE_RANK = "dayRankTEST";
+    public static final String DaySCORE_RANK = "dayRankTEST";
     @Override
     public RankInfo dayNumRankByStudentId(User user) {
         RankInfo rankInfo = new RankInfo(user);
-        Long rankNum = redisTemplate.opsForZSet().reverseRank(SCORE_RANK, user.getStudent_id());
-        Double score = redisTemplate.opsForZSet().score(SCORE_RANK, user.getStudent_id());
+        Long rankNum = redisTemplate.opsForZSet().reverseRank(DaySCORE_RANK, user.getStudent_id());
+        Double score = redisTemplate.opsForZSet().score(DaySCORE_RANK, user.getStudent_id());
 
         if (rankNum==0){
             rankInfo.setRank(rankNum+1);
@@ -30,7 +30,7 @@ public class PositionRankServiceImp  implements PositionRankInterface {
             rankInfo.setTotal(score);
             return rankInfo;
         }
-        Set<ZSetOperations.TypedTuple<String>> range = redisTemplate.opsForZSet().reverseRangeWithScores(SCORE_RANK, rankNum-1, rankNum-1);
+        Set<ZSetOperations.TypedTuple<String>> range = redisTemplate.opsForZSet().reverseRangeWithScores(DaySCORE_RANK, rankNum-1, rankNum-1);
         Iterator<ZSetOperations.TypedTuple<String>> it = range.iterator();
         while (it.hasNext()) {//求出和前一名的差距
             ZSetOperations.TypedTuple str = it.next();
