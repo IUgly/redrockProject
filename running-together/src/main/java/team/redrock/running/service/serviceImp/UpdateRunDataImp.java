@@ -2,6 +2,7 @@ package team.redrock.running.service.serviceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
@@ -19,12 +20,12 @@ public class UpdateRunDataImp {
 
     public static final String SCORE_RANK = "dayRankTEST";
 
-//    @Async
+    @Async
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertRecord(record);
     }
 
-//    @Async
+    @Async
     public void insertOnceDayRunToRedis(RankInfo rankInfo) {
 //        Set<ZSetOperations.TypedTuple<String>> tuples = new HashSet<>();
 //        ZSetOperations.TypedTuple typedTuple = rankInfo;

@@ -49,7 +49,7 @@ public class UserServiceImp {
         }
         return true;
     }
-
+    @Async
     public Boolean updateUserInfo(User user) {
         Gson gson = new Gson();
         String userInfo = gson.toJson(user);

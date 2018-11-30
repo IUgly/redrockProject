@@ -11,15 +11,6 @@ import team.redrock.running.vo.UserOtherInfo;
 @Mapper
 @Component
 public interface UserDao {
-    @Select("SELECT * from user_info WHERE username = #{username} and password = #{password}")
-    /**
-     * 验证帐号密码是否正确
-     *
-     */
-    User verityAccount(User user);
-
-    @Update("update user_info set username = #{username} where id = 1")
-    boolean updateUser(User user);
 
     @Insert("Insert into user set student_id=#{student_id},name=#{name},nickname=#{class_id},class_id=#{class_id},college=#{college}")
     Boolean insertUser(User user);
