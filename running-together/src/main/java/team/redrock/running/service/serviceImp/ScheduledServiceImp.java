@@ -36,16 +36,16 @@ public class ScheduledServiceImp {
             User user = this.userServiceImp.selectUserInfo(str.getValue().toString());
             RankInfo rankInfo = new RankInfo(user);
             rankInfo.setDistance(str.getScore());
+
             if (this.scheduledDao.selectStuRankInfo(rankInfo)==null){
                 this.scheduledDao.insertStuRankInfoToMysql(rankInfo);
-            }else {
-                this.scheduledDao.updateStuScore(rankInfo);
             }
-            if (this.scheduledDao.selectClaRankInfo(rankInfo)==null){
+            if (this.scheduledDao.selectStuRankInfo(rankInfo)==null){
                 this.scheduledDao.insertClaRankInfoToMysql(rankInfo);
-            }else {
-                this.scheduledDao.updateClaScore(rankInfo);
             }
+
+            this.scheduledDao.updateStuScore(rankInfo);
+
         }
     }
     /**

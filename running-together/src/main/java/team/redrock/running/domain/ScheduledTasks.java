@@ -55,7 +55,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 40 23 * * ?")
     public void updateWeekDistanceToRedis(){
-        List<RankInfo> rankInfoList = this.rankDao.selectRank(weekDistanceRank);
+        List<RankInfo> rankInfoList = this.rankDao.selectStuWeekRank();
         for (int i=0; i<rankInfoList.size(); i++){
             RankInfo rankInfo = rankInfoList.get(i);
             this.redisTemplate.opsForZSet().incrementScore(weekDistanceRank, rankInfo.getStudent_id(), rankInfo.getTotal());
@@ -67,7 +67,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 41 23 * * ?")
     public void updateMonthDistanceToRedis(){
-        List<RankInfo> rankInfoList = this.rankDao.selectRank(monthDistanceRank);
+        List<RankInfo> rankInfoList = this.rankDao.selectStuMonthRank();
         for (int i=0; i<rankInfoList.size(); i++){
             RankInfo rankInfo = rankInfoList.get(i);
             this.redisTemplate.opsForZSet().incrementScore(monthDistanceRank, rankInfo.getStudent_id(), rankInfo.getTotal());
@@ -79,7 +79,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 42 23 * * ?")
     public void updateAllDistanceToRedis(){
-        List<RankInfo> rankInfoList = this.rankDao.selectRank(allDistanceRank);
+        List<RankInfo> rankInfoList = this.rankDao.selectStuAllRank();
         for (int i=0; i<rankInfoList.size(); i++){
             RankInfo rankInfo = rankInfoList.get(i);
             this.redisTemplate.opsForZSet().incrementScore(allDistanceRank, rankInfo.getStudent_id(), rankInfo.getTotal());

@@ -13,7 +13,9 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
+import team.redrock.running.dao.RankDao;
 import team.redrock.running.dao.ScheduledDao;
+import team.redrock.running.dao.UserDao;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
 import team.redrock.running.service.serviceImp.UserServiceImp;
@@ -45,17 +47,25 @@ public class TestDeptService {
     private UserServiceImp userServiceImp;
     @Autowired
     private ScheduledDao scheduledDao;
-    @Test
-    public void testDao(){
-        RankInfo rankInfo = new RankInfo();
-        Gson gson = new Gson();
-        rankInfo.setKind_rank("student_rank");
-//        List<RankInfo> rankInfoListA = this.scheduledDao.selectTest(rankInfo);
-//        System.out.println("listA:"+gson.toJson(rankInfoListA));
+    @Autowired
+    private RankDao rankDao;
+    @Autowired
+    private UserDao userDao;
 
-        rankInfo.setKind_rank("class_rank");
-//        List<RankInfo> rankInfoListB = this.scheduledDao.selectTest(rankInfo);
-//        System.out.println("listB:"+gson.toJson(rankInfoListB));
+    @Test
+    public void rankInfo() throws Exception{
+        RankInfo rankInfo = new RankInfo();
+        rankInfo.setDistance(10000);
+        rankInfo.setClass_id("04031702");
+        rankInfo.setStudent_id("2017211903");
+        rankInfo.setCollege("jsj");
+        rankInfo.setDuration("29");
+        rankInfo.setSteps(100);
+        rankInfo.setNickname("echo");
+        if (!this.scheduledDao.insertStuRankInfoToMysql(rankInfo))
+        {
+            System.out.println("ok");
+        }
     }
     @Test
     public void update(){

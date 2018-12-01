@@ -40,4 +40,10 @@ public class RankControl {
         JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getRankDistance(page,kindRank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
     }
+    @GetMapping(value = "/sanzou/rank/class/distance/{kind_rank}/{page?}", produces = "application/json")
+    public String getClaRankList(String page,String kindRank){
+        int num = this.rankListServerImp.rankListNum(kindRank);
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getRankDistance(page, kindRank));
+        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS,num));
+    }
 }

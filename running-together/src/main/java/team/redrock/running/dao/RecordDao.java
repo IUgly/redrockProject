@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import team.redrock.running.vo.Record;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface RecordDao {
@@ -15,6 +17,6 @@ public interface RecordDao {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertRecord(Record record);
 
-    @Select("select id from record where student_id = #{student_id} and begin_time=#{begin_time} and end_time=#{end_time}")
-    int selectIdOfRecord(Record record);
+    @Select("select * from record where student_id = #{student_id}")
+    List<Record> selectLatLngList(String student_id);
 }

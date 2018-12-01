@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import team.redrock.running.dao.UserDao;
 import team.redrock.running.vo.User;
+import team.redrock.running.vo.UserOtherInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +44,7 @@ public class UserServiceImp {
     }
     @Async
     public Boolean insertUser(User user) {
-        if (this.userDao.selectUserByStudentId(user.getStudent_id())==null)
-        {
-            return this.userDao.insertUser(user);
-        }
-        return true;
+        return this.userDao.insertUser(user);
     }
     @Async
     public Boolean updateUserInfo(User user) {
@@ -74,5 +71,8 @@ public class UserServiceImp {
 
     public User selectUserSimpleInfo(String student_id) {
         return this.userDao.selectSimpleUserInfo(student_id);
+    }
+    public UserOtherInfo selectUserOtherInfo(String student_id){
+        return this.userDao.getUserOtherInfo(student_id);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import team.redrock.running.bean.RankResponseBean;
 import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.service.serviceImp.PositionRankServiceImp;
@@ -17,6 +18,7 @@ import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.AbstractBaseController;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
+import team.redrock.running.vo.UserOtherInfo;
 
 @RestController
 public class UserControl extends AbstractBaseController {
@@ -79,5 +81,16 @@ public class UserControl extends AbstractBaseController {
 
         record.setLat_lng(latLing);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
+    }
+    @GetMapping(value = "sanzou/user/{student_id}/{page?}", produces = "application/json")
+    public String getLatLngList(String student_id,String page){
+        int num = 0;
+        JSONArray jsonArray = this.recordServiceImp.getLatLngList(student_id, page, num);
+        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, num));
+    }
+    @GetMapping(value = "sanzou/user/info/{student_id}", produces = "application/json")
+    public String getUserOtherInfo(String student_id){
+        UserOtherInfo userOtherInfo = this.userServiceImp.selectUserOtherInfo(student_id);
+        return JSONObject.toJSONString(new ResponseBean<>(userOtherInfo, UnicomResponseEnums.SUCCESS));
     }
 }

@@ -12,10 +12,15 @@ import team.redrock.running.vo.UserOtherInfo;
 @Component
 public interface UserDao {
 
-    @Insert("Insert into user set student_id=#{student_id},name=#{name},nickname=#{class_id},class_id=#{class_id},college=#{college}")
+    /**
+     *  replace语句：如果mysql中存在与插入数据的键值相同的数据，则更新数据，如果没有相同则插入
+     * @param user
+     * @return
+     */
+    @Insert("replace into user set student_id=#{student_id},name=#{name},nickname=#{nickname},class_id=#{class_id},college=#{college}")
     Boolean insertUser(User user);
 
-    @Insert("Insert into user_other_info set student_id=#{student_id},class_id=#{class_id},college=#{college},highest_distance_rank=#{highest_distance_rank},highest_distance=#{highest_distance},highest_steps_rank=#{highest_steps_rank},highest_steps=#{highest_steps},total_steps={total_steps},total_distance=#{total_distance},highest_continuous_day=#{highest_continuous_day}")
+    @Insert("replace into user_other_info set student_id=#{student_id},class_id=#{class_id},college=#{college},highest_distance_rank=#{highest_distance_rank},highest_distance=#{highest_distance},highest_steps_rank=#{highest_steps_rank},highest_steps=#{highest_steps},total_steps={total_steps},total_distance=#{total_distance},highest_continuous_day=#{highest_continuous_day}")
     Boolean insertUserOtherInfo(UserOtherInfo userOtherInfo);
 
     @Update("update user set nickname = #{nickname} where student_id=#{student_id}")
@@ -26,4 +31,7 @@ public interface UserDao {
 
     @Select("select student_id,nickname from user where student_id = #{student_id}")
     User selectSimpleUserInfo(String student_id);
+
+    @Select("select * from user_other_info where student_id = #{student_id}")
+    UserOtherInfo getUserOtherInfo(String student_id);
 }

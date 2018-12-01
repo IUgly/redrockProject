@@ -8,16 +8,14 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
     private String student_id;
     private String class_id;
     private String kind_rank;
-
     private String nickname;
     private double total;
     private long rank;
+    private int steps;
     private String prev_difference;
     private double distance;
     private String college;
     private String duration;
-
-
 
     public RankInfo(){}
 
