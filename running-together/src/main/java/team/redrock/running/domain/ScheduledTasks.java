@@ -35,11 +35,11 @@ public class ScheduledTasks {
         this.scheduledServiceImp.insertDayDistanceToWeekRank();
     }
     /**
-     *  每周周日周路程插入月和总路程，周路程归零。
+     *  每周周日 周路程归零。
      */
     @Scheduled(cron = "0 31 23 ? * SUN")
     public void updateWeekDistance(){
-        this.scheduledServiceImp.updateWeekDistanceToMysql();
+        this.scheduledServiceImp.updateWeekDistance();
     }
 
     /**
@@ -47,7 +47,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 32 23 L * ?")
     public void updateMonthDistance(){
-        this.scheduledServiceImp.updateMonthDistanceToMysql();
+        this.scheduledServiceImp.updateMonthDistance();
     }
 
     /**

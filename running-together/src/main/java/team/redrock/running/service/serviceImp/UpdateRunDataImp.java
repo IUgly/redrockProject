@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
+import team.redrock.running.vo.User;
 
 @Service
 @Component
@@ -17,23 +18,42 @@ public class UpdateRunDataImp {
     private RecordDao recordDao;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private UserServiceImp userServiceImp;
 
-    public static final String DaySCORE_RANK = "dayRankTEST";
+    //个人排行榜  日周月总
+    public static final String StuDayDistanceRank = "stuDayRankTEST";
+    public static final String StuWeekDistanceRank = "stuWeekDistanceRank000";
+    public static final String StuMonthDistanceRank = "stuMonthDistanceRank000";
+    public static final String StuAllDistanceRank = "stuAllDistanceRank000";
 
+    //班级排行榜   日周月总
+    public static final String ClaDayDistanceRank = "claDayRankTEST";
+    public static final String ClaWeekDistanceRank = "claWeekDistanceRank000";
+    public static final String ClaMonthDistanceRank = "claMonthDistanceRank000";
+    public static final String ClaAllDistanceRank = "claAllDistanceRank000";
+
+    //班级排行榜  日周月总
     @Async
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertRecord(record);
     }
 
     @Async
-    public void insertOnceDayRunToRedis(RankInfo rankInfo) {
-//        Set<ZSetOperations.TypedTuple<String>> tuples = new HashSet<>();
-//        ZSetOperations.TypedTuple typedTuple = rankInfo;
-//        tuples.add(typedTuple);
-//        this.redisTemplate.opsForZSet().add(SCORE_RANK, tuples);
-        /**
-         * 更新个人每日路程排行榜redis
-         */
-        this.redisTemplate.opsForZSet().incrementScore(DaySCORE_RANK, rankInfo.getStudent_id(), rankInfo.getScore());
+    public void insertOnceRunDataToRedis(Record record) {
+        RankInfo rankInfo = new RankInfo(record);
+        String student_id = rankInfo.getStudent_id();
+        double distance = rankInfo.getDistance();
+        this.redisTemplate.opsForZSet().incrementScore(StuDayDistanceRank, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(StuWeekDistanceRank, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(StuMonthDistanceRank, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(StuAllDistanceRank, student_id, distance);
+
+        User user = this.userServiceImp.selectUserInfo(student_id);
+        String class_id = user.getClass_id();
+        this.redisTemplate.opsForZSet().incrementScore(ClaDayDistanceRank, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(ClaWeekDistanceRank, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(ClaMonthDistanceRank, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(ClaAllDistanceRank, class_id, distance);
     }
 }

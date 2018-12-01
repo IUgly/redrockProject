@@ -10,6 +10,7 @@ import java.sql.Date;
 @Data
 public class Record {
     private String student_id;
+    private String class_id;
     private long begin_time;
     private long end_time;
     private int steps;

@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
+import team.redrock.running.dao.ScheduledDao;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
 import team.redrock.running.service.serviceImp.UserServiceImp;
@@ -42,6 +43,20 @@ public class TestDeptService {
     private RecordServiceImp recordServiceImp;
     @Autowired
     private UserServiceImp userServiceImp;
+    @Autowired
+    private ScheduledDao scheduledDao;
+    @Test
+    public void testDao(){
+        RankInfo rankInfo = new RankInfo();
+        Gson gson = new Gson();
+        rankInfo.setKind_rank("student_rank");
+//        List<RankInfo> rankInfoListA = this.scheduledDao.selectTest(rankInfo);
+//        System.out.println("listA:"+gson.toJson(rankInfoListA));
+
+        rankInfo.setKind_rank("class_rank");
+//        List<RankInfo> rankInfoListB = this.scheduledDao.selectTest(rankInfo);
+//        System.out.println("listB:"+gson.toJson(rankInfoListB));
+    }
     @Test
     public void update(){
         Record record = new Record();
@@ -56,7 +71,7 @@ public class TestDeptService {
 //        this.latLngServiceImp.insertLatLngToRedis(recordId, json.getString("lat_lng"));
 //        record.setLat_lng(latLing);
         RankInfo rankInfo = new RankInfo(record);
-        this.updateRunDataImp.insertOnceDayRunToRedis(rankInfo);
+        this.updateRunDataImp.insertOnceRunDataToRedis(record);
 
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = redisTemplate.opsForZSet().reverseRangeWithScores(SCORE_RANK, 0, 10);
         System.out.println("获取到的排行和分数列表:" + gson.toJson(rangeWithScores));

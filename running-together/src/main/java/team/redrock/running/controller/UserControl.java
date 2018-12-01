@@ -15,7 +15,6 @@ import team.redrock.running.service.serviceImp.RecordServiceImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.AbstractBaseController;
-import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
@@ -66,15 +65,19 @@ public class UserControl extends AbstractBaseController {
     }
     @PostMapping(value = "update", produces = "application/json")
     public String update(@RequestBody JSONObject json){
+        //插入跑步数据到mysql
         Record record = new Record(json);
         this.updateRunDataImp.notInvitedUpdate(record);
+
+        //得到插入数据返回的id，并以 记录id－轨迹  存入redis
         int recordId = record.getId();
         JSONArray latLing = json.getJSONArray("lat_lng");
         this.recordServiceImp.insertLatLngToRedis(String.valueOf(recordId), json.getString("lat_lng"));
-        record.setLat_lng(latLing);
-        RankInfo rankInfo = new RankInfo(record);
-        this.updateRunDataImp.insertOnceDayRunToRedis(rankInfo);
 
+        //更新redis的个人和班级RSET集合（日周月总榜）
+        this.updateRunDataImp.insertOnceRunDataToRedis(record);
+
+        record.setLat_lng(latLing);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
 }

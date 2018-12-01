@@ -3,7 +3,6 @@ package team.redrock.running.service.serviceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.ScheduledDao;
@@ -23,6 +22,10 @@ public class ScheduledServiceImp {
     private UserServiceImp userServiceImp;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    /**
+     * 每天从redis中一一取出当日跑步数据，更新mysql中个人排行表，和班级排行表
+     */
     public void insertDayDistanceToWeekRank() {
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = this.redisTemplate.opsForZSet().reverseRangeWithScores
                 (DaySCORE_RANK, 0, this.redisTemplate.opsForZSet().zCard(DaySCORE_RANK));
@@ -33,15 +36,30 @@ public class ScheduledServiceImp {
             User user = this.userServiceImp.selectUserInfo(str.getValue().toString());
             RankInfo rankInfo = new RankInfo(user);
             rankInfo.setDistance(str.getScore());
-            this.scheduledDao.insertRankInfoToMysql(rankInfo);
+            if (this.scheduledDao.selectStuRankInfo(rankInfo)==null){
+                this.scheduledDao.insertStuRankInfoToMysql(rankInfo);
+            }else {
+                this.scheduledDao.updateStuScore(rankInfo);
+            }
+            if (this.scheduledDao.selectClaRankInfo(rankInfo)==null){
+                this.scheduledDao.insertClaRankInfoToMysql(rankInfo);
+            }else {
+                this.scheduledDao.updateClaScore(rankInfo);
+            }
         }
     }
-    @Async
-    public void updateWeekDistanceToMysql(){
-        this.scheduledDao.updateWeekScore();
+    /**
+     * 每周末23:40 周数据归零
+     */
+    public void updateWeekDistance(){
+        this.scheduledDao.timingUpdateWeekScore("student_rank");
+        this.scheduledDao.timingUpdateWeekScore("class_rank");
     }
-    @Async
-    public void updateMonthDistanceToMysql(){
-        this.scheduledDao.updateMonthScore();
+    /**
+     *  每月最后一天 23:40  月数据归零
+     */
+    public void updateMonthDistance(){
+        this.scheduledDao.timingUpdateMonthScore("student_rank");
+        this.scheduledDao.timingUpdateMonthScore("class_rank");
     }
 }

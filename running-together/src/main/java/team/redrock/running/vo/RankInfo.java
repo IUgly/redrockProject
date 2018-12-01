@@ -6,6 +6,9 @@ import org.springframework.data.redis.core.ZSetOperations;
 @Data
 public class RankInfo implements ZSetOperations.TypedTuple<String>{
     private String student_id;
+    private String class_id;
+    private String kind_rank;
+
     private String nickname;
     private double total;
     private long rank;
@@ -14,7 +17,7 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
     private String college;
     private String duration;
 
-    private String class_id;
+
 
     public RankInfo(){}
 
