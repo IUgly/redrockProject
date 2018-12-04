@@ -24,7 +24,7 @@ public class ScheduledServiceImp {
     private RedisTemplate<String, String> redisTemplate;
 
     /**
-     * 每天从redis中一一取出当日跑步数据，更新mysql中个人排行表，和班级排行表
+     * 每天23:30从redis中一一取出当日跑步数据，更新mysql中个人排行表，和班级排行表
      */
     public void insertDayDistanceToWeekRank() {
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = this.redisTemplate.opsForZSet().reverseRangeWithScores
@@ -37,29 +37,22 @@ public class ScheduledServiceImp {
             RankInfo rankInfo = new RankInfo(user);
             rankInfo.setDistance(str.getScore());
 
-            if (this.scheduledDao.selectStuRankInfo(rankInfo)==null){
-                this.scheduledDao.insertStuRankInfoToMysql(rankInfo);
-            }
-            if (this.scheduledDao.selectStuRankInfo(rankInfo)==null){
-                this.scheduledDao.insertClaRankInfoToMysql(rankInfo);
-            }
-
-            this.scheduledDao.updateStuScore(rankInfo);
-
+            this.scheduledDao.updateDayScoreToStuMysql(rankInfo);
+            this.scheduledDao.updateDayScoreToClaMysql(rankInfo);
         }
     }
     /**
-     * 每周末23:40 周数据归零
+     * 每周末23:35 周数据归零
      */
     public void updateWeekDistance(){
-        this.scheduledDao.timingUpdateWeekScore("student_rank");
-        this.scheduledDao.timingUpdateWeekScore("class_rank");
+        this.scheduledDao.timingUpdateWeekScore();
+        this.scheduledDao.timingUpdateWeekScore();
     }
     /**
      *  每月最后一天 23:40  月数据归零
      */
     public void updateMonthDistance(){
-        this.scheduledDao.timingUpdateMonthScore("student_rank");
-        this.scheduledDao.timingUpdateMonthScore("class_rank");
+        this.scheduledDao.timingUpdateMonthScore();
+        this.scheduledDao.timingUpdateMonthScore();
     }
 }
