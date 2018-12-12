@@ -9,7 +9,7 @@ public enum UnicomResponseEnums {
 	METHOD_NOT_ALLOWED(-002,"不合法的请求方式"),
 	DATABASE_ERROR(-002,"数据库异常"),
 	BOUND_STATEMENT_NOT_FOUNT(-002,"找不到方法！"),
-	REPEAT_REGISTER(-002,"重复注册"),
+	UPLOAD_FAIL(-003, "上传失败"),
 	NO_USER_EXIST(002,"该学号没有跑步数据"),
 	INVALID_PASSWORD(-002,"帐号或密码错误"),
 	NO_PERMISSION(-002,"非法请求！"),

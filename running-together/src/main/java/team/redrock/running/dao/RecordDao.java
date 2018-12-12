@@ -18,5 +18,9 @@ public interface RecordDao {
     void insertRecord(Record record);
 
     @Select("select * from record where student_id = #{student_id}")
-    List<Record> selectLatLngList(String student_id);
+    List<Record> selectRecordList(String student_id);
+
+    @Select("select * from record where id = #{id}")
+    Record selectRecordById(String id);
+
 }

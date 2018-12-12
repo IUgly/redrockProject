@@ -45,13 +45,4 @@ public class PositionRankServiceImp {
         return rankInfo;
     }
 
-
-    public RankInfo weekNumRankByStudentId(User user) {
-        return null;
-    }
-
-
-    public RankInfo monthNumRankByStudentId(User user) {
-        return null;
-    }
 }

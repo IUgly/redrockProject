@@ -36,7 +36,8 @@ public class RecordServiceImp {
             end = start+14;
         }
 
-        List<Record> recordList = this.recordDao.selectLatLngList(student_id);
+        List<Record> recordList = this.recordDao.selectRecordList(student_id);
+
         num = recordList.size();
         JSONArray jsonArray = new JSONArray();
         for (int i=start; i<end; i++){
@@ -46,8 +47,9 @@ public class RecordServiceImp {
         jsonArray.add(recordList);
         return jsonArray;
     }
-
-    public String selectLatLngById(String id) {
-        return this.redisTemplate.opsForValue().get(id);
+    public Record getRecordById(String id){
+        Record record = this.recordDao.selectRecordById(id);
+        record.setLat_lng(JSONArray.parseArray(this.redisTemplate.opsForValue().get(id)));
+        return record;
     }
 }

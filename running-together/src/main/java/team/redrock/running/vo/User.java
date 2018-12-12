@@ -29,6 +29,7 @@ public class User implements Serializable {
     private String password;
 
     private double total;
+    private String state;
 
     private String idNum;
     private String stuId;

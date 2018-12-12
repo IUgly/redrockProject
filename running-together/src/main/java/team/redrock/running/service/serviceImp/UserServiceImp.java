@@ -75,4 +75,7 @@ public class UserServiceImp {
     public UserOtherInfo selectUserOtherInfo(String student_id){
         return this.userDao.getUserOtherInfo(student_id);
     }
+//    public List<User> selectUserByStudent_Name(String name){
+//        List<>
+//    }
 }

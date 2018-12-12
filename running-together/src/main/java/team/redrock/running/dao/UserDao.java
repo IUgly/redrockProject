@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface UserDao {
@@ -34,4 +36,7 @@ public interface UserDao {
 
     @Select("select * from user_other_info where student_id = #{student_id}")
     UserOtherInfo getUserOtherInfo(String student_id);
+
+    @Select("select * from user where name = #{name}")
+    List<User> getUserListByName(String name);
 }
