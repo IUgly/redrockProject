@@ -21,9 +21,11 @@ public class InvitedService {
     public String inviteUser(String[] student_id){
         for (int i=0; i<student_id.length; i++){
             User user = this.userServiceImp.selectUserInfo(student_id[i]);
-            user.setState();
+            user.setState("1");
             this.userServiceImp.updateUserInfo(user);
+            this.redisTemplate.opsForHash().put("","","");
         }
+        return "";
 
     }
 }

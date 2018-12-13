@@ -2,7 +2,7 @@ package team.redrock.running.service.serviceImp;
 
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -15,14 +15,16 @@ import java.util.List;
 @Component
 public class RecordServiceImp {
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private StringRedisTemplate redisTemplate;
     @Autowired
     private RecordDao recordDao;
     @Autowired
     private UserServiceImp userServiceImp;
+    public static final String LAT_LNG_REDIS = "latLngRedis";
+    public static final String RECORD_REDIS = "recordRedis";
     @Async
     public void insertLatLngToRedis(String recordId, String latLng) {
-        this.redisTemplate.opsForValue().set(recordId, latLng);
+        this.redisTemplate.opsForHash().put(LAT_LNG_REDIS, recordId, latLng);
     }
     public JSONArray getLatLngList(String student_id,String pageParam, int num){
         int page = 1;
@@ -41,7 +43,7 @@ public class RecordServiceImp {
         num = recordList.size();
         JSONArray jsonArray = new JSONArray();
         for (int i=start; i<end; i++){
-            String latLng = this.redisTemplate.opsForValue().get(recordList.get(i).getId());
+            String latLng = (String) this.redisTemplate.opsForHash().get(LAT_LNG_REDIS , recordList.get(i).getId());
             recordList.get(i).setLat_lng(JSONArray.parseArray(latLng));
         }
         jsonArray.add(recordList);
@@ -49,7 +51,7 @@ public class RecordServiceImp {
     }
     public Record getRecordById(String id){
         Record record = this.recordDao.selectRecordById(id);
-        record.setLat_lng(JSONArray.parseArray(this.redisTemplate.opsForValue().get(id)));
+        record.setLat_lng(JSONArray.parseArray((String)this.redisTemplate.opsForHash().get(RECORD_REDIS, id)));
         return record;
     }
 }

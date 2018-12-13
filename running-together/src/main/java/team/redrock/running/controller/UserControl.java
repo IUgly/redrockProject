@@ -48,8 +48,6 @@ public class UserControl extends AbstractBaseController {
 //            Token token = new Token("2017211903", new Date());
             user.setToken("11111");
             this.userServiceImp.insertUserToRedis(student_id, user);
-
-            System.out.println(this.userServiceImp.selectUserInfo(student_id));
             return JSONObject.toJSONString(new ResponseBean<>(user, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(

@@ -34,7 +34,7 @@ import java.util.Set;
 @WebAppConfiguration
 public class TestDeptService {
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate redisTemplate;
 
 //    public static final String SCORE_RANK = "test29";
 
@@ -51,22 +51,18 @@ public class TestDeptService {
     private RankDao rankDao;
     @Autowired
     private UserDao userDao;
+    public static final String TEST = "test22";
 
     @Test
     public void rankInfo() throws Exception{
-        RankInfo rankInfo = new RankInfo();
-        rankInfo.setDistance(10000);
-        rankInfo.setClass_id("04031702");
-        rankInfo.setStudent_id("2017211903");
-        rankInfo.setCollege("jsj");
-        rankInfo.setDuration("29");
-        rankInfo.setSteps(100);
-        rankInfo.setNickname("echo");
-        if (!this.scheduledDao.insertStuRankInfoToMysql(rankInfo))
-        {
-            System.out.println("ok");
+        User user = this.userServiceImp.login("2017211903","289112");
+        if (user!=null){
+            System.out.println("exist");
+        }else {
+            System.out.println("not exist");
         }
     }
+
     @Test
     public void update(){
         Record record = new Record();
@@ -97,7 +93,7 @@ public class TestDeptService {
 //        this.redisTemplate.opsForValue().set("testa", gson.toJson(user));
 //        System.out.println(this.redisTemplate.opsForValue().get("testa"));
 //        this.userServiceImp.insertUserToRedis(user.getStudent_id(), user);
-        String info = this.redisTemplate.opsForValue().get("2017211903");
+        String info = (String) this.redisTemplate.opsForValue().get("2017211903");
         System.out.println(info);
         User u = gson.fromJson(info, User.class);
         System.out.println(u.toString());

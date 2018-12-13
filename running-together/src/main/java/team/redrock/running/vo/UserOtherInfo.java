@@ -21,6 +21,7 @@ public class UserOtherInfo {
         this.college = user.getCollege();
         this.student_id = user.getStudent_id();
     }
+
     public UserOtherInfo(String student_id, String class_id, String college, int highest_distance_rank, int highest_distance, int highest_steps_rank, String highest_steps, String total_steps, int total_distance, int highest_continuous_day) {
         this.student_id = student_id;
         this.class_id = class_id;

@@ -1,7 +1,6 @@
 package team.redrock.running.service.serviceImp;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
@@ -21,23 +20,25 @@ public class UserServiceImp {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate redisTemplate;
+    public static final String USER_REDIS = "UserRedis";
     @Async
     public void insertUserToRedis(String student_id, User userInfo) {
-        Gson gson = new Gson();
-        this.redisTemplate.opsForValue().set(student_id, gson.toJson(userInfo));
+        HashMap userHash = new HashMap();
+        userHash.put(student_id, userInfo);
+        this.redisTemplate.opsForHash().putAll(USER_REDIS, userHash);
     }
     public User login(String student_id, String password) {
-
-        if (this.redisTemplate.opsForValue().get(student_id)!=null){
-            return this.selectUserInfo(student_id);
-        }
         RestTemplate restT = new RestTemplate();
         Map<String, String> map = new HashMap<>();
         map.put("stuNum",student_id);
         map.put("idNum", password);
 
         JSONObject responseEntity = restT.postForObject("http://hongyan.cqupt.edu.cn/api/verify", map, JSONObject.class);
+        String status = responseEntity.getString("status");
+        if (!status.equals("200")){
+            return null;
+        }
         JSONObject json = responseEntity.getJSONObject("data");
         User user = new User(json);
         return user;
@@ -48,34 +49,28 @@ public class UserServiceImp {
     }
     @Async
     public Boolean updateUserInfo(User user) {
-        Gson gson = new Gson();
-        String userInfo = gson.toJson(user);
         //用户信息插入redis（stu_id － userInfo）
-        this.redisTemplate.opsForValue().getOperations().delete(user.getStudent_id());
-        this.redisTemplate.opsForValue().set(user.getStudent_id(), userInfo);
+//        this.redisTemplate.opsForHash().delete(USER_REDIS, user.getStudent_id());
+        HashMap userHash = new HashMap();
+        userHash.put(user.getStudent_id(), user);
+        this.redisTemplate.opsForHash().putAll(USER_REDIS, userHash);
 
         return this.userDao.updateUserInfo(user);
     }
 
     public User selectUserInfo(String student_id) {
-        String userInfo = this.redisTemplate.opsForValue().get(student_id);
-//        System.out.println("redis中:"+userInfo);
-        Gson gson = new Gson();
-        User user = gson.fromJson(userInfo, User.class);
+        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
         if (user!=null){
-//            System.out.println("转bean："+user.toString());
             return user;
         }
         return this.userDao.selectUserByStudentId(student_id);
     }
 
-    public User selectUserSimpleInfo(String student_id) {
-        return this.userDao.selectSimpleUserInfo(student_id);
+    public UserOtherInfo selectUserSimpleInfo(String student_id) {
+        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+        return new UserOtherInfo(user);
     }
     public UserOtherInfo selectUserOtherInfo(String student_id){
         return this.userDao.getUserOtherInfo(student_id);
     }
-//    public List<User> selectUserByStudent_Name(String name){
-//        List<>
-//    }
 }
