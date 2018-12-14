@@ -1,14 +1,8 @@
 package team.redrock.running.util;
 
-import com.alibaba.fastjson.JSONObject;
-
 public class Util {
-    public static String response(String status, String message, JSONObject json){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("status", status);
-        jsonObject.put("message", message);
-        jsonObject.put("data", json);
-        return jsonObject.toString();
-
+    public static boolean isLetterDigitOrChinese(String str) {
+        String regex = "^[a-z0-9A-Z\u4e00-\u9fa5]+$";//其他需要，直接修改正则表达式就好
+        return str.matches(regex);
     }
 }

@@ -34,7 +34,6 @@ public class UpdateRunDataImp {
     public static final String ClaAllDistanceRank = "claAllDistanceRank000";
 
     //班级排行榜  日周月总
-    @Async
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertRecord(record);
     }

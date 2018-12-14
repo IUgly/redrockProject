@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Queue;
 
 /**
  * Created by huangds on 2017/10/28.
@@ -32,6 +33,14 @@ public class User implements Serializable {
 
     private String idNum;
     private String stuId;
+    private Queue invitations;
+
+    public void enQueue(InviteInfo Inviter){
+        this.invitations.offer(Inviter);
+    }
+    public InviteInfo deQueue(){
+        return (InviteInfo) this.invitations.peek();
+    }
 
     public User(String student_id, String name, String nickname, String class_id, String token, String college) {
         this.student_id = student_id;
@@ -55,10 +64,6 @@ public class User implements Serializable {
 
     public User(){}
 
-    public static void main(String[] args) {
-
-
-    }
     public User(JSONObject json){
         this.class_id = json.get("classNum").toString();
         this.college = json.get("college").toString();

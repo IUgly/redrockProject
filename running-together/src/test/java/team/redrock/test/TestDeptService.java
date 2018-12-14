@@ -13,13 +13,9 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
-import team.redrock.running.dao.RankDao;
-import team.redrock.running.dao.ScheduledDao;
-import team.redrock.running.dao.UserDao;
-import team.redrock.running.service.serviceImp.RecordServiceImp;
+import team.redrock.running.service.serviceImp.InvitedService;
+import team.redrock.running.service.serviceImp.RankListServerImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
-import team.redrock.running.service.serviceImp.UserServiceImp;
-import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
@@ -35,6 +31,8 @@ import java.util.Set;
 public class TestDeptService {
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private RankListServerImp rankListServerImp;
 
 //    public static final String SCORE_RANK = "test29";
 
@@ -42,25 +40,12 @@ public class TestDeptService {
     @Autowired
     private UpdateRunDataImp updateRunDataImp;
     @Autowired
-    private RecordServiceImp recordServiceImp;
-    @Autowired
-    private UserServiceImp userServiceImp;
-    @Autowired
-    private ScheduledDao scheduledDao;
-    @Autowired
-    private RankDao rankDao;
-    @Autowired
-    private UserDao userDao;
+    private InvitedService invitedService;
     public static final String TEST = "test22";
 
     @Test
     public void rankInfo() throws Exception{
-        User user = this.userServiceImp.login("2017211903","289112");
-        if (user!=null){
-            System.out.println("exist");
-        }else {
-            System.out.println("not exist");
-        }
+
     }
 
     @Test
@@ -72,15 +57,9 @@ public class TestDeptService {
         Gson gson = new Gson();
         record.setEnd_time(System.currentTimeMillis());
         this.updateRunDataImp.notInvitedUpdate(record);
-//        String recordId = String.valueOf(this.latLngServiceImp.selectIdOfRecord(record));
-//        JSONArray latLing = json.getJSONArray("lat_lng");
-//        this.latLngServiceImp.insertLatLngToRedis(recordId, json.getString("lat_lng"));
-//        record.setLat_lng(latLing);
-        RankInfo rankInfo = new RankInfo(record);
-        this.updateRunDataImp.insertOnceRunDataToRedis(record);
+        JSONArray latLing = JSONArray.parseArray();
+        record.setLat_lng(latLing);
 
-        Set<ZSetOperations.TypedTuple<String>> rangeWithScores = redisTemplate.opsForZSet().reverseRangeWithScores(SCORE_RANK, 0, 10);
-        System.out.println("获取到的排行和分数列表:" + gson.toJson(rangeWithScores));
     }
     @Test
     public void UserTest(){

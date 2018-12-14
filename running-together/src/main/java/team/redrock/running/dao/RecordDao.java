@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public interface RecordDao {
 
-    @Insert("INSERT INTO record set student_id=#{student_id},begin_time=#{begin_time},end_time=#{end_time},distance=#{distance},steps=#{steps},date=#{date}")
+    @Insert("INSERT INTO record set student_id=#{student_id},begin_time=#{begin_time},end_time=#{end_time},distance=#{distance},steps=#{steps},date=#{date},lat_lng=#{lat_lng, typeHandler=team.redrock.running.bean.JsonTypeHandler}")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertRecord(Record record);
 

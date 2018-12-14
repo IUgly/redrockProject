@@ -37,15 +37,6 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
         this.rank = rank;
         this.prev_difference = prev_difference;
     }
-
-    public RankInfo(String nickname, int total, int rank, String prev_difference, String class_id) {
-        this.nickname = nickname;
-        this.total = total;
-        this.rank = rank;
-        this.prev_difference = prev_difference;
-        this.class_id = class_id;
-    }
-
 //    @Override
 //    public String toString() {
 //        return "{" +

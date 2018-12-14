@@ -22,7 +22,6 @@ public class ScheduledServiceImp {
     private UserServiceImp userServiceImp;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-
     /**
      * 每天23:30从redis中一一取出当日跑步数据，更新mysql中个人排行表，和班级排行表
      */

@@ -12,6 +12,7 @@ import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -64,6 +65,9 @@ public class UserServiceImp {
             return user;
         }
         return this.userDao.selectUserByStudentId(student_id);
+    }
+    public List<User> selectUserListByName(String name){
+        return this.userDao.getUserListByName(name);
     }
 
     public UserOtherInfo selectUserSimpleInfo(String student_id) {

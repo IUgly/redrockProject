@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.vo.Record;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Component
@@ -53,5 +55,10 @@ public class RecordServiceImp {
         Record record = this.recordDao.selectRecordById(id);
         record.setLat_lng(JSONArray.parseArray((String)this.redisTemplate.opsForHash().get(RECORD_REDIS, id)));
         return record;
+    }
+    public void putRedisHash(String key, Object o, String RedisHash){
+        Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put(key, o);
+        this.redisTemplate.opsForHash().putAll(RedisHash, hashMap);
     }
 }

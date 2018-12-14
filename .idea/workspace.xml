@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50a51bb5-7d7d-428f-a787-6d0d8f55b4df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -182,18 +190,18 @@
     <session id="1759399027">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -201,7 +209,7 @@
           <entry key="class" value="3" />
           <entry key="example" value="1" />
           <entry key="fxml" value="1" />
-          <entry key="java" value="185" />
+          <entry key="java" value="242" />
           <entry key="properties" value="2" />
           <entry key="xml" value="1" />
           <entry key="yml" value="1" />
@@ -210,7 +218,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="185" />
+          <entry key="JAVA" value="242" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Properties" value="2" />
           <entry key="XML" value="2" />
@@ -220,13 +228,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="3" />
-          <entry key="java" value="9872" />
+          <entry key="java" value="12408" />
           <entry key="properties" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="9872" />
+          <entry key="JAVA" value="12408" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="Properties" value="31" />
         </counts>
@@ -239,43 +247,108 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-269">
-              <caret line="23" column="49" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="50" column="5" lean-forward="true" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+            <state relative-caret-position="684">
+              <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3154#3155#0" expanded="true" />
+                <element signature="e#3178#3179#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/JsonTypeHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="17" column="34" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java">
+        <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+            <state relative-caret-position="329">
+              <caret line="59" column="49" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -283,62 +356,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-              <folding>
-                <element signature="e#1652#1653#0" expanded="true" />
-                <element signature="e#1704#1705#0" expanded="true" />
-                <element signature="e#2751#2752#0" expanded="true" />
-                <element signature="e#2815#2816#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/UserDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="57" column="66" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
+            <state relative-caret-position="236">
+              <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2510#2511#0" expanded="true" />
+                <element signature="e#2544#2545#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -382,9 +406,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/exception/UnicomRuntimeException.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/configuration/LoginAdapter.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/mapper/DemoMapper.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/RankServiceInterface.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/UserServiceInterface.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/redis/RedisObjectSerializer.java" />
@@ -404,34 +425,37 @@
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/aop/ControllerAspect.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/PositionRankDao.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDaoImp.java" />
         <option value="$PROJECT_DIR$/volunteerTime/src/main/resources/mybatis/mapper/cn/mldn/User.xml.fxml" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/Trace.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java" />
         <option value="$PROJECT_DIR$/webSite/src/main/java/team/redrock/template/config/Config.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/resources/define.properties" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/configuration/Config.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/TraceControl.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedServer.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/Util.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/JsonTypeHandler.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java" />
       </list>
     </option>
@@ -615,6 +639,18 @@
               <item name="team" type="462c0819:PsiDirectoryNode" />
               <item name="redrock" type="462c0819:PsiDirectoryNode" />
               <item name="running" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
+              <item name="running-together" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="team" type="462c0819:PsiDirectoryNode" />
+              <item name="redrock" type="462c0819:PsiDirectoryNode" />
+              <item name="running" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -731,113 +767,13 @@
               <item name="redrock" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team" type="462c0819:PsiDirectoryNode" />
-              <item name="redrock" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team" type="462c0819:PsiDirectoryNode" />
-              <item name="redrock" type="462c0819:PsiDirectoryNode" />
-              <item name="template" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team" type="462c0819:PsiDirectoryNode" />
-              <item name="redrock" type="462c0819:PsiDirectoryNode" />
-              <item name="template" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team" type="462c0819:PsiDirectoryNode" />
-              <item name="redrock" type="462c0819:PsiDirectoryNode" />
-              <item name="template" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team" type="462c0819:PsiDirectoryNode" />
-              <item name="redrock" type="462c0819:PsiDirectoryNode" />
-              <item name="template" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="redrockProject" type="462c0819:PsiDirectoryNode" />
-              <item name="webSite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -850,7 +786,7 @@
     <property name="SearchEverywhereHistoryKey" value="config&#9;FILE&#9;file:///Users/kuangjunlin/Downloads/ReferCode/redrockProject/webSite/src/main/java/team/redrock/webSite/config/Config.java&#10;httpcli&#9;PSI&#9;JAVA://org.apache.commons.httpclient.HttpClient" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544661482132" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544800612014" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -902,7 +838,20 @@
     </option>
     <option name="contentProportion" value="0.29090908" />
   </component>
-  <component name="RunManager" selected="JUnit.TestDeptService.rankInfo">
+  <component name="RunManager" selected="Application.InviteInfo">
+    <configuration name="InviteInfo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.redrock.running.vo.InviteInfo" />
+      <module name="running-together" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.redrock.running.vo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="User" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.redrock.running.vo.User" />
       <module name="running-together" />
@@ -943,22 +892,6 @@
       <option name="PACKAGE_NAME" value="team.redrock.test" />
       <option name="MAIN_CLASS_NAME" value="team.redrock.test.TestDeptService" />
       <option name="METHOD_NAME" value="testDao" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestDeptService.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="running-together" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.redrock.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="team.redrock.test" />
-      <option name="MAIN_CLASS_NAME" value="team.redrock.test.TestDeptService" />
-      <option name="METHOD_NAME" value="update" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -1014,18 +947,18 @@
       <item itemvalue="Spring Boot.StartSpringBootMain (3)" />
       <item itemvalue="Spring Boot.StartSpringBootMain (4)" />
       <item itemvalue="Application.User" />
-      <item itemvalue="JUnit.TestDeptService.update" />
       <item itemvalue="JUnit.TestDeptService.testDao" />
       <item itemvalue="JUnit.TestDeptService.userInfo" />
       <item itemvalue="JUnit.TestDeptService.rankInfo" />
+      <item itemvalue="Application.InviteInfo" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.InviteInfo" />
         <item itemvalue="JUnit.TestDeptService.rankInfo" />
         <item itemvalue="JUnit.TestDeptService.userInfo" />
         <item itemvalue="JUnit.TestDeptService.testDao" />
         <item itemvalue="Application.User" />
-        <item itemvalue="JUnit.TestDeptService.update" />
       </list>
     </recent_temporary>
   </component>
@@ -1108,26 +1041,12 @@
       <workItem from="1543902011824" duration="1867000" />
       <workItem from="1543975008785" duration="2622000" />
       <workItem from="1544441103928" duration="6778000" />
-      <workItem from="1544528670740" duration="9547000" />
+      <workItem from="1544528670740" duration="10197000" />
+      <workItem from="1544743183962" duration="13247000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 07h 45m 43s.xml">
-      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 07h 46m 04s.xml">
-      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 07h 46m 50s.xml">
-      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 08h 23m 04s.xml">
-      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 08h 27m 44s.xml">
-      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 08h 28m 49s.xml">
       <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
     </history-entry>
@@ -1143,9 +1062,24 @@
     <history-entry file="TestDeptService_rankInfo - 2018.12.13 at 08h 36m 48s.xml">
       <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestDeptService_rankInfo - 2018.12.14 at 10h 07m 28s.xml">
+      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestDeptService_rankInfo - 2018.12.14 at 10h 09m 15s.xml">
+      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestDeptService_rankInfo - 2018.12.14 at 10h 16m 45s.xml">
+      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestDeptService_rankInfo - 2018.12.14 at 10h 18m 18s.xml">
+      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestDeptService_rankInfo - 2018.12.14 at 10h 21m 26s.xml">
+      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="468522000" />
+    <option name="totallyTimeSpent" value="482419000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1235,12 +1169,6 @@
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java</url>
           <line>36</line>
           <properties />
@@ -1250,15 +1178,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/PositionRankDao.java" />
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RunDataDao.java" />
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/InvitedServiceInterface.java" />
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/RankServiceInterface.java" />
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/inteceptor/LoginInterceptor.java">
@@ -1315,30 +1234,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
           <caret line="60" column="11" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1379,47 +1278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/ResponseBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/RankResponseBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webSite/src/main/java/team/redrock/template/dao/Dao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -1431,13 +1289,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webSite/src/main/java/team/redrock/template/controller/Control.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="83" column="5" lean-forward="true" selection-start-line="57" selection-start-column="4" selection-end-line="83" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1455,20 +1306,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1499,40 +1336,48 @@
     <entry file="file://$PROJECT_DIR$/webSite/src/main/resources/application.ym.example">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        <state relative-caret-position="198">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java">
+    <entry file="file://$PROJECT_DIR$/webSite/src/main/java/team/redrock/template/controller/Control.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="293">
+          <caret line="48" column="31" lean-forward="true" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-121">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="324">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1541,52 +1386,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+        <state relative-caret-position="304">
+          <caret line="40" column="21" lean-forward="true" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/util/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+        <state relative-caret-position="36">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/RankResponseBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/ResponseBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+        <state relative-caret-position="42">
+          <caret line="79" column="35" lean-forward="true" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+        <state relative-caret-position="108">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        <state relative-caret-position="121">
+          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
           <folding>
-            <element signature="e#1652#1653#0" expanded="true" />
-            <element signature="e#1704#1705#0" expanded="true" />
-            <element signature="e#2751#2752#0" expanded="true" />
-            <element signature="e#2815#2816#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#981#982#0" expanded="true" />
+            <element signature="e#1038#1039#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="57" column="66" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
+        <state relative-caret-position="273">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#744#745#0" expanded="true" />
+            <element signature="e#791#792#0" expanded="true" />
+            <element signature="e#824#825#0" expanded="true" />
+            <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#1956#1957#0" expanded="true" />
+            <element signature="e#1996#1997#0" expanded="true" />
+            <element signature="e#2032#2033#0" expanded="true" />
+            <element signature="e#2088#2089#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1595,15 +1470,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateRunDataImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+        <state relative-caret-position="149">
+          <caret line="45" column="77" selection-start-line="45" selection-start-column="77" selection-end-line="45" selection-end-column="77" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-269">
-          <caret line="23" column="49" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        <state relative-caret-position="247">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1612,15 +1487,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="50" column="5" lean-forward="true" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+        <state relative-caret-position="684">
+          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+        <state relative-caret-position="236">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2510#2511#0" expanded="true" />
+            <element signature="e#2544#2545#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3154#3155#0" expanded="true" />
+            <element signature="e#3178#3179#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RankDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/RankInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/bean/JsonTypeHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/RecordDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="59" column="49" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
