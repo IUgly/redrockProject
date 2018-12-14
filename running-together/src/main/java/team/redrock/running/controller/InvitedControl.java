@@ -4,19 +4,20 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
+import team.redrock.running.service.serviceImp.UpdateRunDataImp;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.Util;
 import team.redrock.running.vo.InviteInfo;
+import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class InvitedControl {
@@ -30,6 +31,8 @@ public class InvitedControl {
     private RecordServiceImp recordServiceImp;
     @Autowired
     private InvitedService invitedService;
+    @Autowired
+    private UpdateRunDataImp updateRunDataImp;
     @PostMapping(value = "invite/update", produces = "application/json")
     public String Upload(String student_id, String invitees){
         User invite_user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
@@ -82,5 +85,20 @@ public class InvitedControl {
         }
         this.recordServiceImp.putRedisHash(invited_id, inviteInfo, INVITATION_REDIS);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
+    }
+    @PostMapping(value = "/invite/update", produces = "application/json")
+    public String inviteUpdate(String invited_id, @RequestBody JSONObject json){
+        InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
+        Record record = new Record(json);
+        record.setInvited_id(invited_id);
+        Set<String> invited_members = inviteInfo.getPassive_studentSet();
+        for (String student_id: invited_members){
+            record.setStudent_id(student_id);
+            this.updateRunDataImp.notInvitedUpdate(record);
+            //更新redis的个人和班级RSET集合（日周月总榜）
+            this.updateRunDataImp.insertOnceRunDataToRedis(record);
+        }
+
+        return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));
     }
 }

@@ -13,13 +13,15 @@ import team.redrock.running.vo.User;
 @Service
 @Component
 public class UpdateRunDataImp {
-
+    public static final String LAT_LNG = "Lat_Lng";
     @Autowired
     private RecordDao recordDao;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private UserServiceImp userServiceImp;
+    @Autowired
+    private RecordServiceImp recordServiceImp;
 
     //个人排行榜  日周月总
     public static final String StuDayDistanceRank = "stuDayRankTEST";
@@ -36,6 +38,7 @@ public class UpdateRunDataImp {
     //班级排行榜  日周月总
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertRecord(record);
+        this.recordServiceImp.putRedisHash(record.getId(), record.getLat_lng(), LAT_LNG);
     }
 
     @Async

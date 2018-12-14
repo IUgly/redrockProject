@@ -11,7 +11,6 @@ import team.redrock.running.bean.RankResponseBean;
 import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.configuration.Config;
 import team.redrock.running.enums.UnicomResponseEnums;
-import team.redrock.running.service.serviceImp.PositionRankServiceImp;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
 import team.redrock.running.service.serviceImp.UserServiceImp;
@@ -37,8 +36,6 @@ public class UserControl extends AbstractBaseController {
     @Autowired
     private Config config;
     @Autowired
-    private PositionRankServiceImp positionRankServiceImp;
-    @Autowired
     private RecordServiceImp recordServiceImp;
     @PostMapping(value = "/login", produces = "application/json")
     public String login(String student_id, String password){
@@ -59,7 +56,6 @@ public class UserControl extends AbstractBaseController {
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
 
-
     @PostMapping(value = "user/info/update", produces = "application/json")
     public String updateUserInfo(String student_id, String data){
         JSONObject json = JSONObject.parseObject(data);
@@ -78,10 +74,8 @@ public class UserControl extends AbstractBaseController {
         //插入跑步数据到mysql
         Record record = new Record(json);
         this.updateRunDataImp.notInvitedUpdate(record);
-
         //更新redis的个人和班级RSET集合（日周月总榜）
         this.updateRunDataImp.insertOnceRunDataToRedis(record);
-
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
     @GetMapping(value = "sanzou/user/{student_id}/{page?}", produces = "application/json")
@@ -111,7 +105,6 @@ public class UserControl extends AbstractBaseController {
                 MultipartFile file = iter.next() ;
                 if (file != null) { // 现在有文件上传
                     try {
-                        // Get the file and save it somewhere
                         byte[] bytes = file.getBytes();
                         long fileName = System.currentTimeMillis();
                         Path path = Paths.get(this.config.getPhoto() +"/"+ fileName+".jpg");

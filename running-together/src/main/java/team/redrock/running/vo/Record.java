@@ -17,13 +17,14 @@ public class Record {
     private double distance;
     private Date date;
     private JSONArray lat_lng;
-    private int id;
+    private String id;
+    private String invited_id;
 //    private String duration;
 
     public Record(){
     }
 
-    public Record(String student_id, long begin_time, long end_time, int steps, double distance, Date date, int id) {
+    public Record(String student_id, long begin_time, long end_time, int steps, double distance, Date date, String id) {
         this.student_id = student_id;
         this.begin_time = begin_time;
         this.end_time = end_time;
