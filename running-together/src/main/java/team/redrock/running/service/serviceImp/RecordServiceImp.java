@@ -24,10 +24,7 @@ public class RecordServiceImp {
     private UserServiceImp userServiceImp;
     public static final String LAT_LNG_REDIS = "latLngRedis";
     public static final String RECORD_REDIS = "recordRedis";
-    @Async
-    public void insertLatLngToRedis(String recordId, String latLng) {
-        this.redisTemplate.opsForHash().put(LAT_LNG_REDIS, recordId, latLng);
-    }
+
     public JSONArray getLatLngList(String student_id,String pageParam, int num){
         int page = 1;
         if (pageParam!=null){

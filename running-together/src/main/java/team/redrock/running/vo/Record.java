@@ -41,5 +41,6 @@ public class Record {
         this.steps = Integer.parseInt(json.getString("steps"));
         this.distance = Double.valueOf(json.getString("distance"));
         this.date = Date.valueOf(json.getString("date"));
+        this.setLat_lng(json.getJSONArray("lat_lng"));
     }
 }

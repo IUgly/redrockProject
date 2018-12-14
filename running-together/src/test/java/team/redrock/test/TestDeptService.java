@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
+import team.redrock.running.dao.RecordDao;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RankListServerImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
@@ -40,6 +41,8 @@ public class TestDeptService {
     @Autowired
     private UpdateRunDataImp updateRunDataImp;
     @Autowired
+    private RecordDao recordDao;
+    @Autowired
     private InvitedService invitedService;
     public static final String TEST = "test22";
 
@@ -54,12 +57,10 @@ public class TestDeptService {
         record.setBegin_time(System.currentTimeMillis());
         record.setStudent_id("2017211903");
         record.setDate(Date.valueOf("2016-11-12"));
-        Gson gson = new Gson();
         record.setEnd_time(System.currentTimeMillis());
-        this.updateRunDataImp.notInvitedUpdate(record);
-        JSONArray latLing = JSONArray.parseArray();
+        JSONArray latLing = JSONArray.parseArray("[{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972}]");
         record.setLat_lng(latLing);
-
+        this.recordDao.insertRecord(record);
     }
     @Test
     public void UserTest(){
