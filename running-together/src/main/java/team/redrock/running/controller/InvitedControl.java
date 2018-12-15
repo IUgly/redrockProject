@@ -63,7 +63,7 @@ public class InvitedControl {
     @GetMapping(value = "/invite/invited", produces = "application/json")
     public String getInvitedOrNot(String student_id){
         User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-        InviteInfo inviteInfo = user.deQueue();
+        InviteInfo inviteInfo = user.deQueueInvitation();
         if (inviteInfo!=null){
             return JSONObject.toJSONString(new ResponseBean<>(inviteInfo, UnicomResponseEnums.SUCCESS));
         }else {

@@ -42,7 +42,7 @@ public class InvitedService {
         for (String ids: student_ids){
             InviteInfo inviteInfo = new InviteInfo(invite_user, ids);
             User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, ids);
-            user.enQueue(inviteInfo);
+            user.enQueueInvitation(inviteInfo);
         }
     }
     @Async

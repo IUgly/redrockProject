@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -11,37 +12,36 @@ import java.util.Queue;
  */
 @Data
 public class User implements Serializable {
-
     private int id;
-
     private String student_id;
-
     private String name;
-
     private String nickname;
-
     private String class_id;
-
     private String token;
-
     private String college;
-
     private String password;
-
     private double total;
     private String state;
-
     private String idNum;
     private String stuId;
-    private Queue invitations;
+    //当前收到的邀约(可能多个邀约)
+    private Queue queueInvitations;
 
-    public void enQueue(InviteInfo Inviter){
-        this.invitations.offer(Inviter);
+    //当前发出的邀约（一个邀约多个其它用户）
+    private Map<String, InviteInfo> InvitingMap;
+    public void enQueueInvitation(InviteInfo Inviter){
+        this.queueInvitations.offer(Inviter);
     }
-    public InviteInfo deQueue(){
-        return (InviteInfo) this.invitations.peek();
+    public InviteInfo deQueueInvitation(){
+        return (InviteInfo) this.queueInvitations.peek();
     }
+    public void enInvitingMap(InviteInfo needInviteUser){
+        this.getInvitingMap().put(needInviteUser.getInvited_studentId(), needInviteUser);
+    }
+    public void setInvitedState(InviteInfo passiveUserInvited, String choose){
+        this.getInvitingMap().get(passiveUserInvited).setResult(choose);
 
+    }
     public User(String student_id, String name, String nickname, String class_id, String token, String college) {
         this.student_id = student_id;
         this.name = name;
