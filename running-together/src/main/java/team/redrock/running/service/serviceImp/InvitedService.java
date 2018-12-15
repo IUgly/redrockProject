@@ -1,5 +1,7 @@
 package team.redrock.running.service.serviceImp;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
@@ -10,6 +12,7 @@ import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.User;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 @Component
@@ -27,9 +30,6 @@ public class InvitedService {
         String state = user.getState();
         return state;
     }
-    public void inviteUser(InviteInfo inviteInfo){
-        this.invitedDao.insertInvited(inviteInfo);
-    }
     @Async
     public void insertInvitationToRedis(InviteInfo inviteInfo){
         HashMap invitationHash = new HashMap();
@@ -45,9 +45,17 @@ public class InvitedService {
             user.enQueue(inviteInfo);
         }
     }
-    public InviteInfo receive(String student_id){
-        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-        return user.deQueue();
+    @Async
+    public void OverInvitation(String invited_id, InviteInfo inviteInfo){
+        this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
+        inviteInfo.setResult("END");
+        this.invitedDao.insertInvited(inviteInfo);
+    }
+    public JsonArray getInvitedHistory(String student_id){
+        List<InviteInfo> inviteInfoList = this.invitedDao.selectInvitedList(student_id);
+        Gson gson = new Gson();
+        JsonArray jsonArray = gson.fromJson(gson.toJson(inviteInfoList), JsonArray.class);
+        return jsonArray;
     }
 
 }

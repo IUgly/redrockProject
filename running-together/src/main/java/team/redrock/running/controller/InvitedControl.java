@@ -2,6 +2,7 @@ package team.redrock.running.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,6 @@ public class InvitedControl {
     public String Upload(String student_id, String invitees){
         User invite_user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
         InviteInfo inviteInfo = new InviteInfo(invite_user, invitees);
-        this.invitedService.inviteUser(inviteInfo);
         this.invitedService.sendInvitations(invitees, invite_user);
         this.invitedService.insertInvitationToRedis(inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(inviteInfo.getInvited_id(), UnicomResponseEnums.SUCCESS));
@@ -74,6 +74,7 @@ public class InvitedControl {
     public String getInvitationOverOrNot(String invited_id){
         return "";
     }
+
     @PostMapping(value = "/invite/result", produces = "application/json")
     public String receiveOrOther(String invited_id, String student_id, String result){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
@@ -86,19 +87,33 @@ public class InvitedControl {
         this.recordServiceImp.putRedisHash(invited_id, inviteInfo, INVITATION_REDIS);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
-    @PostMapping(value = "/invite/update", produces = "application/json")
-    public String inviteUpdate(String invited_id, @RequestBody JSONObject json){
+    @PostMapping(value = "/invite/updateData", produces = "application/json")
+    public String inviteUpdateRunData(String invited_id, @RequestBody JSONObject json){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         Record record = new Record(json);
         record.setInvited_id(invited_id);
         Set<String> invited_members = inviteInfo.getPassive_studentSet();
+        invited_members.add(inviteInfo.getInvited_studentId());
         for (String student_id: invited_members){
             record.setStudent_id(student_id);
             this.updateRunDataImp.notInvitedUpdate(record);
-            //更新redis的个人和班级RSET集合（日周月总榜）
+            //更新redis的个人和班级RSET集合（日周月总榜)
             this.updateRunDataImp.insertOnceRunDataToRedis(record);
         }
-
+        this.invitedService.OverInvitation(invited_id, inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));
+    }
+    @GetMapping(value = "/invite/end", produces = "application/json")
+    public String invitedEnd(String invited_id){
+        InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
+        if (inviteInfo!=null){
+            return JSONObject.toJSONString(new ResponseBean<>(new InviteInfo("OK"), UnicomResponseEnums.SUCCESS));
+        }
+        return JSONObject.toJSONString(new ResponseBean<>(new InviteInfo("END"), UnicomResponseEnums.SUCCESS));
+    }
+    @GetMapping(value = "invite/history", produces = "application/json")
+    public String invitedHistory(String student_id){
+        JsonArray invitedHistoryJsonArray = this.invitedService.getInvitedHistory(student_id);
+        return JSONObject.toJSONString(new ResponseBean<>(invitedHistoryJsonArray, UnicomResponseEnums.SUCCESS));
     }
 }

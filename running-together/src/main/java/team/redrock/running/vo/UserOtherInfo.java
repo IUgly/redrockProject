@@ -2,8 +2,10 @@ package team.redrock.running.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UserOtherInfo {
+public class UserOtherInfo implements Serializable {
 
     private String student_id;
     private String class_id;

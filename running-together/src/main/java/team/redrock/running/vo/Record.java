@@ -4,11 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 
 @Data
-public class Record {
+public class Record implements Serializable {
     private String student_id;
     private String class_id;
     private long begin_time;

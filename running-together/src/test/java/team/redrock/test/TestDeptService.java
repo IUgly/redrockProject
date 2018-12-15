@@ -17,13 +17,12 @@ import team.redrock.running.dao.RecordDao;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RankListServerImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
+import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 
 @SpringBootTest(classes = StartSpringBootMain.class)
@@ -48,6 +47,11 @@ public class TestDeptService {
 
     @Test
     public void rankInfo() throws Exception{
+        String student_id = "2017211903";
+        InviteInfo inviteInfo = new InviteInfo("123","echo");
+        Map<String, InviteInfo> map = new HashMap<>();
+        map.put(student_id, inviteInfo);
+        this.redisTemplate.opsForHash().putAll(TEST, map);
 
     }
 
