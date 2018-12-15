@@ -79,12 +79,6 @@ public class InvitedService {
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, inviteInfo.getInvited_studentId());
         user.getInvitingMap().clear();
-        Map<String, InviteInfo> inviteInfoMap = user.getInvitingMap();
-        Iterator iterator = inviteInfoMap.entrySet().iterator();
-        while (iterator.hasNext()){
-            InviteInfo invitedToOthers = (InviteInfo) iterator.next();
-            User receiveUser = this.redisTemplate.opsForHash().get(USER_REDIS, invitedToOthers.)
-        }
     }
 
 }

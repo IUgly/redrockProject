@@ -4,7 +4,6 @@
     <list default="true" id="50a51bb5-7d7d-428f-a787-6d0d8f55b4df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -216,13 +215,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="3" />
-          <entry key="java" value="14772" />
+          <entry key="java" value="14787" />
           <entry key="properties" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="14772" />
+          <entry key="JAVA" value="14787" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="Properties" value="31" />
         </counts>
@@ -264,11 +263,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="85" column="79" selection-start-line="85" selection-start-column="79" selection-end-line="85" selection-end-column="79" />
+            <state relative-caret-position="221">
+              <caret line="80" column="38" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -288,13 +287,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="311">
-              <caret line="115" column="8" lean-forward="true" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
+              <caret line="115" column="53" selection-start-line="115" selection-start-column="53" selection-end-line="115" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#6119#6120#0" expanded="true" />
+                <element signature="e#6170#6171#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -341,8 +342,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            <state relative-caret-position="349">
+              <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -438,8 +439,8 @@
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/InvitedDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" />
       </list>
     </option>
   </component>
@@ -769,7 +770,7 @@
     <property name="SearchEverywhereHistoryKey" value="config&#9;FILE&#9;file:///Users/kuangjunlin/Downloads/ReferCode/redrockProject/webSite/src/main/java/team/redrock/webSite/config/Config.java&#10;httpcli&#9;PSI&#9;JAVA://org.apache.commons.httpclient.HttpClient" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544855830344" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544856675640" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -1028,7 +1029,7 @@
       <workItem from="1543975008785" duration="2622000" />
       <workItem from="1544441103928" duration="6778000" />
       <workItem from="1544528670740" duration="10197000" />
-      <workItem from="1544743183962" duration="23042000" />
+      <workItem from="1544743183962" duration="23316000" />
     </task>
     <servers />
   </component>
@@ -1065,7 +1066,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492214000" />
+    <option name="totallyTimeSpent" value="492488000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1508,16 +1509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1541,10 +1532,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="115" column="8" lean-forward="true" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
+        <state relative-caret-position="349">
+          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1553,10 +1544,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="85" column="79" selection-start-line="85" selection-start-column="79" selection-end-line="85" selection-end-column="79" />
+        <state relative-caret-position="221">
+          <caret line="80" column="38" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="115" column="53" selection-start-line="115" selection-start-column="53" selection-end-line="115" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6119#6120#0" expanded="true" />
+            <element signature="e#6170#6171#0" expanded="true" />
           </folding>
         </state>
       </provider>
