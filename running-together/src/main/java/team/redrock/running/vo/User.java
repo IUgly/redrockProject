@@ -40,7 +40,6 @@ public class User implements Serializable {
     }
     public void setInvitedState(InviteInfo passiveUserInvited, String choose){
         this.getInvitingMap().get(passiveUserInvited).setResult(choose);
-
     }
     public User(String student_id, String name, String nickname, String class_id, String token, String college) {
         this.student_id = student_id;

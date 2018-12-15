@@ -1,5 +1,6 @@
 package team.redrock.running.service.serviceImp;
 
+import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.User;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Component
@@ -56,6 +59,32 @@ public class InvitedService {
         Gson gson = new Gson();
         JsonArray jsonArray = gson.fromJson(gson.toJson(inviteInfoList), JsonArray.class);
         return jsonArray;
+    }
+    public void needInvitedUserResult(InviteInfo inviteInfo,String student_id, String result){
+        User sendInvitedUser = (User) this.redisTemplate.opsForHash().get(INVITATION_REDIS, inviteInfo.getInvited_studentId());
+        sendInvitedUser.getInvitingMap().get(student_id).setResult(result);
+    }
+    public JSONArray getInvitedResult(String student_id){
+        User user = (User)this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+        Map<String, InviteInfo> inviteInfoMap = user.getInvitingMap();
+        JSONArray jsonArray = new JSONArray();
+        Iterator iterator = inviteInfoMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            jsonArray.add(iterator.next());
+        }
+        return jsonArray;
+    }
+    @Async
+    public void cancelInvited(String invited_id){
+        InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
+        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, inviteInfo.getInvited_studentId());
+        user.getInvitingMap().clear();
+        Map<String, InviteInfo> inviteInfoMap = user.getInvitingMap();
+        Iterator iterator = inviteInfoMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            InviteInfo invitedToOthers = (InviteInfo) iterator.next();
+            User receiveUser = this.redisTemplate.opsForHash().get(USER_REDIS, invitedToOthers.)
+        }
     }
 
 }

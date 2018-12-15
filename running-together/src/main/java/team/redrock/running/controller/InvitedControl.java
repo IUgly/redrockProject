@@ -61,29 +61,19 @@ public class InvitedControl {
         }
     }
     @GetMapping(value = "/invite/invited", produces = "application/json")
-    public String getInvitedOrNot(String student_id){
+    public String getInvitedOrNot(String student_id) {
         User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
         InviteInfo inviteInfo = user.deQueueInvitation();
-        if (inviteInfo!=null){
+        if (inviteInfo != null) {
             return JSONObject.toJSONString(new ResponseBean<>(inviteInfo, UnicomResponseEnums.SUCCESS));
-        }else {
+        } else {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_INVITED_INFO));
         }
     }
-    @GetMapping(value = "/invite/end", produces = "application/json")
-    public String getInvitationOverOrNot(String invited_id){
-        return "";
-    }
-
     @PostMapping(value = "/invite/result", produces = "application/json")
     public String receiveOrOther(String invited_id, String student_id, String result){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
-        switch (result){
-            case "1":
-                inviteInfo.getPassive_studentSet().add(student_id);
-            default:
-                inviteInfo.getPassive_studentSet().remove(student_id);
-        }
+        this.invitedService.needInvitedUserResult(inviteInfo, student_id, result);
         this.recordServiceImp.putRedisHash(invited_id, inviteInfo, INVITATION_REDIS);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
@@ -111,9 +101,18 @@ public class InvitedControl {
         }
         return JSONObject.toJSONString(new ResponseBean<>(new InviteInfo("END"), UnicomResponseEnums.SUCCESS));
     }
-    @GetMapping(value = "invite/history", produces = "application/json")
+    @GetMapping (value = "/invite/history", produces = "application/json")
     public String invitedHistory(String student_id){
         JsonArray invitedHistoryJsonArray = this.invitedService.getInvitedHistory(student_id);
         return JSONObject.toJSONString(new ResponseBean<>(invitedHistoryJsonArray, UnicomResponseEnums.SUCCESS));
+    }
+    @GetMapping(value = "/invite/history/result", produces = "application/json")
+    public String getInvitedResult(String student_id){
+        JSONArray jsonArray = this.invitedService.getInvitedResult(student_id);
+        return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
+    }
+    @PostMapping(value = "/invite/cancel", produces = "application/json")
+    public String cancelInvitation(String invited_id){
+        
     }
 }
