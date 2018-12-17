@@ -23,19 +23,21 @@ public class RankControl {
     @Autowired
     private RecordServiceImp recordServiceImp;
     @GetMapping(value = "sanzou/rank/student/distance", produces = "application/json")
-    public String getStuRankNum(String student_id, String kind_ran){
+    public String getStuRankNum(String student_id, String kind_rank){
+        kind_rank = kind_rank + "StuDistance000";
         User user = this.userServiceImp.selectUserInfo(student_id);
         if (user!=null){
-            RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_ran);
+            RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_rank);
             return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
         }
     }
     @GetMapping(value = "sanzou/ranklist/student/distance", produces = "application/json")
-    public String getStuRankList(String page,String kindRank){
-        int num = this.rankListServerImp.rankListNum(kindRank);
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page,kindRank));
+    public String getStuRankList(String page,String kind_rank){
+        kind_rank = kind_rank + "StuDistance000";
+        int num = this.rankListServerImp.rankListNum(kind_rank);
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page,kind_rank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
     }
     @GetMapping(value = "/sanzou/rank/class/distance/{kind_rank}/{page?}", produces = "application/json")

@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import team.redrock.running.dao.InvitedDao;
+import team.redrock.running.dao.RecordDao;
 import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.User;
 
@@ -27,7 +27,7 @@ public class InvitedService {
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
-    private InvitedDao invitedDao;
+    private RecordDao recordDao;
     public String selectUserState(String student_id){
         User user = this.userServiceImp.selectUserInfo(student_id);
         String state = user.getState();
@@ -52,10 +52,10 @@ public class InvitedService {
     public void OverInvitation(String invited_id, InviteInfo inviteInfo){
         this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
         inviteInfo.setResult("END");
-        this.invitedDao.insertInvited(inviteInfo);
+        this.recordDao.insertInvitedRecord(inviteInfo);
     }
     public JsonArray getInvitedHistory(String student_id){
-        List<InviteInfo> inviteInfoList = this.invitedDao.selectInvitedList(student_id);
+        List<InviteInfo> inviteInfoList = this.recordDao.selectInvitedRecordList(student_id);
         Gson gson = new Gson();
         JsonArray jsonArray = gson.fromJson(gson.toJson(inviteInfoList), JsonArray.class);
         return jsonArray;

@@ -24,22 +24,21 @@ public class UpdateRunDataImp {
     private RecordServiceImp recordServiceImp;
 
     //个人排行榜  日周月总
-    public static final String StuDayDistanceRank = "stuDayRankTEST";
-    public static final String StuWeekDistanceRank = "stuWeekDistanceRank000";
-    public static final String StuMonthDistanceRank = "stuMonthDistanceRank000";
-    public static final String StuAllDistanceRank = "stuAllDistanceRank000";
+    public static final String STU_DAY_DISTANCE_RANK = "daysStuDistance000";
+    public static final String STU_WEEK_DISTANCE_RANK = "weekendsStuDistance000";
+    public static final String STU_MONTH_DISTANCE_RANK = "monthsStuDistance000";
+    public static final String STU_All_DISTANCE_RANK = "allStuDistance000";
 
     //班级排行榜   日周月总
-    public static final String ClaDayDistanceRank = "claDayRankTEST";
-    public static final String ClaWeekDistanceRank = "claWeekDistanceRank000";
-    public static final String ClaMonthDistanceRank = "claMonthDistanceRank000";
-    public static final String ClaAllDistanceRank = "claAllDistanceRank000";
+    public static final String CLA_DAY_DISTANCE_RANK = "dayClaDistance000";
+    public static final String CLA_WEEK_DISTANCE_RANK = "weekendsClaDistance000";
+    public static final String CLA_MONTH_DISTANCE_RANK = "monthsClaDistance000";
+    public static final String CLA_ALL_DISTANCE_RANK = "allClaDistance000";
 
     //班级排行榜  日周月总
     public void notInvitedUpdate(Record record) {
-        this.recordDao.insertRecord(record);
+        this.recordDao.insertDistanceRecord(record);
         this.recordServiceImp.putRedisHash(record.getId(), record.getLat_lng().toString(), LAT_LNG);
-
     }
 
     @Async
@@ -47,16 +46,16 @@ public class UpdateRunDataImp {
         RankInfo rankInfo = new RankInfo(record);
         String student_id = rankInfo.getStudent_id();
         double distance = rankInfo.getDistance();
-        this.redisTemplate.opsForZSet().incrementScore(StuDayDistanceRank, student_id, distance);
-        this.redisTemplate.opsForZSet().incrementScore(StuWeekDistanceRank, student_id, distance);
-        this.redisTemplate.opsForZSet().incrementScore(StuMonthDistanceRank, student_id, distance);
-        this.redisTemplate.opsForZSet().incrementScore(StuAllDistanceRank, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(STU_DAY_DISTANCE_RANK, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(STU_WEEK_DISTANCE_RANK, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(STU_MONTH_DISTANCE_RANK, student_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(STU_All_DISTANCE_RANK, student_id, distance);
 
         User user = this.userServiceImp.selectUserInfo(student_id);
         String class_id = user.getClass_id();
-        this.redisTemplate.opsForZSet().incrementScore(ClaDayDistanceRank, class_id, distance);
-        this.redisTemplate.opsForZSet().incrementScore(ClaWeekDistanceRank, class_id, distance);
-        this.redisTemplate.opsForZSet().incrementScore(ClaMonthDistanceRank, class_id, distance);
-        this.redisTemplate.opsForZSet().incrementScore(ClaAllDistanceRank, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(CLA_DAY_DISTANCE_RANK, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(CLA_WEEK_DISTANCE_RANK, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(CLA_MONTH_DISTANCE_RANK, class_id, distance);
+        this.redisTemplate.opsForZSet().incrementScore(CLA_ALL_DISTANCE_RANK, class_id, distance);
     }
 }

@@ -37,7 +37,7 @@ public class PositionRankServiceImp {
         Iterator<ZSetOperations.TypedTuple<String>> it = range.iterator();
         while (it.hasNext()) {//求出和前一名的差距
             ZSetOperations.TypedTuple str = it.next();
-            rankInfo.setPrev_difference(String.valueOf(score-str.getScore()));
+            rankInfo.setPrev_difference(String.valueOf(str.getScore()-score));
         }
         rankInfo.setRank(rankNum+1);
         rankInfo.setTotal(score);

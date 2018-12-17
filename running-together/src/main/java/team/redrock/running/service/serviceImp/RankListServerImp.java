@@ -17,10 +17,7 @@ import java.util.Set;
 @Service
 @Component
 public class RankListServerImp {
-    public static final String dayDistanceRank = "dayRankTEST";
-    public static final String weekDistanceRank = "weekDistanceRank000";
-    public static final String monthDistanceRank = "monthDistanceRank000";
-    public static final String allDistanceRank = "allDistanceRank000";
+
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
     @Autowired

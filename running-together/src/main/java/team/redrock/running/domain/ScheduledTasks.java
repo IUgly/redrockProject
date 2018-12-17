@@ -33,13 +33,14 @@ public class ScheduledTasks {
     @Scheduled(cron = "0 30 23 * * ?")
     public void reportCurrentTime(){
         this.scheduledServiceImp.insertDayDistanceToWeekRank();
+        this.scheduledServiceImp.insertDayInvitedToWeekRank();
     }
     /**
      *  每周周日 周路程归零。
      */
     @Scheduled(cron = "0 31 23 ? * SUN")
     public void updateWeekDistance(){
-        this.scheduledServiceImp.updateWeekDistance();
+        this.scheduledServiceImp.updateWeek();
     }
 
     /**
@@ -47,11 +48,11 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 32 23 L * ?")
     public void updateMonthDistance(){
-        this.scheduledServiceImp.updateMonthDistance();
+        this.scheduledServiceImp.updateMonth();
     }
 
     /**
-     * 从mysql更新周数据到redis
+     * 从mysql更新路程周数据到redis
      */
     @Scheduled(cron = "0 40 23 * * ?")
     public void updateWeekDistanceToRedis(){
@@ -63,7 +64,7 @@ public class ScheduledTasks {
     }
 
     /**
-     *  从mysql更新月数据到redis
+     *  从mysql更新路程月数据到redis
      */
     @Scheduled(cron = "0 41 23 * * ?")
     public void updateMonthDistanceToRedis(){
@@ -75,7 +76,7 @@ public class ScheduledTasks {
     }
 
     /**
-     *  从mysql更新总数据到redis
+     *  从mysql更新路程总数据到redis
      */
     @Scheduled(cron = "0 42 23 * * ?")
     public void updateAllDistanceToRedis(){

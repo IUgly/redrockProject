@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
+import team.redrock.running.util.Util;
 import team.redrock.running.vo.Record;
 
 import java.util.HashMap;
@@ -25,18 +26,10 @@ public class RecordServiceImp {
     public static final String RECORD_REDIS = "recordRedis";
 
     public JSONArray getLatLngList(String student_id,String pageParam, int num){
-        int page = 1;
-        if (pageParam!=null){
-            page = Integer.valueOf(pageParam);
-        }
         int start = 0;
         int end = 14;
-        if (page >1){
-            start = 15*(page-1);
-            end = start+14;
-        }
-
-        List<Record> recordList = this.recordDao.selectRecordList(student_id);
+        Util.partPage(pageParam, start, end);
+        List<Record> recordList = this.recordDao.selectDistanceRecordList(student_id);
 
         num = recordList.size();
         JSONArray jsonArray = new JSONArray();
@@ -48,7 +41,7 @@ public class RecordServiceImp {
         return jsonArray;
     }
     public Record getRecordById(String id){
-        Record record = this.recordDao.selectRecordById(id);
+        Record record = this.recordDao.selectDistanceRecordById(id);
         record.setLat_lng(JSONArray.parseArray((String)this.redisTemplate.opsForHash().get(RECORD_REDIS, id)));
         return record;
     }

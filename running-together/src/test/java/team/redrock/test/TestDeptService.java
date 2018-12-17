@@ -60,7 +60,7 @@ public class TestDeptService {
         record.setEnd_time(System.currentTimeMillis());
         JSONArray latLing = JSONArray.parseArray("[{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972}]");
         record.setLat_lng(latLing);
-        this.recordDao.insertRecord(record);
+        this.recordDao.insertDistanceRecord(record);
     }
     @Test
     public void UserTest(){
