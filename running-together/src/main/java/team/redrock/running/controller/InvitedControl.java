@@ -114,5 +114,6 @@ public class InvitedControl {
     @PostMapping(value = "/invite/cancel", produces = "application/json")
     public String cancelInvitation(String invited_id){
         this.invitedService.cancelInvited(invited_id);
+        return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
 }

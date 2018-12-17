@@ -17,7 +17,6 @@ import team.redrock.running.dao.RecordDao;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RankListServerImp;
 import team.redrock.running.service.serviceImp.UpdateRunDataImp;
-import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
@@ -47,12 +46,9 @@ public class TestDeptService {
 
     @Test
     public void rankInfo() throws Exception{
-        String student_id = "2017211903";
-        InviteInfo inviteInfo = new InviteInfo("123","echo");
-        Map<String, InviteInfo> map = new HashMap<>();
-        map.put(student_id, inviteInfo);
-        this.redisTemplate.opsForHash().putAll(TEST, map);
-
+        Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("kk", new JSONArray());
+        this.redisTemplate.opsForHash().putAll("HASH", hashMap);
     }
 
     @Test

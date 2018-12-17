@@ -3,7 +3,6 @@ package team.redrock.running.service.serviceImp;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
@@ -57,5 +56,6 @@ public class RecordServiceImp {
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put(key, o);
         this.redisTemplate.opsForHash().putAll(RedisHash, hashMap);
+        System.out.println(this.redisTemplate.opsForHash().get(RedisHash, key));
     }
 }

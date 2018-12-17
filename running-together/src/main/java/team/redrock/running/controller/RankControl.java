@@ -17,8 +17,6 @@ public class RankControl {
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
-    private UpdateRunDataImp updateRunDataImp;
-    @Autowired
     private PositionRankServiceImp positionRankServiceImp;
     @Autowired
     private RankListServerImp rankListServerImp;
@@ -37,13 +35,25 @@ public class RankControl {
     @GetMapping(value = "sanzou/ranklist/student/distance", produces = "application/json")
     public String getStuRankList(String page,String kindRank){
         int num = this.rankListServerImp.rankListNum(kindRank);
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getRankDistance(page,kindRank));
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page,kindRank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
     }
     @GetMapping(value = "/sanzou/rank/class/distance/{kind_rank}/{page?}", produces = "application/json")
     public String getClaRankList(String page,String kindRank){
         int num = this.rankListServerImp.rankListNum(kindRank);
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getRankDistance(page, kindRank));
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page, kindRank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS,num));
+    }
+    @GetMapping(value = "/rank/invite/student", produces = "application/json")
+    public String getStuInvitedRankList(String page, String kindRank){
+        int num = this.rankListServerImp.rankListNum(kindRank);
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankInvite(page, kindRank));
+        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, num));
+    }
+    @GetMapping(value = "/rank/invite/class", produces = "application/json")
+    public String getClaInvitedRankList(String page, String kindRank){
+        int num = this.rankListServerImp.rankListNum(kindRank);
+        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankInvite(page, kindRank));
+        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, num));
     }
 }

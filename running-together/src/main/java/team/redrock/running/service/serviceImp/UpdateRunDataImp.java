@@ -38,7 +38,8 @@ public class UpdateRunDataImp {
     //班级排行榜  日周月总
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertRecord(record);
-        this.recordServiceImp.putRedisHash(record.getId(), record.getLat_lng(), LAT_LNG);
+        this.recordServiceImp.putRedisHash(record.getId(), record.getLat_lng().toString(), LAT_LNG);
+
     }
 
     @Async
