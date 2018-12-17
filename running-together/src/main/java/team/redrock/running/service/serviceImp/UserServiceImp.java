@@ -48,10 +48,8 @@ public class UserServiceImp {
     public Boolean insertUser(User user) {
         return this.userDao.insertUser(user);
     }
-    @Async
+
     public Boolean updateUserInfo(User user) {
-        //用户信息插入redis（stu_id － userInfo）
-//        this.redisTemplate.opsForHash().delete(USER_REDIS, user.getStudent_id());
         HashMap userHash = new HashMap();
         userHash.put(user.getStudent_id(), user);
         this.redisTemplate.opsForHash().putAll(USER_REDIS, userHash);

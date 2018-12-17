@@ -64,9 +64,8 @@ public class UserControl extends AbstractBaseController {
         user.setStudent_id(student_id);
         this.userServiceImp.updateUserInfo(user);
 
-        System.out.println(this.userServiceImp.selectUserInfo(student_id));
         return JSONObject.toJSONString(new ResponseBean<>(
-                this.userServiceImp.selectUserSimpleInfo(user.getStudent_id()),
+                this.userServiceImp.selectUserInfo(student_id),
                 UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "update", produces = "application/json")
