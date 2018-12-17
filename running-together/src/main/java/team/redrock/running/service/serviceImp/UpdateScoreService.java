@@ -37,10 +37,10 @@ public class UpdateScoreService {
     public static final String CLA_ALL_DISTANCE_RANK = "allClaDistance000";
 
     //个人邀约排行榜  日周月总
-    public static final String STU_DAY_INVITATION_RANK = "daysStuDistance000";
-    public static final String STU_WEEK_INVITATION_RANK = "weekendsStuDistance000";
-    public static final String STU_MONTH_INVITATION_RANK = "monthsStuDistance000";
-    public static final String STU_ALL_INVITATION_RANK = "allStuDistance000";
+    public static final String STU_DAY_INVITATION_RANK = "daysStuInvited000";
+    public static final String STU_WEEK_INVITATION_RANK = "weekendsStuInvited000";
+    public static final String STU_MONTH_INVITATION_RANK = "monthsStuInvited000";
+    public static final String STU_ALL_INVITATION_RANK = "allStuInvited000";
 
     //班级邀约排行榜   日周月总
     public static final String CLA_DAY_INVITATION_RANK = "dayClaDistance000";
@@ -75,7 +75,10 @@ public class UpdateScoreService {
     @Async
     public void insertOnceInvitedData(InviteInfo inviteInfo){
         String student_id = inviteInfo.getInvited_studentId();
-        String score =
-        this.redisTemplate.opsForHash().increment(STU_DAY_DISTANCE_RANK,)
+        double score = inviteInfo.getDistance();
+        this.redisTemplate.opsForHash().increment(STU_DAY_INVITATION_RANK, student_id, score);
+        this.redisTemplate.opsForHash().increment(STU_WEEK_INVITATION_RANK, student_id, score);
+        this.redisTemplate.opsForHash().increment(STU_MONTH_INVITATION_RANK, student_id, score);
+        this.redisTemplate.opsForHash().increment(STU_ALL_INVITATION_RANK, student_id, score);
     }
 }

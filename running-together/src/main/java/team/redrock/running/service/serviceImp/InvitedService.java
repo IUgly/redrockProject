@@ -47,9 +47,12 @@ public class InvitedService {
     public void OverInvitation(String invited_id, InviteInfo inviteInfo){
         this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
         inviteInfo.setResult("END");
-        this.recordDao.insertInvitedRecord(inviteInfo);
-
+        this.recordDao.overInvited(inviteInfo);
     }
+    public void startInvited(InviteInfo inviteInfo) {
+        this.recordDao.insertInvitedRecord(inviteInfo);
+    }
+
     public JsonArray getInvitedHistory(String student_id){
         List<InviteInfo> inviteInfoList = this.recordDao.selectInvitedRecordList(student_id);
         Gson gson = new Gson();

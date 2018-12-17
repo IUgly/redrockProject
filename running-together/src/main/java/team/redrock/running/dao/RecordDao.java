@@ -31,4 +31,6 @@ public interface RecordDao {
     @Select("select distance,date,passive_students as student_id,invited_id from invited_record where invited_student_id=#{student_id}")
     List<InviteInfo> selectInvitedRecordList(String student_id);
 
+    @Select("replace into invited_record set invited_student_id = #{invited_studentId}, passive_students=#{passive_students}, date=#{date}")
+    void overInvited(InviteInfo inviteInfo);
 }
