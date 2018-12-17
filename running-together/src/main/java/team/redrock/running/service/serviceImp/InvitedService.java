@@ -28,11 +28,6 @@ public class InvitedService {
     private UserServiceImp userServiceImp;
     @Autowired
     private RecordDao recordDao;
-    public String selectUserState(String student_id){
-        User user = this.userServiceImp.selectUserInfo(student_id);
-        String state = user.getState();
-        return state;
-    }
     @Async
     public void insertInvitationToRedis(InviteInfo inviteInfo){
         HashMap invitationHash = new HashMap();
@@ -53,6 +48,7 @@ public class InvitedService {
         this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
         inviteInfo.setResult("END");
         this.recordDao.insertInvitedRecord(inviteInfo);
+
     }
     public JsonArray getInvitedHistory(String student_id){
         List<InviteInfo> inviteInfoList = this.recordDao.selectInvitedRecordList(student_id);

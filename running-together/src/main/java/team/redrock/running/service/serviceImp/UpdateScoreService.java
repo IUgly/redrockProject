@@ -6,13 +6,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
+import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 @Service
 @Component
-public class UpdateRunDataImp {
+public class UpdateScoreService {
     public static final String LAT_LNG = "Lat_Lng";
     @Autowired
     private RecordDao recordDao;
@@ -23,17 +24,29 @@ public class UpdateRunDataImp {
     @Autowired
     private RecordServiceImp recordServiceImp;
 
-    //个人排行榜  日周月总
+    //个人路程排行榜  日周月总
     public static final String STU_DAY_DISTANCE_RANK = "daysStuDistance000";
     public static final String STU_WEEK_DISTANCE_RANK = "weekendsStuDistance000";
     public static final String STU_MONTH_DISTANCE_RANK = "monthsStuDistance000";
     public static final String STU_All_DISTANCE_RANK = "allStuDistance000";
 
-    //班级排行榜   日周月总
+    //班级路程排行榜   日周月总
     public static final String CLA_DAY_DISTANCE_RANK = "dayClaDistance000";
     public static final String CLA_WEEK_DISTANCE_RANK = "weekendsClaDistance000";
     public static final String CLA_MONTH_DISTANCE_RANK = "monthsClaDistance000";
     public static final String CLA_ALL_DISTANCE_RANK = "allClaDistance000";
+
+    //个人邀约排行榜  日周月总
+    public static final String STU_DAY_INVITATION_RANK = "daysStuDistance000";
+    public static final String STU_WEEK_INVITATION_RANK = "weekendsStuDistance000";
+    public static final String STU_MONTH_INVITATION_RANK = "monthsStuDistance000";
+    public static final String STU_ALL_INVITATION_RANK = "allStuDistance000";
+
+    //班级邀约排行榜   日周月总
+    public static final String CLA_DAY_INVITATION_RANK = "dayClaDistance000";
+    public static final String CLA_WEEK_INVITATION_RANK = "weekendsClaDistance000";
+    public static final String CLA_MONTH_INVITATION_RANK = "monthsClaDistance000";
+    public static final String CLA_ALL_INVITATION_RANK = "allClaDistance000";
 
     //班级排行榜  日周月总
     public void notInvitedUpdate(Record record) {
@@ -57,5 +70,12 @@ public class UpdateRunDataImp {
         this.redisTemplate.opsForZSet().incrementScore(CLA_WEEK_DISTANCE_RANK, class_id, distance);
         this.redisTemplate.opsForZSet().incrementScore(CLA_MONTH_DISTANCE_RANK, class_id, distance);
         this.redisTemplate.opsForZSet().incrementScore(CLA_ALL_DISTANCE_RANK, class_id, distance);
+    }
+
+    @Async
+    public void insertOnceInvitedData(InviteInfo inviteInfo){
+        String student_id = inviteInfo.getInvited_studentId();
+        String score =
+        this.redisTemplate.opsForHash().increment(STU_DAY_DISTANCE_RANK,)
     }
 }

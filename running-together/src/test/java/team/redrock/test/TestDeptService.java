@@ -16,7 +16,7 @@ import team.redrock.running.StartSpringBootMain;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RankListServerImp;
-import team.redrock.running.service.serviceImp.UpdateRunDataImp;
+import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
@@ -37,7 +37,7 @@ public class TestDeptService {
 
     public static final String SCORE_RANK = "dayRank";
     @Autowired
-    private UpdateRunDataImp updateRunDataImp;
+    private UpdateScoreService updateScoreService;
     @Autowired
     private RecordDao recordDao;
     @Autowired

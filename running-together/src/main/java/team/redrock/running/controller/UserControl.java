@@ -12,7 +12,7 @@ import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.configuration.Config;
 import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
-import team.redrock.running.service.serviceImp.UpdateRunDataImp;
+import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.AbstractBaseController;
 import team.redrock.running.vo.Record;
@@ -32,7 +32,7 @@ public class UserControl extends AbstractBaseController {
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
-    private UpdateRunDataImp updateRunDataImp;
+    private UpdateScoreService updateScoreService;
     @Autowired
     private Config config;
     @Autowired
@@ -72,9 +72,9 @@ public class UserControl extends AbstractBaseController {
     public String update(@RequestBody JSONObject json){
         //插入跑步数据到mysql
         Record record = new Record(json);
-        this.updateRunDataImp.notInvitedUpdate(record);
+        this.updateScoreService.notInvitedUpdate(record);
         //更新redis的个人和班级RSET集合（日周月总榜）
-        this.updateRunDataImp.insertOnceRunDataToRedis(record);
+        this.updateScoreService.insertOnceRunDataToRedis(record);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
     @GetMapping(value = "sanzou/user/{student_id}/{page?}", produces = "application/json")

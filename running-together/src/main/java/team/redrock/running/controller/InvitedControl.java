@@ -10,7 +10,7 @@ import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
-import team.redrock.running.service.serviceImp.UpdateRunDataImp;
+import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.Util;
 import team.redrock.running.vo.InviteInfo;
@@ -33,7 +33,7 @@ public class InvitedControl {
     @Autowired
     private InvitedService invitedService;
     @Autowired
-    private UpdateRunDataImp updateRunDataImp;
+    private UpdateScoreService updateScoreService;
     @PostMapping(value = "invite/update", produces = "application/json")
     public String Upload(String student_id, String invitees){
         User invite_user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
@@ -86,9 +86,9 @@ public class InvitedControl {
         invited_members.add(inviteInfo.getInvited_studentId());
         for (String student_id: invited_members){
             record.setStudent_id(student_id);
-            this.updateRunDataImp.notInvitedUpdate(record);
+            this.updateScoreService.notInvitedUpdate(record);
             //更新redis的个人和班级RSET集合（日周月总榜)
-            this.updateRunDataImp.insertOnceRunDataToRedis(record);
+            this.updateScoreService.insertOnceRunDataToRedis(record);
         }
         this.invitedService.OverInvitation(invited_id, inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));

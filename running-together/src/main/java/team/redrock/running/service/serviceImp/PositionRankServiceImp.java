@@ -14,10 +14,18 @@ import java.util.Set;
 @Service
 @Component
 public class PositionRankServiceImp {
-    public static final String dayDistanceRank = "dayRankTEST";
-    public static final String weekDistanceRank = "weekDistanceRank000";
-    public static final String monthDistanceRank = "monthDistanceRank000";
-    public static final String allDistanceRank = "allDistanceRank000";
+    //个人排行榜  日周月总
+    public static final String STU_DAY_DISTANCE_RANK = "daysStuDistance000";
+    public static final String STU_WEEK_DISTANCE_RANK = "weekendsStuDistance000";
+    public static final String STU_MONTH_DISTANCE_RANK = "monthsStuDistance000";
+    public static final String STU_All_DISTANCE_RANK = "allStuDistance000";
+
+    //班级排行榜   日周月总
+    public static final String CLA_DAY_DISTANCE_RANK = "dayClaDistance000";
+    public static final String CLA_WEEK_DISTANCE_RANK = "weekendsClaDistance000";
+    public static final String CLA_MONTH_DISTANCE_RANK = "monthsClaDistance000";
+    public static final String CLA_ALL_DISTANCE_RANK = "allClaDistance000";
+
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
