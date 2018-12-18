@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
@@ -20,7 +21,7 @@ public class InviteInfo implements Serializable {
     private String state;
     private String[] passive_studentSet;
     //邀请的用户 的回馈结果
-    private Map<String, String> result;
+    private Map<String, String> result = new HashMap<>();
 
     public InviteInfo(){}
 
@@ -32,8 +33,8 @@ public class InviteInfo implements Serializable {
         String[] strings = passive_Students.substring
                 (1, passive_Students.length()-1).split(",");
         this.passive_studentSet = strings;
-        this.setDate("OK");
         for (String s: strings){
+
             result.put(s,"0");
         }
     }

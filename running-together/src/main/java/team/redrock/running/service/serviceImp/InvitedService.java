@@ -72,7 +72,7 @@ public class InvitedService {
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         JSONArray jsonArray = new JSONArray();
         Map map = inviteInfo.getResult();
-        Set<String> keys = map.keySet();   //此行可省略，直接将map.keySet()写在for-each循环的条件中
+        Set<String> keys = map.keySet();
         for(String key:keys){
             JSONObject json = new JSONObject();
             json.put(key, map.get(key));

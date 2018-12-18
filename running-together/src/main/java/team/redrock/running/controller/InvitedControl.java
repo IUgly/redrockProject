@@ -21,7 +21,9 @@ import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class InvitedControl {
@@ -82,7 +84,9 @@ public class InvitedControl {
     public String receiveOrOther(String invited_id, String student_id, String result){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         inviteInfo.getResult().put(student_id, result);
-        this.recordServiceImp.putRedisHash(invited_id, inviteInfo, INVITATION_REDIS);
+        Map<String, InviteInfo> hashMap = new HashMap<>();
+        hashMap.put(invited_id, inviteInfo);
+        this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, hashMap);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "/invite/update_data", produces = "application/json")

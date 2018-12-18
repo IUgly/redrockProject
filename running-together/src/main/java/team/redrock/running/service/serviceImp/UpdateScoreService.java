@@ -14,7 +14,6 @@ import team.redrock.running.vo.User;
 @Service
 @Component
 public class UpdateScoreService {
-    public static final String LAT_LNG = "Lat_Lng";
     @Autowired
     private RecordDao recordDao;
     @Autowired
@@ -51,9 +50,7 @@ public class UpdateScoreService {
     //班级排行榜  日周月总
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertDistanceRecord(record);
-        this.recordServiceImp.putRedisHash(record.getId(), record.getLat_lng().toString(), LAT_LNG);
     }
-
     @Async
     public void insertOnceRunDataToRedis(Record record) {
         RankInfo rankInfo = new RankInfo(record);
