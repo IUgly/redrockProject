@@ -1,6 +1,7 @@
 package team.redrock.running.service.serviceImp;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,7 @@ import team.redrock.running.dto.InvitationSend;
 import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.User;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Component
@@ -29,11 +27,14 @@ public class InvitedService {
     private UserServiceImp userServiceImp;
     @Autowired
     private RecordDao recordDao;
-    @Async
+//    @Async
     public void insertInvitationToRedis(InviteInfo inviteInfo){
         HashMap invitationHash = new HashMap();
         invitationHash.put(inviteInfo.getInvited_id(), inviteInfo);
         this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
+
+        InviteInfo inviteInfo1 = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, inviteInfo.getInvited_id());
+        System.out.println(inviteInfo1.toString());
     }
     @Async
     public void sendInvitations(String invitees, InviteInfo inviteInfo){
@@ -49,7 +50,7 @@ public class InvitedService {
     @Async
     public void OverInvitation(String invited_id, InviteInfo inviteInfo){
         this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
-        inviteInfo.setResult("END");
+        inviteInfo.setDate("END");
         this.recordDao.overInvited(inviteInfo);
     }
     public void startInvited(InviteInfo inviteInfo) {
@@ -63,16 +64,19 @@ public class InvitedService {
         return jsonArray;
     }
     public void needInvitedUserResult(InviteInfo inviteInfo,String student_id, String result){
-        User sendInvitedUser = (User) this.redisTemplate.opsForHash().get(INVITATION_REDIS, inviteInfo.getInvited_studentId());
-        sendInvitedUser.getInvitingMap().get(student_id).setResult(result);
+        inviteInfo.getResult().put(student_id, result);
     }
     public JSONArray getInvitedResult(String student_id){
         User user = (User)this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-        Map<String, InviteInfo> inviteInfoMap = user.getInvitingMap();
+        String invited_id = user.getInvitingNow();
+        InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         JSONArray jsonArray = new JSONArray();
-        Iterator iterator = inviteInfoMap.entrySet().iterator();
-        while (iterator.hasNext()){
-            jsonArray.add(iterator.next());
+        Map map = inviteInfo.getResult();
+        Set<String> keys = map.keySet();   //此行可省略，直接将map.keySet()写在for-each循环的条件中
+        for(String key:keys){
+            JSONObject json = new JSONObject();
+            json.put(key, map.get(key));
+            jsonArray.add(json);
         }
         return jsonArray;
     }
@@ -80,7 +84,7 @@ public class InvitedService {
     public void cancelInvited(String invited_id){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, inviteInfo.getInvited_studentId());
-        user.getInvitingMap().clear();
+        user.setInvitingNow("");
     }
 
 }

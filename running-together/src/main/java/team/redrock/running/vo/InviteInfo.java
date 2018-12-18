@@ -2,11 +2,11 @@ package team.redrock.running.vo;
 
 import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
-import team.redrock.running.dto.InvitationSend;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 @Data
 public class InviteInfo implements Serializable {
@@ -16,10 +16,11 @@ public class InviteInfo implements Serializable {
     private String passive_students;
     private JSONArray student_id;
     private String date;
-    private String state;
     private double distance;
-    private String result;
+    private String state;
     private String[] passive_studentSet;
+    //邀请的用户 的回馈结果
+    private Map<String, String> result;
 
     public InviteInfo(){}
 
@@ -31,27 +32,15 @@ public class InviteInfo implements Serializable {
         String[] strings = passive_Students.substring
                 (1, passive_Students.length()-1).split(",");
         this.passive_studentSet = strings;
-        this.setResult("OK");
+        this.setDate("OK");
+        for (String s: strings){
+            result.put(s,"0");
+        }
     }
 
     public InviteInfo(String result) {
-        this.result = result;
+        this.state = result;
     }
 
-    public static void main(String[] args) {
-        User user = new User();
-        user.enQueueInvitation(new InvitationSend("111", "2018","kuangkuang"));
-        user.enQueueInvitation(new InvitationSend("222", "2019","xiaotang"));
 
-        InvitationSend invitationSend = user.deQueueInvitation();
-        System.out.println(invitationSend.toString());
-
-        InvitationSend invitationSend1 = user.deQueueInvitation();
-        System.out.println(invitationSend1.toString());
-
-        InvitationSend invitationSend2 = user.deQueueInvitation();
-        if (invitationSend2==null){
-            System.out.println("没有了");
-        }
-    }
 }

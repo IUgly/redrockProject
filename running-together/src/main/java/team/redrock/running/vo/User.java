@@ -7,7 +7,6 @@ import team.redrock.running.dto.InvitationSend;
 import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Map;
 
 /**
  * Created by huangds on 2017/10/28.
@@ -30,7 +29,7 @@ public class User implements Serializable {
     private Deque queueInvitations = new ArrayDeque();
 
     //当前发出的邀约（一个邀约多个其它用户）
-    private Map<String, InviteInfo> InvitingMap;
+    private String invitingNow;
 
     public void enQueueInvitation(InvitationSend invitationSend){
         this.queueInvitations.offerLast(invitationSend);
@@ -39,12 +38,6 @@ public class User implements Serializable {
         return (InvitationSend) this.queueInvitations.pollFirst();
     }
 
-    public void enInvitingMap(InviteInfo needInviteUser){
-        this.getInvitingMap().put(needInviteUser.getInvited_studentId(), needInviteUser);
-    }
-    public void setInvitedState(InviteInfo passiveUserInvited, String choose){
-        this.getInvitingMap().get(passiveUserInvited).setResult(choose);
-    }
 
     public User(String student_id, String name, String nickname, String class_id, String token, String college) {
         this.student_id = student_id;

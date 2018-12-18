@@ -44,6 +44,9 @@ public class InvitedControl {
         this.invitedService.startInvited(inviteInfo);
         this.invitedService.sendInvitations(invitees, inviteInfo);
         this.invitedService.insertInvitationToRedis(inviteInfo);
+
+        invite_user.setInvitingNow(inviteInfo.getInvited_id());
+        this.userServiceImp.insertUserToRedis(invite_user.getStudent_id(), invite_user);
         return JSONObject.toJSONString(new ResponseBean<>(inviteInfo.getInvited_id(), UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "invite/searchinfo", produces = "application/json")
@@ -78,7 +81,7 @@ public class InvitedControl {
     @PostMapping(value = "/invite/result", produces = "application/json")
     public String receiveOrOther(String invited_id, String student_id, String result){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
-        this.invitedService.needInvitedUserResult(inviteInfo, student_id, result);
+        inviteInfo.getResult().put(student_id, result);
         this.recordServiceImp.putRedisHash(invited_id, inviteInfo, INVITATION_REDIS);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
@@ -112,6 +115,7 @@ public class InvitedControl {
         JsonArray invitedHistoryJsonArray = this.invitedService.getInvitedHistory(student_id);
         return JSONObject.toJSONString(new ResponseBean<>(invitedHistoryJsonArray, UnicomResponseEnums.SUCCESS));
     }
+    //得到最近一次邀约结果
     @GetMapping(value = "/invite/history/result", produces = "application/json")
     public String getInvitedResult(String student_id){
         JSONArray jsonArray = this.invitedService.getInvitedResult(student_id);
