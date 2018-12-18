@@ -23,7 +23,7 @@ public class UserServiceImp {
     @Autowired
     private RedisTemplate redisTemplate;
     public static final String USER_REDIS = "UserRedis";
-    @Async
+//    @Async
     public void insertUserToRedis(String student_id, User userInfo) {
         HashMap userHash = new HashMap();
         userHash.put(student_id, userInfo);
@@ -57,12 +57,20 @@ public class UserServiceImp {
         return this.userDao.updateUserInfo(user);
     }
 
+    /**
+     * 循环依赖，redis中若没有相应的用户，则从mysql拉取存入redis
+     * @param student_id
+     * @return
+     */
+
     public User selectUserInfo(String student_id) {
         User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
         if (user!=null){
             return user;
         }
-        return this.userDao.selectUserByStudentId(student_id);
+        User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
+        this.insertUserToRedis(userFromDatabase.getStudent_id(), userFromDatabase);
+        return userFromDatabase;
     }
     public List<User> selectUserListByName(String name){
         return this.userDao.getUserListByName(name);

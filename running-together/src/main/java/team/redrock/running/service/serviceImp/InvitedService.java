@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
+import team.redrock.running.dto.InvitationSend;
 import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.User;
 
@@ -35,12 +36,14 @@ public class InvitedService {
         this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
     }
     @Async
-    public void sendInvitations(String invitees, User invite_user){
-        String[] student_ids = invitees.split(",");
+    public void sendInvitations(String invitees, InviteInfo inviteInfo){
+        InvitationSend invitationSend = new InvitationSend(inviteInfo);
+        String[] student_ids = invitees.substring
+                (1, invitees.length()-1).split(",");
         for (String ids: student_ids){
-            InviteInfo inviteInfo = new InviteInfo(invite_user, ids);
-            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, ids);
-            user.enQueueInvitation(inviteInfo);
+            User user = this.userServiceImp.selectUserInfo(ids);
+            user.enQueueInvitation(invitationSend);
+            this.userServiceImp.insertUserToRedis(user.getStudent_id(), user);
         }
     }
     @Async

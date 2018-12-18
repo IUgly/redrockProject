@@ -2,10 +2,12 @@ package team.redrock.running.vo;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
+import team.redrock.running.dto.InvitationSend;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * Created by huangds on 2017/10/28.
@@ -25,22 +27,25 @@ public class User implements Serializable {
     private String idNum;
     private String stuId;
     //当前收到的邀约(可能多个邀约)
-    private Queue queueInvitations;
+    private Deque queueInvitations = new ArrayDeque();
 
     //当前发出的邀约（一个邀约多个其它用户）
     private Map<String, InviteInfo> InvitingMap;
-    public void enQueueInvitation(InviteInfo Inviter){
-        this.queueInvitations.offer(Inviter);
+
+    public void enQueueInvitation(InvitationSend invitationSend){
+        this.queueInvitations.offerLast(invitationSend);
     }
-    public InviteInfo deQueueInvitation(){
-        return (InviteInfo) this.queueInvitations.peek();
+    public InvitationSend deQueueInvitation(){
+        return (InvitationSend) this.queueInvitations.pollFirst();
     }
+
     public void enInvitingMap(InviteInfo needInviteUser){
         this.getInvitingMap().put(needInviteUser.getInvited_studentId(), needInviteUser);
     }
     public void setInvitedState(InviteInfo passiveUserInvited, String choose){
         this.getInvitingMap().get(passiveUserInvited).setResult(choose);
     }
+
     public User(String student_id, String name, String nickname, String class_id, String token, String college) {
         this.student_id = student_id;
         this.name = name;

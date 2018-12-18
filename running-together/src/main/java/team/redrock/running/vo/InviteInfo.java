@@ -2,6 +2,7 @@ package team.redrock.running.vo;
 
 import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
+import team.redrock.running.dto.InvitationSend;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -20,14 +21,8 @@ public class InviteInfo implements Serializable {
     private String result;
     private String[] passive_studentSet;
 
-    public static void main(String[] args) {
-        String str = "[\"2016212758\",\"2016212777\"]";
-        String ss = str.substring(1,str.length()-1);
-        String[] strings = ss.split(",");
-        for (String s :strings){
-            System.out.println(s.substring(1,s.length()-1));
-        }
-    }
+    public InviteInfo(){}
+
     public InviteInfo(User invited_user, String passive_Students) {
         this.invited_studentId = invited_user.getStudent_id();
         this.nickname = invited_user.getNickname();
@@ -36,11 +31,27 @@ public class InviteInfo implements Serializable {
         String[] strings = passive_Students.substring
                 (1, passive_Students.length()-1).split(",");
         this.passive_studentSet = strings;
-        System.out.println(passive_studentSet.toString());
         this.setResult("OK");
     }
 
     public InviteInfo(String result) {
         this.result = result;
+    }
+
+    public static void main(String[] args) {
+        User user = new User();
+        user.enQueueInvitation(new InvitationSend("111", "2018","kuangkuang"));
+        user.enQueueInvitation(new InvitationSend("222", "2019","xiaotang"));
+
+        InvitationSend invitationSend = user.deQueueInvitation();
+        System.out.println(invitationSend.toString());
+
+        InvitationSend invitationSend1 = user.deQueueInvitation();
+        System.out.println(invitationSend1.toString());
+
+        InvitationSend invitationSend2 = user.deQueueInvitation();
+        if (invitationSend2==null){
+            System.out.println("没有了");
+        }
     }
 }

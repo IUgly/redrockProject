@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import team.redrock.running.bean.ResponseBean;
+import team.redrock.running.dto.InvitationSend;
 import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
@@ -41,8 +42,7 @@ public class InvitedControl {
         User invite_user= this.userServiceImp.selectUserInfo(student_id);
         InviteInfo inviteInfo = new InviteInfo(invite_user, invitees);
         this.invitedService.startInvited(inviteInfo);
-
-        this.invitedService.sendInvitations(invitees, invite_user);
+        this.invitedService.sendInvitations(invitees, inviteInfo);
         this.invitedService.insertInvitationToRedis(inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(inviteInfo.getInvited_id(), UnicomResponseEnums.SUCCESS));
     }
@@ -66,10 +66,11 @@ public class InvitedControl {
     }
     @GetMapping(value = "/invite/invited", produces = "application/json")
     public String getInvitedOrNot(String student_id) {
-        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-        InviteInfo inviteInfo = user.deQueueInvitation();
-        if (inviteInfo != null) {
-            return JSONObject.toJSONString(new ResponseBean<>(inviteInfo, UnicomResponseEnums.SUCCESS));
+        User user = this.userServiceImp.selectUserInfo(student_id);
+        InvitationSend invitationReceive = user.deQueueInvitation();
+        this.userServiceImp.insertUserToRedis(user.getStudent_id(), user);
+        if (invitationReceive != null) {
+            return JSONObject.toJSONString(new ResponseBean<>(invitationReceive, UnicomResponseEnums.SUCCESS));
         } else {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_INVITED_INFO));
         }

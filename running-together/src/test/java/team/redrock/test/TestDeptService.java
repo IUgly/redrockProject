@@ -13,15 +13,20 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
+import team.redrock.running.dao.InvitedDao;
 import team.redrock.running.dao.RecordDao;
+import team.redrock.running.dao.UserDao;
 import team.redrock.running.service.serviceImp.InvitedService;
 import team.redrock.running.service.serviceImp.RankListServerImp;
 import team.redrock.running.service.serviceImp.UpdateScoreService;
+import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 @SpringBootTest(classes = StartSpringBootMain.class)
@@ -41,14 +46,30 @@ public class TestDeptService {
     @Autowired
     private RecordDao recordDao;
     @Autowired
+    private InvitedDao invitedDao;
+    @Autowired
+    private UserDao userDao;
+    @Autowired
     private InvitedService invitedService;
-    public static final String TEST = "test22";
+    @Autowired
+    private UserServiceImp userServiceImp;
+    public static final String INVITATION_REDIS = "InvitationRedis";
+    public static final String USER_REDIS = "UserRedis";
+
 
     @Test
     public void rankInfo() throws Exception{
-        Map<String, Object> hashMap = new HashMap<>();
-        hashMap.put("kk", new JSONArray());
-        this.redisTemplate.opsForHash().putAll("HASH", hashMap);
+//        InviteInfo inviteInfo = this.invitedDao.selectInvitedById("2");
+//        HashMap invitationHash = new HashMap();
+//        invitationHash.put(inviteInfo.getInvited_id(), inviteInfo);
+//        this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
+//        InvitationSend invitationSend = new InvitationSend(inviteInfo);
+//
+//        User user = this.userDao.selectUserByStudentId("2017211001");
+//        user.enQueueInvitation(invitationSend.toString());
+//        System.out.println(user.deQueueInvitation());
+//        this.userServiceImp.insertUserToRedis(user.getStudent_id(), user);
+
     }
 
     @Test
