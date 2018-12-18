@@ -94,14 +94,15 @@ public class InvitedControl {
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         Record record = new Record(json);
         record.setInvited_id(invited_id);
-        String[] invited_members = inviteInfo.getPassive_studentSet();
-        invited_members[invited_members.length+1] = inviteInfo.getInvited_studentId();
+        String[] invited_members = inviteInfo.getPassive_studentArry();
+        invited_members[invited_members.length-1] = inviteInfo.getInvited_studentId();
         for (int i=1; i< invited_members.length; i++){
             record.setStudent_id(invited_members[i]);
             this.updateScoreService.notInvitedUpdate(record);
             //更新redis的个人和班级RSET集合（日周月总榜)
-            this.updateScoreService.insertOnceRunDataToRedis(record);
+
         }
+        this.updateScoreService.insertOnceInvitedData(inviteInfo);
         this.invitedService.insertInvitationToRedis(inviteInfo);
         this.invitedService.OverInvitation(invited_id, inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));

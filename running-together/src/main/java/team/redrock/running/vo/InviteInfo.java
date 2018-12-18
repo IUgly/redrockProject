@@ -19,7 +19,7 @@ public class InviteInfo implements Serializable {
     private String date;
     private double distance;
     private String state;
-    private String[] passive_studentSet;
+    private String[] passive_studentArry;
     //邀请的用户 的回馈结果
     private Map<String, String> result = new HashMap<>();
 
@@ -32,7 +32,7 @@ public class InviteInfo implements Serializable {
         this.date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
         String[] strings = passive_Students.substring
                 (1, passive_Students.length()-1).split(",");
-        this.passive_studentSet = strings;
+        this.passive_studentArry = strings;
         for (String s: strings){
 
             result.put(s,"0");

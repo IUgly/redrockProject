@@ -50,7 +50,7 @@ public class InvitedService {
     @Async
     public void OverInvitation(String invited_id, InviteInfo inviteInfo){
         this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
-        inviteInfo.setDate("END");
+        inviteInfo.setState("END");
         this.recordDao.overInvited(inviteInfo);
     }
     public void startInvited(InviteInfo inviteInfo) {

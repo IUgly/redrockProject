@@ -71,11 +71,16 @@ public class UpdateScoreService {
 
     @Async
     public void insertOnceInvitedData(InviteInfo inviteInfo){
-        String student_id = inviteInfo.getInvited_studentId();
+        String[] invited_members = inviteInfo.getPassive_studentArry();
         double score = inviteInfo.getDistance();
-        this.redisTemplate.opsForHash().increment(STU_DAY_INVITATION_RANK, student_id, score);
-        this.redisTemplate.opsForHash().increment(STU_WEEK_INVITATION_RANK, student_id, score);
-        this.redisTemplate.opsForHash().increment(STU_MONTH_INVITATION_RANK, student_id, score);
-        this.redisTemplate.opsForHash().increment(STU_ALL_INVITATION_RANK, student_id, score);
+        int size = invited_members.length;
+        invited_members[size-1] = inviteInfo.getInvited_studentId();
+        for (String student_id:invited_members
+             ) {
+            this.redisTemplate.opsForHash().increment(STU_DAY_INVITATION_RANK, student_id, score);
+            this.redisTemplate.opsForHash().increment(STU_WEEK_INVITATION_RANK, student_id, score);
+            this.redisTemplate.opsForHash().increment(STU_MONTH_INVITATION_RANK, student_id, score);
+            this.redisTemplate.opsForHash().increment(STU_ALL_INVITATION_RANK, student_id, score);
+        }
     }
 }
