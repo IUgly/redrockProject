@@ -3,6 +3,7 @@ package team.redrock.running.enums;
 public enum UnicomResponseEnums {
  
 	SYSTEM_ERROR(-001,"系统异常"),
+	NO_INVITATION(23, "没有收到邀约"),
 	NOT_STUDENT_OR_NOT_REGISTER(-1001,"没有该学号或未使用约跑"),
 	NOT_INVITED_INFO(-1002, "没有邀约信息"),
 	BAD_REQUEST(-002,"错误的请求参数"),

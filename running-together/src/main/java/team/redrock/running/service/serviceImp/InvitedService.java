@@ -34,7 +34,6 @@ public class InvitedService {
         this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
 
         InviteInfo inviteInfo1 = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, inviteInfo.getInvited_id());
-        System.out.println(inviteInfo1.toString());
     }
     @Async
     public void sendInvitations(String invitees, InviteInfo inviteInfo){

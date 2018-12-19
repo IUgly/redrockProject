@@ -92,15 +92,18 @@ public class InvitedControl {
     @PostMapping(value = "/invite/update_data", produces = "application/json")
     public String inviteUpdateRunData(String invited_id, @RequestBody JSONObject json){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
+        inviteInfo.setDistance(Double.parseDouble(json.getString("distance")));
         Record record = new Record(json);
         record.setInvited_id(invited_id);
-        String[] invited_members = inviteInfo.getPassive_studentArry();
-        invited_members[invited_members.length-1] = inviteInfo.getInvited_studentId();
-        for (int i=1; i< invited_members.length; i++){
-            record.setStudent_id(invited_members[i]);
-            this.updateScoreService.notInvitedUpdate(record);
-            //更新redis的个人和班级RSET集合（日周月总榜)
-
+        Map<String, String> resultMap = inviteInfo.getResult();
+        resultMap.put(inviteInfo.getInvited_studentId(), "1");
+        for(String key:resultMap.keySet()){
+            if (resultMap.get(key).equals("1")){
+                record.setStudent_id(key);
+                this.updateScoreService.notInvitedUpdate(record);
+                //更新redis的个人和班级RSET集合（日周月总榜）
+                this.updateScoreService.insertOnceRunDataToRedis(record);
+            }
         }
         this.updateScoreService.insertOnceInvitedData(inviteInfo);
         this.invitedService.insertInvitationToRedis(inviteInfo);
@@ -124,7 +127,10 @@ public class InvitedControl {
     @GetMapping(value = "/invite/history/result", produces = "application/json")
     public String getInvitedResult(String student_id){
         JSONArray jsonArray = this.invitedService.getInvitedResult(student_id);
-        return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
+        if (jsonArray!=null){
+            return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
+        }
+        return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_INVITED_INFO));
     }
     @PostMapping(value = "/invite/cancel", produces = "application/json")
     public String cancelInvitation(String invited_id){
