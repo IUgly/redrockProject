@@ -23,7 +23,7 @@ public class UserServiceImp {
     @Autowired
     private RedisTemplate redisTemplate;
     public static final String USER_REDIS = "UserRedis";
-//    @Async
+    @Async
     public void insertUserToRedis(String student_id, User userInfo) {
         HashMap userHash = new HashMap();
         userHash.put(student_id, userInfo);

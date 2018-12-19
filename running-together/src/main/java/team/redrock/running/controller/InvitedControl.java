@@ -2,7 +2,6 @@ package team.redrock.running.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,9 +43,9 @@ public class InvitedControl {
         User invite_user= this.userServiceImp.selectUserInfo(student_id);
         InviteInfo inviteInfo = new InviteInfo(invite_user, invitees);
         this.invitedService.startInvited(inviteInfo);
+        //异步处理
         this.invitedService.sendInvitations(invitees, inviteInfo);
         this.invitedService.insertInvitationToRedis(inviteInfo);
-
         invite_user.setInvitingNow(inviteInfo.getInvited_id());
         this.userServiceImp.insertUserToRedis(invite_user.getStudent_id(), invite_user);
         return JSONObject.toJSONString(new ResponseBean<>(inviteInfo.getInvited_id(), UnicomResponseEnums.SUCCESS));
@@ -105,32 +104,32 @@ public class InvitedControl {
                 this.updateScoreService.insertOnceRunDataToRedis(record);
             }
         }
-        this.updateScoreService.insertOnceInvitedData(inviteInfo);
-        this.invitedService.insertInvitationToRedis(inviteInfo);
+        this.updateScoreService.insertOnceInvitedDataToRedis(inviteInfo);
         this.invitedService.OverInvitation(invited_id, inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));
     }
+    //轮询邀约是否结束
     @GetMapping(value = "/invite/end", produces = "application/json")
     public String invitedEnd(String invited_id){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
+        HashMap<String, String> resultMap = new HashMap<>();
         if (inviteInfo!=null){
+            resultMap.put("result", "OK");
             return JSONObject.toJSONString(new ResponseBean<>(new InviteInfo("OK"), UnicomResponseEnums.SUCCESS));
         }
-        return JSONObject.toJSONString(new ResponseBean<>(new InviteInfo("END"), UnicomResponseEnums.SUCCESS));
+        resultMap.put("result", "END");
+        return JSONObject.toJSONString(new ResponseBean<>(resultMap, UnicomResponseEnums.SUCCESS));
     }
     @GetMapping (value = "/invite/history", produces = "application/json")
     public String invitedHistory(String student_id){
-        JsonArray invitedHistoryJsonArray = this.invitedService.getInvitedHistory(student_id);
+        JSONArray invitedHistoryJsonArray = this.invitedService.getInvitedHistory(student_id);
         return JSONObject.toJSONString(new ResponseBean<>(invitedHistoryJsonArray, UnicomResponseEnums.SUCCESS));
     }
     //得到最近一次邀约结果
     @GetMapping(value = "/invite/history/result", produces = "application/json")
     public String getInvitedResult(String student_id){
         JSONArray jsonArray = this.invitedService.getInvitedResult(student_id);
-        if (jsonArray!=null){
-            return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
-        }
-        return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_INVITED_INFO));
+        return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "/invite/cancel", produces = "application/json")
     public String cancelInvitation(String invited_id){

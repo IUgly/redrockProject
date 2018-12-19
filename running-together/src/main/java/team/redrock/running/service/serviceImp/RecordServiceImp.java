@@ -33,16 +33,13 @@ public class RecordServiceImp {
 
         num = recordList.size();
         JSONArray jsonArray = new JSONArray();
-        for (int i=start; i<end; i++){
-            String latLng = (String) this.redisTemplate.opsForHash().get(LAT_LNG_REDIS , recordList.get(i).getId());
-            recordList.get(i).setLat_lng(JSONArray.parseArray(latLng));
-        }
+
         jsonArray.add(recordList);
         return jsonArray;
     }
     public Record getRecordById(String id){
         Record record = this.recordDao.selectDistanceRecordById(id);
-        record.setLat_lng(JSONArray.parseArray((String)this.redisTemplate.opsForHash().get(RECORD_REDIS, id)));
+//        record.setLat_lng(JSONArray.parseArray((String)this.redisTemplate.opsForHash().get(RECORD_REDIS, id)));
         return record;
     }
     public void putRedisHash(String key, Object o, String RedisHash){

@@ -14,12 +14,11 @@ public class InviteInfo implements Serializable {
     private String invited_id;
     private String nickname;
     private String invited_studentId;
-    private String passive_students;
-    private JSONArray student_id;
+    private JSONArray passive_students;
     private String date;
     private double distance;
     private String state;
-    private String[] passive_studentArry;
+    private String[] passive_studentArray;
     //邀请的用户 的回馈结果
     private Map<String, String> result = new HashMap<>();
 
@@ -28,13 +27,11 @@ public class InviteInfo implements Serializable {
     public InviteInfo(User invited_user, String passive_Students) {
         this.invited_studentId = invited_user.getStudent_id();
         this.nickname = invited_user.getNickname();
-        this.passive_students = passive_Students;
         this.date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
         String[] strings = passive_Students.substring
                 (1, passive_Students.length()-1).split(",");
-        this.passive_studentArry = strings;
+        this.passive_studentArray = strings;
         for (String s: strings){
-
             result.put(s,"0");
         }
     }

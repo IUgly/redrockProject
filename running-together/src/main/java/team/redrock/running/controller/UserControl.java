@@ -77,7 +77,7 @@ public class UserControl extends AbstractBaseController {
         this.updateScoreService.insertOnceRunDataToRedis(record);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
-    @GetMapping(value = "sanzou/user/{student_id}/{page?}", produces = "application/json")
+    @GetMapping(value = "/user/lat_lng", produces = "application/json")
     public String getLatLngList(String student_id,String page){
         int num =0;
         JSONArray jsonArray = this.recordServiceImp.getLatLngList(student_id, page, num);

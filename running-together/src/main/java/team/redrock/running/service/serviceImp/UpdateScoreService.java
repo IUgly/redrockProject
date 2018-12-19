@@ -69,18 +69,17 @@ public class UpdateScoreService {
         this.redisTemplate.opsForZSet().incrementScore(CLA_ALL_DISTANCE_RANK, class_id, distance);
     }
 
+    /**
+     * 更新个人邀约排行榜 日周月总
+     * @param inviteInfo
+     */
     @Async
-    public void insertOnceInvitedData(InviteInfo inviteInfo){
-        String[] invited_members = inviteInfo.getPassive_studentArry();
+    public void insertOnceInvitedDataToRedis(InviteInfo inviteInfo){
         double score = inviteInfo.getDistance();
-        int size = invited_members.length;
-        invited_members[size-1] = inviteInfo.getInvited_studentId();
-        for (String student_id:invited_members
-             ) {
-            this.redisTemplate.opsForHash().increment(STU_DAY_INVITATION_RANK, student_id, score);
-            this.redisTemplate.opsForHash().increment(STU_WEEK_INVITATION_RANK, student_id, score);
-            this.redisTemplate.opsForHash().increment(STU_MONTH_INVITATION_RANK, student_id, score);
-            this.redisTemplate.opsForHash().increment(STU_ALL_INVITATION_RANK, student_id, score);
-        }
+        String invited_student_id = inviteInfo.getInvited_studentId();
+        this.redisTemplate.opsForHash().increment(STU_DAY_INVITATION_RANK, invited_student_id, score);
+        this.redisTemplate.opsForHash().increment(STU_WEEK_INVITATION_RANK, invited_student_id, score);
+        this.redisTemplate.opsForHash().increment(STU_MONTH_INVITATION_RANK, invited_student_id, score);
+        this.redisTemplate.opsForHash().increment(STU_ALL_INVITATION_RANK, invited_student_id, score);
     }
 }
