@@ -49,7 +49,4 @@ public interface ScheduledDao {
      */
     @Insert("insert into student_invited_rank set student_id=#{student_id},nickname=#{nickname},day_invitation=#{total},week_invitation=#{total},month_invitation=#{total},all_invitation=#{total},college=#{college},class_id=#{class_id} on DUPLICATE key update day_invitation=#{total},week_invitation = week_invitation + #{total},month_invitation=month_invitation+#{total},all_invitation=all_invitation+#{total}")
     void updateDayInviteScoreToStuMysql(RankInfo rankInfo);
-    @Insert("insert into class_invited_rank set class_id=#{class_id},day_invitation=#{total},week_invitation=#{total},month_invitation=#{total},all_invitation=#{total},college=#{college} on DUPLICATE key update day_invitation=#{total},week_invitation = week_invitation + #{total},month_invitation=month_invitation+#{total},all_invitation=all_invitation+#{total}")
-    void updateDayInvitedScoreToClaMysql(RankInfo rankInfo);
-
 }

@@ -63,7 +63,7 @@ public class TestDeptService {
 
         InviteInfo inviteInfo = this.invitedDao.selectInvitedById("2");
         HashMap<String, InviteInfo> invitationHash = new HashMap();
-        invitationHash.put(inviteInfo.getInvited_id(), inviteInfo);
+        invitationHash.put(String.valueOf(inviteInfo.getInvited_id()), inviteInfo);
         this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
         InvitationSend invitationSend = new InvitationSend(inviteInfo);
 

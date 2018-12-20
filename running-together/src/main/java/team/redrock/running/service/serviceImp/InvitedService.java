@@ -28,6 +28,7 @@ public class InvitedService {
     private UserServiceImp userServiceImp;
     @Autowired
     private RecordDao recordDao;
+
     @Async
     public void insertInvitationToRedis(InviteInfo inviteInfo){
         HashMap invitationHash = new HashMap();
@@ -58,6 +59,7 @@ public class InvitedService {
         }
         inviteInfo.setPassive_students(studentsJsonArr);
         this.recordDao.overInvited(inviteInfo);
+//        this.recordDao.addOneInvitedNum(inviteInfo.getInvited_studentId());
     }
     public void startInvited(InviteInfo inviteInfo) {
         this.recordDao.insertInvitedRecord(inviteInfo);
@@ -84,9 +86,8 @@ public class InvitedService {
     }
     @Async
     public void cancelInvited(String invited_id){
-        InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
-        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, inviteInfo.getInvited_studentId());
-        user.setInvitingNow("");
+        this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
+        System.out.println(this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id).toString());
     }
 
 }

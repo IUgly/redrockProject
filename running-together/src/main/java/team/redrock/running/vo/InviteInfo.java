@@ -22,6 +22,16 @@ public class InviteInfo implements Serializable {
     //邀请的用户 的回馈结果
     private Map<String, String> result = new HashMap<>();
 
+    public int getSuccessInvitedPersonNum(){
+        int num =0;
+        for(String key:this.result.keySet()){
+            if (this.result.get(key).equals("1")){
+                num++;
+            }
+        }
+        return num;
+    }
+
     public InviteInfo(){}
 
     public InviteInfo(User invited_user, String passive_Students) {

@@ -37,7 +37,7 @@ public class UserControl extends AbstractBaseController {
     private Config config;
     @Autowired
     private RecordServiceImp recordServiceImp;
-    @PostMapping(value = "/login", produces = "application/json")
+    @PostMapping(value = "user/login", produces = "application/json")
     public String login(String student_id, String password){
         User user = this.userServiceImp.login(student_id, password);
         if (user!=null){
@@ -68,7 +68,7 @@ public class UserControl extends AbstractBaseController {
                 this.userServiceImp.selectUserInfo(student_id),
                 UnicomResponseEnums.SUCCESS));
     }
-    @PostMapping(value = "update", produces = "application/json")
+    @PostMapping(value = "/user/distance/update", produces = "application/json")
     public String update(@RequestBody JSONObject json){
         //插入跑步数据到mysql
         Record record = new Record(json);
@@ -88,7 +88,7 @@ public class UserControl extends AbstractBaseController {
         Record record = this.recordServiceImp.getRecordById(id);
         return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));
     }
-    @GetMapping(value = "sanzou/user/info/{student_id}", produces = "application/json")
+    @GetMapping(value = "/user/info", produces = "application/json")
     public String getUserOtherInfo(String student_id){
         UserOtherInfo userOtherInfo = this.userServiceImp.selectUserOtherInfo(student_id);
         return JSONObject.toJSONString(new ResponseBean<>(userOtherInfo, UnicomResponseEnums.SUCCESS));
@@ -96,6 +96,7 @@ public class UserControl extends AbstractBaseController {
     @ResponseBody
     @PostMapping(value = "/upload", produces = "application/json")
     public String upload(HttpServletRequest request) {
+        String student_id = request.getParameter("student_id");
         if (request instanceof MultipartHttpServletRequest) { // 如果你现在是MultipartHttpServletRequest对象
             MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
             List<MultipartFile> files = mrequest.getFiles("file");
@@ -106,8 +107,8 @@ public class UserControl extends AbstractBaseController {
                     try {
                         byte[] bytes = file.getBytes();
                         long fileName = System.currentTimeMillis();
-                        Path path = Paths.get(this.config.getPhoto() +"/"+ fileName+".jpg");
-                        String url = this.config.getPhotoUrl()+"/"+fileName+".jpg";
+                        Path path = Paths.get(this.config.getPhoto() +"/"+ student_id+".jpg");
+//                        String url = this.config.getPhotoUrl()+"/"+student_id+".jpg";
 
                         Files.write(path, bytes);
                         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));

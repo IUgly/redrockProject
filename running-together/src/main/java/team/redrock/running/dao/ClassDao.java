@@ -8,7 +8,7 @@ import team.redrock.running.vo.ClassRank;
 @Mapper
 @Component
 public interface ClassDao {
-    @Select("select * from class_rank where class_id = #{class_id}")
+    @Select("select * from class_distance_rank where class_id = #{class_id}")
     ClassRank selectClassByClassId(String class_id);
 
     @Select("select * from class_rank")

@@ -136,5 +136,4 @@ public class InvitedControl {
         this.invitedService.cancelInvited(invited_id);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
-
 }

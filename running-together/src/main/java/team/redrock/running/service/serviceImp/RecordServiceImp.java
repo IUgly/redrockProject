@@ -9,9 +9,7 @@ import team.redrock.running.dao.RecordDao;
 import team.redrock.running.util.Util;
 import team.redrock.running.vo.Record;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Component
@@ -20,10 +18,6 @@ public class RecordServiceImp {
     private StringRedisTemplate redisTemplate;
     @Autowired
     private RecordDao recordDao;
-    @Autowired
-    private UserServiceImp userServiceImp;
-    public static final String LAT_LNG_REDIS = "latLngRedis";
-    public static final String RECORD_REDIS = "recordRedis";
 
     public JSONArray getLatLngList(String student_id,String pageParam, int num){
         int start = 0;
@@ -39,13 +33,7 @@ public class RecordServiceImp {
     }
     public Record getRecordById(String id){
         Record record = this.recordDao.selectDistanceRecordById(id);
-//        record.setLat_lng(JSONArray.parseArray((String)this.redisTemplate.opsForHash().get(RECORD_REDIS, id)));
         return record;
     }
-    public void putRedisHash(String key, Object o, String RedisHash){
-        Map<String, Object> hashMap = new HashMap<>();
-        hashMap.put(key, o);
-        this.redisTemplate.opsForHash().putAll(RedisHash, hashMap);
-        System.out.println(this.redisTemplate.opsForHash().get(RedisHash, key));
-    }
+
 }

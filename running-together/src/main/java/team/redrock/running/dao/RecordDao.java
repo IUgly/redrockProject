@@ -31,6 +31,10 @@ public interface RecordDao {
     @Select("select distance,date,passive_students,invited_id from invited_record where invited_student_id=#{student_id}")
     List<InviteInfo> selectInvitedRecordList(String student_id);
 
-    @Update("update invited_record set distance=#{distance},state=#{state},passive_students=#{student_id, typeHandler=team.redrock.running.bean.JsonTypeHandler} where invited_id=#{invited_id}")
+    @Update("update invited_record set distance=#{distance},state=#{state},passive_students=#{passive_students, typeHandler=team.redrock.running.bean.JsonTypeHandler} where invited_id=#{invited_id}")
     void overInvited(InviteInfo inviteInfo);
+
+    @Update("update student_invitation_rank set all_invited_num =all_invited_num +1 where student_id = #{student_id}")
+    void addOneInvitedNum(String student_id);
+
 }

@@ -44,27 +44,15 @@ public class RankListServerImp {
         while (it.hasNext()) {
             ZSetOperations.TypedTuple str = it.next();
             User user = this.userServiceImp.selectUserInfo(str.getValue().toString());
-            //模拟数据
-            if (user==null){
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("student_id", str.getValue());
-                jsonObject.put("name", "无名氏"+rankStart+"号");
-                jsonObject.put("rank", rankStart+1);
-                jsonObject.put("total", str.getScore());
-                jsonObject.put("college", "tx");
-                jsonArray.add(jsonObject);
-                rankStart++;
-            }
-            else {
-                JSONObject json = JSONObject.parseObject(user.toString());
-                json.put("rank", rankStart+1);
-                json.put("total", str.getScore());
-                jsonArray.add(json);
-                rankStart++;
-            }
+            JSONObject json = JSONObject.parseObject(user.toString());
+            json.put("rank", rankStart+1);
+            json.put("total", str.getScore());
+            jsonArray.add(json);
+            rankStart++;
         }
         return jsonArray.toString();
     }
+
     public String getPersonRankInvite(String pageParam, String kindRank){
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = this.getRedisRangeWithScoreByPartPage(pageParam, kindRank);
         return traversalPersonZSet(rangeWithScores);

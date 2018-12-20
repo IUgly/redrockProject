@@ -20,8 +20,6 @@ public class UpdateScoreService {
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private UserServiceImp userServiceImp;
-    @Autowired
-    private RecordServiceImp recordServiceImp;
 
     //个人路程排行榜  日周月总
     public static final String STU_DAY_DISTANCE_RANK = "daysStuDistance000";
@@ -30,7 +28,7 @@ public class UpdateScoreService {
     public static final String STU_All_DISTANCE_RANK = "allStuDistance000";
 
     //班级路程排行榜   日周月总
-    public static final String CLA_DAY_DISTANCE_RANK = "dayClaDistance000";
+    public static final String CLA_DAY_DISTANCE_RANK = "daysClaDistance000";
     public static final String CLA_WEEK_DISTANCE_RANK = "weekendsClaDistance000";
     public static final String CLA_MONTH_DISTANCE_RANK = "monthsClaDistance000";
     public static final String CLA_ALL_DISTANCE_RANK = "allClaDistance000";
@@ -41,21 +39,18 @@ public class UpdateScoreService {
     public static final String STU_MONTH_INVITATION_RANK = "monthsStuInvited000";
     public static final String STU_ALL_INVITATION_RANK = "allStuInvited000";
 
-    //班级邀约排行榜   日周月总
-    public static final String CLA_DAY_INVITATION_RANK = "dayClaDistance000";
-    public static final String CLA_WEEK_INVITATION_RANK = "weekendsClaDistance000";
-    public static final String CLA_MONTH_INVITATION_RANK = "monthsClaDistance000";
-    public static final String CLA_ALL_INVITATION_RANK = "allClaDistance000";
-
-    //班级排行榜  日周月总
+    //个人 班级排行榜  日周月总
+    @Async
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertDistanceRecord(record);
+
     }
     @Async
     public void insertOnceRunDataToRedis(Record record) {
         RankInfo rankInfo = new RankInfo(record);
         String student_id = rankInfo.getStudent_id();
         double distance = rankInfo.getDistance();
+
         this.redisTemplate.opsForZSet().incrementScore(STU_DAY_DISTANCE_RANK, student_id, distance);
         this.redisTemplate.opsForZSet().incrementScore(STU_WEEK_DISTANCE_RANK, student_id, distance);
         this.redisTemplate.opsForZSet().incrementScore(STU_MONTH_DISTANCE_RANK, student_id, distance);
@@ -68,18 +63,18 @@ public class UpdateScoreService {
         this.redisTemplate.opsForZSet().incrementScore(CLA_MONTH_DISTANCE_RANK, class_id, distance);
         this.redisTemplate.opsForZSet().incrementScore(CLA_ALL_DISTANCE_RANK, class_id, distance);
     }
-
     /**
      * 更新个人邀约排行榜 日周月总
      * @param inviteInfo
      */
     @Async
     public void insertOnceInvitedDataToRedis(InviteInfo inviteInfo){
-        double score = inviteInfo.getDistance();
+        double score = inviteInfo.getDistance()*inviteInfo.getSuccessInvitedPersonNum();
         String invited_student_id = inviteInfo.getInvited_studentId();
-        this.redisTemplate.opsForHash().increment(STU_DAY_INVITATION_RANK, invited_student_id, score);
-        this.redisTemplate.opsForHash().increment(STU_WEEK_INVITATION_RANK, invited_student_id, score);
-        this.redisTemplate.opsForHash().increment(STU_MONTH_INVITATION_RANK, invited_student_id, score);
-        this.redisTemplate.opsForHash().increment(STU_ALL_INVITATION_RANK, invited_student_id, score);
+
+        this.redisTemplate.opsForZSet().incrementScore(STU_DAY_INVITATION_RANK, invited_student_id, score);
+        this.redisTemplate.opsForZSet().incrementScore(STU_WEEK_INVITATION_RANK, invited_student_id, score);
+        this.redisTemplate.opsForZSet().incrementScore(STU_MONTH_INVITATION_RANK, invited_student_id, score);
+        this.redisTemplate.opsForZSet().incrementScore(STU_ALL_INVITATION_RANK, invited_student_id, score);
     }
 }
