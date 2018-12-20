@@ -16,14 +16,11 @@ import team.redrock.running.StartSpringBootMain;
 import team.redrock.running.dao.InvitedDao;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.dao.UserDao;
-import team.redrock.running.dto.InvitationSend;
 import team.redrock.running.service.serviceImp.*;
-import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -37,8 +34,6 @@ public class TestDeptService {
     private RedisTemplate redisTemplate;
     @Autowired
     private RankListServerImp rankListServerImp;
-
-//    public static final String SCORE_RANK = "test29";
 
     public static final String SCORE_RANK = "dayRank";
     @Autowired
@@ -59,21 +54,8 @@ public class TestDeptService {
     private RecordServiceImp recordServiceImp;
     @Test
     public void rankInfo() throws Exception{
-        Gson gson = new Gson();
-
-        InviteInfo inviteInfo = this.invitedDao.selectInvitedById("2");
-        HashMap<String, InviteInfo> invitationHash = new HashMap();
-        invitationHash.put(String.valueOf(inviteInfo.getInvited_id()), inviteInfo);
-        this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
-        InvitationSend invitationSend = new InvitationSend(inviteInfo);
-
-
-//        this.recordServiceImp.putRedisHash(invitationSend.getInvited_id(), invitationSend, INVITATION_REDIS);
-
-        InviteInfo inviteInfo1= (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invitationSend.getInvited_id());
-
-
-        System.out.println(inviteInfo1.toString());
+        String rank = "daysStuDistance000";
+        System.out.println(this.rankListServerImp.getPersonRankDistance("1",rank));
     }
 
     @Test

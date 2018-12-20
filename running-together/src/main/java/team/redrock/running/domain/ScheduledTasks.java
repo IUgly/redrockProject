@@ -3,6 +3,7 @@ package team.redrock.running.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import team.redrock.running.dao.RankDao;
 import team.redrock.running.service.serviceImp.RankListServerImp;
 import team.redrock.running.service.serviceImp.ScheduledServiceImp;
@@ -12,7 +13,7 @@ import team.redrock.running.vo.RankInfo;
 import java.util.List;
 
 
-//@Component
+@Component
 public class ScheduledTasks {
     public static final String weekDistanceRank = "weekDistanceRank000";
     public static final String monthDistanceRank = "monthDistanceRank000";
@@ -30,15 +31,19 @@ public class ScheduledTasks {
     /**
      * 每天23:30定时每日路程，插入到rank表
      */
-    @Scheduled(cron = "0 30 23 * * ?")
+//    @Scheduled(cron = "0 30 23 * * ?")
+    @Scheduled(cron = "0 10 18 * * ?")
     public void reportCurrentTime(){
         this.scheduledServiceImp.insertDayDistanceToWeekRank();
         this.scheduledServiceImp.insertDayInvitedToWeekRank();
     }
+
+
     /**
      *  每周周日 周路程归零。
      */
-    @Scheduled(cron = "0 31 23 ? * SUN")
+//    @Scheduled(cron = "0 31 23 ? * SUN")
+    @Scheduled(cron = "0 10 18 * * ?")
     public void updateWeekDistance(){
         this.scheduledServiceImp.updateWeek();
     }
@@ -46,7 +51,8 @@ public class ScheduledTasks {
     /**
      *  每月月底月路程插入总路程，月路程归零
      */
-    @Scheduled(cron = "0 32 23 L * ?")
+//    @Scheduled(cron = "0 32 23 L * ?")
+    @Scheduled(cron = "0 10 18 * * ?")
     public void updateMonthDistance(){
         this.scheduledServiceImp.updateMonth();
     }
@@ -54,7 +60,8 @@ public class ScheduledTasks {
     /**
      * 从mysql更新路程周数据到redis
      */
-    @Scheduled(cron = "0 40 23 * * ?")
+//    @Scheduled(cron = "0 40 23 * * ?")
+    @Scheduled(cron = "0 10 18 * * ?")
     public void updateWeekDistanceToRedis(){
         List<RankInfo> rankInfoList = this.rankDao.selectStuWeekRank();
         for (int i=0; i<rankInfoList.size(); i++){
@@ -66,7 +73,8 @@ public class ScheduledTasks {
     /**
      *  从mysql更新路程月数据到redis
      */
-    @Scheduled(cron = "0 41 23 * * ?")
+//    @Scheduled(cron = "0 41 23 * * ?")
+    @Scheduled(cron = "0 10 18 * * ?")
     public void updateMonthDistanceToRedis(){
         List<RankInfo> rankInfoList = this.rankDao.selectStuMonthRank();
         for (int i=0; i<rankInfoList.size(); i++){
@@ -78,7 +86,8 @@ public class ScheduledTasks {
     /**
      *  从mysql更新路程总数据到redis
      */
-    @Scheduled(cron = "0 42 23 * * ?")
+//    @Scheduled(cron = "0 42 23 * * ?")
+    @Scheduled(cron = "0 10 18 * * ?")
     public void updateAllDistanceToRedis(){
         List<RankInfo> rankInfoList = this.rankDao.selectStuAllRank();
         for (int i=0; i<rankInfoList.size(); i++){

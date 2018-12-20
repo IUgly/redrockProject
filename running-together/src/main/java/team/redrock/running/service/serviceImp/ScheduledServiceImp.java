@@ -15,11 +15,22 @@ import java.util.Set;
 @Service
 @Component
 public class ScheduledServiceImp {
+
     //个人路程排行榜  日周月总
     public static final String STU_DAY_DISTANCE_RANK = "daysStuDistance000";
+    public static final String STU_WEEK_DISTANCE_RANK = "weekendsStuDistance000";
+    public static final String STU_MONTH_DISTANCE_RANK = "monthsStuDistance000";
+    public static final String STU_All_DISTANCE_RANK = "allStuDistance000";
+
+    //班级路程排行榜   日周月总
+    public static final String CLA_DAY_DISTANCE_RANK = "daysClaDistance000";
+    public static final String CLA_WEEK_DISTANCE_RANK = "weekendsClaDistance000";
+    public static final String CLA_MONTH_DISTANCE_RANK = "monthsClaDistance000";
 
     //个人邀约排行榜  日周月总
     public static final String STU_DAY_INVITATION_RANK = "daysStuInvited000";
+    public static final String STU_WEEK_INVITATION_RANK = "weekendsStuInvited000";
+    public static final String STU_MONTH_INVITATION_RANK = "monthsStuInvited000";
 
     @Autowired
     private ScheduledDao scheduledDao;
@@ -43,6 +54,9 @@ public class ScheduledServiceImp {
 
             this.scheduledDao.updateDayDistanceScoreToStuMysql(rankInfo);
             this.scheduledDao.updateDayDistanceScoreToClaMysql(rankInfo);
+
+            //执行完毕 置零
+            this.redisTemplate.opsForZSet().add(STU_DAY_DISTANCE_RANK, user.getStudent_id(), 0);
         }
     }
     /**
@@ -57,15 +71,22 @@ public class ScheduledServiceImp {
             ZSetOperations.TypedTuple str = it.next();
             User user = this.userServiceImp.selectUserInfo(str.getValue().toString());
             RankInfo rankInfo = new RankInfo(user);
-            rankInfo.setDistance(str.getScore());
+            rankInfo.setTotal(str.getScore());
 
             this.scheduledDao.updateDayInviteScoreToStuMysql(rankInfo);
+
+            //执行完毕 置零
+            this.redisTemplate.opsForZSet().add(STU_DAY_INVITATION_RANK, user.getStudent_id(), 0);
         }
     }
     /**
      * 每周末23:35 周数据归零
      */
     public void updateWeek(){
+        this.redisTemplate.opsForZSet().getOperations().delete(STU_WEEK_DISTANCE_RANK);
+        this.redisTemplate.opsForZSet().getOperations().delete(STU_WEEK_INVITATION_RANK);
+        this.redisTemplate.opsForZSet().getOperations().delete(CLA_WEEK_DISTANCE_RANK);
+
         this.scheduledDao.timingUpdateWeekDistanceScore();
         this.scheduledDao.timingUpdateWeekInvitedScore();
     }
@@ -73,6 +94,10 @@ public class ScheduledServiceImp {
      *  每月最后一天 23:40  月数据归零
      */
     public void updateMonth(){
+        this.redisTemplate.opsForZSet().getOperations().delete(STU_MONTH_DISTANCE_RANK);
+        this.redisTemplate.opsForZSet().getOperations().delete(STU_MONTH_INVITATION_RANK);
+        this.redisTemplate.opsForZSet().getOperations().delete(CLA_MONTH_DISTANCE_RANK);
+
         this.scheduledDao.timingUpdateMonthDistanceScore();
         this.scheduledDao.timingUpdateMonthInvitedScore();
     }

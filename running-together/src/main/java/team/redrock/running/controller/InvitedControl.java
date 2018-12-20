@@ -92,12 +92,12 @@ public class InvitedControl {
     public String inviteUpdateRunData(String invited_id, @RequestBody JSONObject json){
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         inviteInfo.setDistance(Double.parseDouble(json.getString("distance")));
-        Record record = new Record(json);
-        record.setInvited_id(invited_id);
         Map<String, String> resultMap = inviteInfo.getResult();
         resultMap.put(inviteInfo.getInvited_studentId(), "1");
         for(String key:resultMap.keySet()){
             if (resultMap.get(key).equals("1")){
+                Record record = new Record(json);
+                record.setInvited_id(invited_id);
                 record.setStudent_id(key);
                 this.updateScoreService.notInvitedUpdate(record);
                 //更新redis的个人和班级RSET集合（日周月总榜）
@@ -106,7 +106,7 @@ public class InvitedControl {
         }
         this.updateScoreService.insertOnceInvitedDataToRedis(inviteInfo);
         this.invitedService.OverInvitation(invited_id, inviteInfo);
-        return JSONObject.toJSONString(new ResponseBean<>(record, UnicomResponseEnums.SUCCESS));
+        return JSONObject.toJSONString(new ResponseBean<>(new Record(json, invited_id), UnicomResponseEnums.SUCCESS));
     }
     //轮询邀约是否结束
     @GetMapping(value = "/invite/end", produces = "application/json")
