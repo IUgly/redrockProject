@@ -6,20 +6,31 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 import team.redrock.running.vo.RankInfo;
 
+/**
+ * mybatis执行 多表查询 出现bug：SQL: update student_distance_rank s,class_distance_rank c, set s.week_distance=0,c.week_distance=0
+ * 原语句：update student_distance_rank s,class_distance_rank c, set s.week_distance=0,c.week_distance=0
+ */
 @Mapper
 @Component
 public interface ScheduledDao {
     /**
      *  每周定时更新个人和班级的周路程到月路程，总路程。周路程清零
      */
-    @Update("update student_rank s,class_rank c set s.week_distance=0,c.week_distance=0")
+    @Update("update student_distance_rank  set week_distance=0")
     void timingUpdateWeekDistanceScore();
-
+    @Update("update class_distance_rank set week_distance=0")
+    void timingUpdateWeekDistanceScoreClass();
+    @Update("update student_invitation_rank set week_invitation=0")
+    void timingUpdateWeekInvitation();
     /**
      *  每月定时更新个人和班级的月路程到总路程。月路程清零
      */
-    @Update("update student_id s,class_id c set s.month_distance=0,c.month_distance")
+    @Update("update student_distance_rank set month_distance=0")
     void timingUpdateMonthDistanceScore();
+    @Update("update class_distance_rank set month_distance=0")
+    void timingUpdateMonthDistanceScoreClass();
+    @Update("update student_invitation_rank set month_invitation=0")
+    void timingUpdateMonthInvitation();
 
     /**
      * 查询mysql中有无对应学生或者班级 路程的排名信息，没有则插入  //on DUPLICATE key update
@@ -31,17 +42,6 @@ public interface ScheduledDao {
     @Insert("insert into class_distance_rank set class_id=#{class_id},day_distance=#{distance},week_distance=#{distance},month_distance=#{distance},all_distance=#{distance},college=#{college},duration=#{duration} on DUPLICATE key update day_distance=#{distance},week_distance = week_distance + #{distance},month_distance=month_distance+#{distance},all_distance=all_distance+#{distance}")
     void updateDayDistanceScoreToClaMysql(RankInfo rankInfo);
 
-    /**
-     *  每周定时更新个人和班级的周路程到月路程，总路程。周路程清零
-     */
-    @Update("update student_rank s,class_rank set s.week_distance=0,c.week_distance=0")
-    void timingUpdateWeekInvitedScore();
-
-    /**
-     *  每月定时更新个人和班级的月路程到总路程。月路程清零
-     */
-    @Update("update student_id s,class_id c set s.month_distance=0,c.month_distance")
-    void timingUpdateMonthInvitedScore();
     /**
      * 查询mysql中有无对应学生或者班级 邀约的排名信息，没有则插入  //on DUPLICATE key update
      * @param rankInfo

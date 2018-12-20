@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50a51bb5-7d7d-428f-a787-6d0d8f55b4df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/src/main/resources/head_img/2017211501.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/main/resources/head_img/2017211501.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/running-together/target/classes/head_img/2017211501.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/running-together/target/classes/head_img/2017211501.jpg" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -201,7 +195,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="47" />
+          <entry key="class" value="48" />
           <entry key="example" value="1" />
           <entry key="fxml" value="1" />
           <entry key="java" value="495" />
@@ -213,7 +207,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="47" />
+          <entry key="CLASS" value="48" />
           <entry key="Image" value="3" />
           <entry key="JAVA" value="495" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -225,14 +219,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="24" />
-          <entry key="java" value="21722" />
+          <entry key="java" value="22112" />
           <entry key="properties" value="72" />
           <entry key="yml" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="21722" />
+          <entry key="JAVA" value="22112" />
           <entry key="PLAIN_TEXT" value="24" />
           <entry key="Properties" value="72" />
           <entry key="YAML" value="25" />
@@ -249,12 +243,21 @@
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="129">
-              <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+              <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2243#2244#0" expanded="true" />
                 <element signature="e#2338#2339#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.9.RELEASE/spring-core-4.3.9.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="105" selection-start-line="105" selection-end-line="105" />
             </state>
           </provider>
         </entry>
@@ -268,11 +271,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="97" column="50" lean-forward="true" selection-start-line="97" selection-start-column="50" selection-end-line="97" selection-end-column="50" />
+            <state relative-caret-position="211">
+              <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -304,8 +307,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="57" column="83" lean-forward="true" selection-start-line="57" selection-start-column="83" selection-end-line="57" selection-end-column="83" />
+            <state relative-caret-position="312">
+              <caret line="72" column="69" selection-start-line="72" selection-start-column="69" selection-end-line="72" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -313,24 +316,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
-              <folding>
-                <element signature="e#856#857#0" expanded="true" />
-                <element signature="e#943#944#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
+            <state relative-caret-position="239">
+              <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -441,11 +431,11 @@
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/Record.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/Controller.java" />
-        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" />
         <option value="$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java" />
         <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java" />
+        <option value="$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java" />
       </list>
     </option>
   </component>
@@ -798,6 +788,51 @@
             <path>
               <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: org.springframework:spring-core:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: org.springframework:spring-core:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
+              <item name="spring-core-4.3.9.RELEASE.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: org.springframework:spring-core:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
+              <item name="spring-core-4.3.9.RELEASE.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="org" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: org.springframework:spring-core:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
+              <item name="spring-core-4.3.9.RELEASE.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="org" type="462c0819:PsiDirectoryNode" />
+              <item name="springframework" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: org.springframework:spring-core:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
+              <item name="spring-core-4.3.9.RELEASE.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="org" type="462c0819:PsiDirectoryNode" />
+              <item name="springframework" type="462c0819:PsiDirectoryNode" />
+              <item name="cglib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: org.springframework:spring-core:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
+              <item name="spring-core-4.3.9.RELEASE.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="org" type="462c0819:PsiDirectoryNode" />
+              <item name="springframework" type="462c0819:PsiDirectoryNode" />
+              <item name="cglib" type="462c0819:PsiDirectoryNode" />
+              <item name="proxy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redrockProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="Maven: org.springframework:spring-web:4.3.9.RELEASE" type="70bed36:NamedLibraryElementNode" />
             </path>
             <path>
@@ -868,7 +903,7 @@
     <property name="SearchEverywhereHistoryKey" value="config&#9;FILE&#9;file:///Users/kuangjunlin/Downloads/ReferCode/redrockProject/webSite/src/main/java/team/redrock/webSite/config/Config.java&#10;httpcli&#9;PSI&#9;JAVA://org.apache.commons.httpclient.HttpClient" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545306078332" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545308573709" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -1134,14 +1169,11 @@
       <workItem from="1545015074294" duration="16034000" />
       <workItem from="1545040604842" duration="2350000" />
       <workItem from="1545049304356" duration="48656000" />
-      <workItem from="1545299966753" duration="5455000" />
+      <workItem from="1545299966753" duration="7973000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestDeptService_rankInfo - 2018.12.18 at 13h 49m 14s.xml">
-      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestDeptService_rankInfo - 2018.12.18 at 13h 56m 42s.xml">
       <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
     </history-entry>
@@ -1169,9 +1201,12 @@
     <history-entry file="TestDeptService_rankInfo - 2018.12.20 at 19h 22m 09s.xml">
       <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestDeptService_rankInfo - 2018.12.20 at 19h 44m 37s.xml">
+      <configuration name="TestDeptService.rankInfo" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="566874000" />
+    <option name="totallyTimeSpent" value="569392000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1183,10 +1218,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="773" extended-state="6" />
+    <frame x="-1" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.26655897" />
+      <window_info content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.29483038" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24959612" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1207,7 +1242,7 @@
       <window_info anchor="bottom" id="Spring" order="10" weight="0.32892805" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32892805" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4927302" weight="0.32892805" />
-      <window_info anchor="bottom" id="Run Dashboard" order="13" sideWeight="0.84814215" visible="true" weight="0.35535976" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="13" sideWeight="0.84814215" visible="true" weight="0.47136563" />
       <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.20355412" side_tool="true" weight="0.33873582" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1415,13 +1450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.9.RELEASE/spring-core-4.3.9.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/vo/ClassRank.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1600,16 +1628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="57" column="83" lean-forward="true" selection-start-line="57" selection-start-column="83" selection-end-line="57" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/RankControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="819">
@@ -1627,18 +1645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2243#2244#0" expanded="true" />
-            <element signature="e#2338#2339#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dto/InvitationSend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1646,13 +1652,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1670,13 +1669,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java">
+    <entry file="file://$PROJECT_DIR$/running-together/src/test/java/team/redrock/test/TestDeptService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="97" column="50" lean-forward="true" selection-start-line="97" selection-start-column="50" selection-end-line="97" selection-end-column="50" />
+        <state relative-caret-position="312">
+          <caret line="72" column="69" selection-start-line="72" selection-start-column="69" selection-end-line="72" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.9.RELEASE/spring-core-4.3.9.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/controller/UserControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2243#2244#0" expanded="true" />
+            <element signature="e#2338#2339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
         </state>
       </provider>
     </entry>

@@ -42,8 +42,8 @@ public class UserControl extends AbstractBaseController {
     private ScheduledServiceImp scheduledServiceImp;
     @GetMapping("/index")
     public String index(){
-        this.scheduledServiceImp.insertDayDistanceToWeekRank();
-        this.scheduledServiceImp.insertDayInvitedToWeekRank();
+        this.scheduledServiceImp.updateWeek();
+        this.scheduledServiceImp.updateMonth();
         return "ok";
     }
     @PostMapping(value = "user/login", produces = "application/json")
