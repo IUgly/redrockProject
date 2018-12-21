@@ -37,24 +37,10 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
         this.rank = rank;
         this.prev_difference = prev_difference;
     }
-//    @Override
-//    public String toString() {
-//        return "{" +
-//                "\""+"student_id\":" +"\""+ student_id + "\"" +
-//                ", \"nickname\":" +"\""+ nickname + "\"" +
-//                ",\"college\":"+"\""+ college+ "\""+
-//                ", \"class_id\":" + "\""+class_id + "\"" +
-//                ",\"duration\":"+"\""+duration+"\""+
-//                '}';
-//    }
 
     @Override
     public String toString() {
         return this.student_id;
-    }
-
-    public String getInfo(){
-        return this.toString();
     }
 
     @Override

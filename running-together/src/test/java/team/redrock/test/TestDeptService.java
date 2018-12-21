@@ -13,7 +13,6 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
-import team.redrock.running.dao.InvitedDao;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.dao.UserDao;
 import team.redrock.running.service.serviceImp.*;
@@ -40,8 +39,6 @@ public class TestDeptService {
     private UpdateScoreService updateScoreService;
     @Autowired
     private RecordDao recordDao;
-    @Autowired
-    private InvitedDao invitedDao;
     @Autowired
     private UserDao userDao;
     @Autowired

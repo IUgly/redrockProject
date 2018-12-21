@@ -10,8 +10,5 @@ import team.redrock.running.vo.ClassRank;
 public interface ClassDao {
     @Select("select * from class_distance_rank where class_id = #{class_id}")
     ClassRank selectClassByClassId(String class_id);
-
-    @Select("select * from class_rank")
-    ClassRank selectClassList();
-
+    
 }

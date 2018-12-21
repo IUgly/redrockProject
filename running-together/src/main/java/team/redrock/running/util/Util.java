@@ -10,7 +10,6 @@ public class Util {
         if (pageParam!=null){
             page = Integer.valueOf(pageParam);
         }
-
         if (page >1){
             start = 15*(page-1);
             end = start+14;
