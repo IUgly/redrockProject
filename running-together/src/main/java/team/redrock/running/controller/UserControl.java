@@ -12,7 +12,6 @@ import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.configuration.Config;
 import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.service.serviceImp.RecordServiceImp;
-import team.redrock.running.service.serviceImp.ScheduledServiceImp;
 import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.AbstractBaseController;
@@ -39,8 +38,6 @@ public class UserControl extends AbstractBaseController {
     private Config config;
     @Autowired
     private RecordServiceImp recordServiceImp;
-    @Autowired
-    private ScheduledServiceImp scheduledServiceImp;
     @PostMapping(value = "/user/login", produces = "application/json")
     public String login(String student_id, String password){
         User user = this.userServiceImp.login(student_id, password);
@@ -114,7 +111,6 @@ public class UserControl extends AbstractBaseController {
                         long fileName = System.currentTimeMillis();
                         Path path = Paths.get(this.config.getPhoto() +"/"+ student_id+".jpg");
 //                        String url = this.config.getPhotoUrl()+"/"+student_id+".jpg";
-
                         Files.write(path, bytes);
                         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
                     } catch (IOException e) {

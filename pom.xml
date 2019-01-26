@@ -111,7 +111,8 @@
     </build>
     <modules>
         <module>volunteerTime</module>
-        <module>webSite</module>
+        <!--<module>webSite</module>-->
         <module>template</module>
+        <module>running-together</module>
     </modules>
 </project>
