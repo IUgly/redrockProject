@@ -38,7 +38,11 @@ public class InvitedControl {
     private InvitedService invitedService;
     @Autowired
     private UpdateScoreService updateScoreService;
-    @PostMapping(value = "invite/update", produces = "application/json")
+    @GetMapping(value = "/test")
+    public String test(){
+        return "hello";
+    }
+    @PostMapping(value = "/invite/update", produces = "application/json")
     public String Upload(String student_id, String invitees){
         User invite_user= this.userServiceImp.selectUserInfo(student_id);
         InviteInfo inviteInfo = new InviteInfo(invite_user, invitees);

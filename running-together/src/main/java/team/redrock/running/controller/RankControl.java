@@ -28,6 +28,9 @@ public class RankControl {
         User user = this.userServiceImp.selectUserInfo(student_id);
         if (user!=null){
             RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_rank);
+            if (rankInfo==null){
+                JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_POSITION));
+            }
             return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));

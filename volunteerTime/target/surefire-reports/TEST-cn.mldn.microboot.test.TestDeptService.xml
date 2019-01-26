@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="cn.mldn.microboot.test.TestDeptService" time="0.585" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="cn.mldn.microboot.test.TestDeptService" time="0.431" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2018.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -7,7 +7,7 @@
     <property name="java.vm.version" value="25.181-b13"/>
     <property name="gopherProxySet" value="false"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/kuangjunlin/Downloads/ReferCode/redrockProject/volunteerTime"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/kuangjunlin/Desktop/study/redrockProject/volunteerTime"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/kuangjunlin/Downloads/ReferCode/redrockProject/volunteerTime"/>
+    <property name="user.dir" value="/Users/kuangjunlin/Desktop/study/redrockProject/volunteerTime"/>
     <property name="java.runtime.version" value="1.8.0_181-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/lib/endorsed"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.11.6"/>
+    <property name="os.version" value="10.14.3"/>
     <property name="user.home" value="/Users/kuangjunlin"/>
     <property name="user.timezone" value="Asia/Shanghai"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
@@ -60,6 +60,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="cn.mldn.microboot.test.TestDeptService" name="testList" time="0.184"/>
-  <testcase classname="cn.mldn.microboot.test.TestDeptService" name="test" time="0.401"/>
+  <testcase classname="cn.mldn.microboot.test.TestDeptService" name="testList" time="0.143"/>
+  <testcase classname="cn.mldn.microboot.test.TestDeptService" name="test" time="0.288"/>
 </testsuite>

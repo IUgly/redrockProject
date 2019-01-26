@@ -33,10 +33,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		Token token = Token.CreateFrom(strToken);
 		//登录过得用户直接通过
-		if(token!=null&&!token.IsExpired()){
-			return true;
+		try{
+			if(token==null||token.IsExpired()){
+				return false;
+			}
+		}catch (Exception e){
+			return false;
 		}
- 
+
 		//未登录用户拦截，返回json数据
 		httpServletResponse.setCharacterEncoding("UTF-8");
 		httpServletResponse.setContentType("application/json; charset=utf-8");

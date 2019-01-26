@@ -22,6 +22,10 @@ public class PositionRankServiceImp {
         Long rankNum = redisTemplate.opsForZSet().reverseRank(kindRank, user.getStudent_id());
         Double score = redisTemplate.opsForZSet().score(kindRank, user.getStudent_id());
 
+        //没有排名数据
+        if (rankNum==null){
+            return null;
+        }
         if (rankNum==0){
             rankInfo.setRank(rankNum+1);
             rankInfo.setPrev_difference("0");

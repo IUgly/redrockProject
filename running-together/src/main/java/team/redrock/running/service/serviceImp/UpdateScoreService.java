@@ -5,6 +5,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import team.redrock.running.dao.ClassDao;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.RankInfo;
@@ -16,6 +17,8 @@ import team.redrock.running.vo.User;
 public class UpdateScoreService {
     @Autowired
     private RecordDao recordDao;
+    @Autowired
+    private ClassDao classDao;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
@@ -43,6 +46,12 @@ public class UpdateScoreService {
     @Async
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertDistanceRecord(record);
+        String student_id = record.getStudent_id();
+        User user = this.userServiceImp.selectUserInfo(student_id);
+        String distance = String.valueOf(record.getDistance());
+        String classId = user.getClass_id();
+        String college = user.getCollege();
+        this.classDao.insertClassDistance(distance, college, classId);
 
     }
     @Async

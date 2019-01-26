@@ -49,7 +49,7 @@ public class ScheduledTasks {
     /**
      *  每月月底月路程插入总路程，月路程归零
      */
-    @Scheduled(cron = "0 32 23 L * ?")
+    @Scheduled(cron = "0 0 0 1 * ?")
     public void updateMonthDistance(){
         this.scheduledServiceImp.updateMonth();
     }

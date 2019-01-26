@@ -41,7 +41,7 @@
         </dependencies>
     </dependencyManagement>
     <build>
-        <finalName>weixinDemo</finalName>
+        <finalName>redrockProject</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -111,7 +111,6 @@
     </build>
     <modules>
         <module>volunteerTime</module>
-        <module>webSite</module>
         <module>webSite</module>
         <module>template</module>
     </modules>
