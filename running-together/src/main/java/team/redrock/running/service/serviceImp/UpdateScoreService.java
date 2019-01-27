@@ -48,11 +48,14 @@ public class UpdateScoreService {
         this.recordDao.insertDistanceRecord(record);
         String student_id = record.getStudent_id();
         User user = this.userServiceImp.selectUserInfo(student_id);
-        String distance = String.valueOf(record.getDistance());
-        String classId = user.getClass_id();
-        String college = user.getCollege();
-        this.classDao.insertClassDistance(distance, college, classId);
+        record.setClass_id(user.getClass_id());
+        record.setCollege(user.getCollege());
 
+        if (this.classDao.selectClassById(record)!=null){
+            this.classDao.updateClassDistance(record);
+        }else {
+            this.classDao.insertClassDistance(record);
+        }
     }
     @Async
     public void insertOnceRunDataToRedis(Record record) {

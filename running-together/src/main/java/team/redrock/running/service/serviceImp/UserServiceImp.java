@@ -35,7 +35,7 @@ public class UserServiceImp {
         map.put("stuNum",student_id);
         map.put("idNum", password);
 
-        JSONObject responseEntity = restT.postForObject("http://hongyan.cqupt.edu.cn/api/verify", map, JSONObject.class);
+        JSONObject responseEntity = restT.postForObject("https://wx.idsbllp.cn/api/verify", map, JSONObject.class);
         String status = responseEntity.getString("status");
         if (!status.equals("200")){
             return null;

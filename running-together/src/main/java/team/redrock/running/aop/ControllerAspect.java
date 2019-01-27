@@ -3,14 +3,12 @@ package team.redrock.running.aop;
 import com.alibaba.fastjson.JSONObject;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.vo.User;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class ControllerAspect {
     @Autowired
     private UserServiceImp userServiceImp;

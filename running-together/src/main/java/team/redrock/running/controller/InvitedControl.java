@@ -100,9 +100,7 @@ public class InvitedControl {
         resultMap.put(inviteInfo.getInvited_studentId(), "1");
         for(String key:resultMap.keySet()){
             if (resultMap.get(key).equals("1")){
-                Record record = new Record(json);
-                record.setInvited_id(invited_id);
-                record.setStudent_id(key);
+                Record record = new Record(json, invited_id, key);
                 this.updateScoreService.notInvitedUpdate(record);
                 //更新redis的个人和班级RSET集合（日周月总榜）
                 this.updateScoreService.insertOnceRunDataToRedis(record);
