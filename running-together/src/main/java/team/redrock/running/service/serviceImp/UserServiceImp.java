@@ -42,6 +42,7 @@ public class UserServiceImp {
         }
         JSONObject json = responseEntity.getJSONObject("data");
         User user = new User(json);
+        user.setNickname(this.userDao.selectSimpleUserInfo(student_id).getNickname());
         return user;
     }
     @Async
@@ -64,22 +65,22 @@ public class UserServiceImp {
      */
 
     public User selectUserInfo(String student_id) {
-        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-        if (user!=null){
-            return user;
+        try {
+            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+            if (user!=null){
+                return new User(user);
+            }
+        }catch (Exception e){
+            User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
+            this.insertUserToRedis(userFromDatabase.getStudent_id(), userFromDatabase);
+            return new User(userFromDatabase);
         }
-        User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
-        this.insertUserToRedis(userFromDatabase.getStudent_id(), userFromDatabase);
-        return userFromDatabase;
+        return null;
     }
     public List<User> selectUserListByName(String name){
         return this.userDao.getUserListByName(name);
     }
 
-    public UserOtherInfo selectUserSimpleInfo(String student_id) {
-        User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-        return new UserOtherInfo(user);
-    }
     public UserOtherInfo selectUserOtherInfo(String student_id){
         return this.userDao.getUserOtherInfo(student_id);
     }

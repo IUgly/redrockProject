@@ -66,14 +66,19 @@ public class User implements Serializable {
         this.college = json.get("college").toString();
         this.name = json.get("name").toString();
         this.student_id = json.get("stuNum").toString();
-        if (this.nickname==null){
-            this.setNickname("有9527名同学和你昵称一样，取个昵称吧！");
-        }
     }
     public User(String nickname){
         this.nickname = nickname;
     }
     public User(RankInfo rankInfo){
         this.student_id=rankInfo.getStudent_id();
+    }
+
+    public User(User user) {
+        this.class_id = user.getClass_id();
+        this.college = user.getCollege();
+        this.student_id = user.getStudent_id();
+        this.name = user.getName();
+        this.nickname = user.getNickname();
     }
 }

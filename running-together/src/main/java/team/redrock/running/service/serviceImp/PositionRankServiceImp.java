@@ -45,4 +45,32 @@ public class PositionRankServiceImp {
         return rankInfo;
     }
 
+    public RankInfo numRankByClass_id(String class_id, String kindRank){
+        Long rankNum = redisTemplate.opsForZSet().reverseRank(kindRank, class_id);
+        Double score = redisTemplate.opsForZSet().score(kindRank, class_id);
+
+        RankInfo rankInfo = new RankInfo();
+        //没有排名数据
+        if (rankNum==null){
+            return null;
+        }
+        if (rankNum==0){
+            rankInfo.setRank(rankNum+1);
+            rankInfo.setPrev_difference("0");
+            rankInfo.setTotal(score);
+            return rankInfo;
+        }
+        Set<ZSetOperations.TypedTuple<String>> range = redisTemplate.opsForZSet().
+                reverseRangeWithScores(kindRank, rankNum-1, rankNum-1);
+        Iterator<ZSetOperations.TypedTuple<String>> it = range.iterator();
+        while (it.hasNext()) {//求出和前一名的差距
+            ZSetOperations.TypedTuple str = it.next();
+            rankInfo.setPrev_difference(String.valueOf(str.getScore()-score));
+        }
+        rankInfo.setRank(rankNum+1);
+        rankInfo.setTotal(score);
+
+        return rankInfo;
+    }
+
 }

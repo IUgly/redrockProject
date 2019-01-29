@@ -54,7 +54,7 @@ public class UserControl extends AbstractBaseController {
         }
     }
     @GetMapping(value = "/user/loginout", produces = "application/json")
-    public String loginOut(){
+    public String loginOut(String student_id){
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
 

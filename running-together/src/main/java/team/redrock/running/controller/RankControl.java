@@ -28,9 +28,19 @@ public class RankControl {
         User user = this.userServiceImp.selectUserInfo(student_id);
         if (user!=null){
             RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_rank);
-            if (rankInfo==null){
+            if (rankInfo!=null){
                 JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_POSITION));
             }
+            return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
+        }else {
+            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
+        }
+    }
+    @GetMapping(value = "/rank/class/distance", produces = "application/json")
+    public String getClaRankNum(String class_id, String kind_rank){
+        kind_rank = kind_rank + "ClaDistance000";
+        RankInfo rankInfo = this.positionRankServiceImp.numRankByClass_id(class_id, kind_rank);
+        if (rankInfo != null){
             return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
@@ -56,7 +66,7 @@ public class RankControl {
         JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page,kind_rank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
     }
-    @GetMapping(value = "/rank/class/distance", produces = "application/json")
+    @GetMapping(value = "/ranklist/class/distance", produces = "application/json")
     public String getClaRankList(String page,String kind_rank){
         kind_rank = kind_rank + "ClaDistance000";
         int num = this.rankListServerImp.rankListNum(kind_rank);

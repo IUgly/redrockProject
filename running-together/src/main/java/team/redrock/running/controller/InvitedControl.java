@@ -56,7 +56,7 @@ public class InvitedControl {
     }
     @PostMapping(value = "invite/searchinfo", produces = "application/json")
     public String searchInfo(String info){
-        if (Util.isLetterDigitOrChinese(info)){
+        if (!Util.isLetterDigitOrChinese(info)){
             List<User> userList = this.userServiceImp.selectUserListByName(info);
             JSONArray jsonArray = new JSONArray();
             for (User user: userList){

@@ -74,7 +74,7 @@ public class RankListServerImp {
             json.put("total", str.getScore());
             json.put("duration", classRank.getDuration());
             json.put("college", classRank.getCollege());
-            json.put("rank", rankStart+1);
+            json.put("rank", ++rankStart);
             jsonArray.add(json);
         }
         return jsonArray.toString();
