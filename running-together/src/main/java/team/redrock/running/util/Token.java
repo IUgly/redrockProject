@@ -30,7 +30,7 @@ public class Token implements Serializable, List<Object> {
     public Token(String userName, Date date)
     {
         this.userName = userName;
-        this.expiredTime = date.getTime()/1000+600;
+        this.expiredTime = date.getTime()/1000+1800;  //半小时
     }
 
     public String CreateToken()
@@ -54,6 +54,7 @@ public class Token implements Serializable, List<Object> {
 
         return "";
     }
+
 
     public static Token CreateFrom(String token){
         try {

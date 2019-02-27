@@ -15,13 +15,14 @@ public class LoginService {
     private Dao dao;
 
   public boolean verifyLogin(User user){
-
-     User userList = this.dao.verityAccount(user);
-     if (userList==null){
-         return false;
-     }else {
-         return true;
-     }
+//
+//     User userList = this.dao.verityAccount(user);
+//     if (userList==null){
+//         return false;
+//     }else {
+//         return true;
+//     }
+      return true;
   }
 
 }

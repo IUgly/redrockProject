@@ -4,15 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import team.redrock.running.StartSpringBootMain;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.dao.UserDao;
 import team.redrock.running.service.serviceImp.*;
@@ -25,9 +20,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 
-@SpringBootTest(classes = StartSpringBootMain.class)
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+//@SpringBootTest(classes = StartSpringBootMain.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@WebAppConfiguration
 public class TestDeptService {
     @Autowired
     private RedisTemplate redisTemplate;

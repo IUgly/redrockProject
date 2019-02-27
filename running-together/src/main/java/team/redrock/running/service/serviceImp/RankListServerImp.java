@@ -61,6 +61,9 @@ public class RankListServerImp {
         Set<ZSetOperations.TypedTuple<String>> rangeWithScores = this.getRedisRangeWithScoreByPartPage(pageParam, kindRank);
         return traversalPersonZSet(rangeWithScores);
     }
+    public void databaseToRedisStuDistance(){
+
+    }
 
     private String traversalClassZSet(Set<ZSetOperations.TypedTuple<String>> rangeWithScores){
         Iterator<ZSetOperations.TypedTuple<String>> it = rangeWithScores.iterator();

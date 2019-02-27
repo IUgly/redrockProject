@@ -15,7 +15,7 @@ import team.redrock.running.service.serviceImp.RecordServiceImp;
 import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.AbstractBaseController;
-import team.redrock.running.util.JwtUtils;
+import team.redrock.running.util.Token;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,13 +42,14 @@ public class UserControl extends AbstractBaseController {
     @PostMapping(value = "/user/login", produces = "application/json")
     public String login(String student_id, String password){
         User user = this.userServiceImp.login(student_id, password);
-        if (user!=null){
+        if (user.getStudent_id()!=null){
             this.userServiceImp.insertUser(user);
+            User responseUser = this.userServiceImp.selectUserInfo(student_id);
             //token有效时间 30 min
-            String token= JwtUtils.encode(new User(student_id), 60000*30);
-            user.setToken(token);
+            Token token = new Token(user.getName(), new Date());
+            responseUser.setToken(token.CreateToken());
             this.userServiceImp.insertUserToRedis(student_id, user);
-            return JSONObject.toJSONString(new ResponseBean<>(user, UnicomResponseEnums.SUCCESS));
+            return JSONObject.toJSONString(new ResponseBean<>(responseUser, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(
                     UnicomResponseEnums.INVALID_PASSWORD));
@@ -120,5 +122,11 @@ public class UserControl extends AbstractBaseController {
             }
         }
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.UPLOAD_FAIL));
+    }
+
+    @GetMapping("/delete")
+    public String deleteRedis(){
+        this.updateScoreService.deleteRedis();
+        return "OK";
     }
 }

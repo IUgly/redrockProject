@@ -13,7 +13,6 @@ import java.util.Deque;
  */
 @Data
 public class User implements Serializable {
-    private int id;
     private String student_id;
     private String name;
     private String nickname;

@@ -10,9 +10,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import team.redrock.running.util.JwtUtils;
 import team.redrock.running.util.MD5Util;
-import team.redrock.running.vo.User;
+import team.redrock.running.util.Token;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +22,6 @@ import java.io.IOException;
  */
 @Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
-    public final static String SESSION_KEY = "username";
 
     @Bean
     public SecurityInterceptor getSecurityInterceptor() {
@@ -33,23 +31,42 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
-        addInterceptor.excludePathPatterns("/error");
-        addInterceptor.excludePathPatterns("/user/login");
-        addInterceptor.excludePathPatterns("/**");
-
+//        addInterceptor.excludePathPatterns("/error");
+//        addInterceptor.excludePathPatterns("/user/login");
+        addInterceptor.addPathPatterns("/user/distance/update");
+        addInterceptor.addPathPatterns("/invite/update_data");
+        addInterceptor.addPathPatterns("/mobilerun/user/distance/update");
+        addInterceptor.addPathPatterns("/mobilerun/invite/update_data");
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-            String token = request.getHeader("Authorization");
+            String strToken = request.getHeader("token");
             String timestamp = request.getHeader("timestamp");
             String signature = request.getHeader("signature");
-//            System.out.println(timestamp);
-//            System.out.println(signature);
-//
-//            System.out.println(MD5Util.encrypt(token + "." + timestamp + "." + "runningtogether"));
-            if (JwtUtils.decode(token, User.class) == null) {
+
+
+            try {
+                System.out.println(strToken);
+                System.out.println(timestamp);
+                System.out.println(signature);
+
+                System.out.println(MD5Util.md5(strToken + "." + timestamp + "." + "runningtogether"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            boolean flag = false;
+            try {
+                Token token = Token.CreateFrom(strToken);
+                if (!token.IsExpired()&&token!=null){
+                    flag =true;
+                }
+            }catch (Exception e){
+                flag =false;
+                e.printStackTrace();
+            }
+            if (!flag) {
                 response.getWriter().write("token error");
                 return false;
             } else {
@@ -58,7 +75,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
                     return false;
                 } else {
                     try {
-                        if (MD5Util.md5(token + "." + timestamp + "." + "runningtogether").equals(signature)) {
+                        if (MD5Util.md5(strToken + "." + timestamp + "." + "runningtogether").equals(signature)) {
                             return true;
                         } else {
                             response.getWriter().write("authorization failed");
@@ -66,10 +83,10 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        return false;
                     }
                 }
             }
-            return false;
         }
     }
 }

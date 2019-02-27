@@ -3,9 +3,15 @@ package team.redrock.running.service.serviceImp;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import team.redrock.running.dao.UserDao;
 import team.redrock.running.vo.User;
@@ -13,7 +19,6 @@ import team.redrock.running.vo.UserOtherInfo;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Component
@@ -29,25 +34,43 @@ public class UserServiceImp {
         userHash.put(student_id, userInfo);
         this.redisTemplate.opsForHash().putAll(USER_REDIS, userHash);
     }
-    public User login(String student_id, String password) {
-        RestTemplate restT = new RestTemplate();
-        Map<String, String> map = new HashMap<>();
-        map.put("stuNum",student_id);
-        map.put("idNum", password);
 
-        JSONObject responseEntity = restT.postForObject("https://wx.idsbllp.cn/api/verify", map, JSONObject.class);
-        String status = responseEntity.getString("status");
-        if (!status.equals("200")){
+
+    public User login(String student_id, String password) {
+        try {
+            String url = "https://wx.idsbllp.cn/api/verify";
+
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
+            map.add("stuNum", student_id);
+            map.add("idNum", password);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+            ResponseEntity<JSONObject> response = restTemplate.postForEntity( url, request , JSONObject.class );
+
+            String status = response.getBody().getString("status");
+            if (!status.equals("200")){
+                return null;
+            }
+            JSONObject json = response.getBody().getJSONObject("data");
+
+            return new User(json);
+        }catch (Exception e){
             return null;
         }
-        JSONObject json = responseEntity.getJSONObject("data");
-        User user = new User(json);
-        user.setNickname(this.userDao.selectSimpleUserInfo(student_id).getNickname());
-        return user;
+
     }
-    @Async
+//    @Async
     public Boolean insertUser(User user) {
-        return this.userDao.insertUser(user);
+        if (this.userDao.selectSimpleUserInfo(user.getStudent_id())==null){
+            if (user.getNickname()==null){
+                user.setNickname("取个昵称吧");
+            }
+            return this.userDao.insertUser(user);
+        }
+        return false;
     }
 
     public Boolean updateUserInfo(User user) {
@@ -65,17 +88,17 @@ public class UserServiceImp {
      */
 
     public User selectUserInfo(String student_id) {
-        try {
-            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-            if (user!=null){
-                return new User(user);
-            }
-        }catch (Exception e){
+//        try {
+//            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+//            if (user!=null){
+//                return new User(user);
+//            }
+//        }catch (Exception e){
             User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
             this.insertUserToRedis(userFromDatabase.getStudent_id(), userFromDatabase);
             return new User(userFromDatabase);
-        }
-        return null;
+//        }
+//        return null;
     }
     public List<User> selectUserListByName(String name){
         return this.userDao.getUserListByName(name);

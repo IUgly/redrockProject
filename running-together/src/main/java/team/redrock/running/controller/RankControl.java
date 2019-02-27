@@ -24,7 +24,7 @@ public class RankControl {
     private RecordServiceImp recordServiceImp;
     @GetMapping(value = "/rank/student/distance", produces = "application/json")
     public String getStuRankNum(String student_id, String kind_rank){
-        kind_rank = kind_rank + "StuDistance000";
+        kind_rank = kind_rank + "StuDistance002";
         User user = this.userServiceImp.selectUserInfo(student_id);
         if (user!=null){
             RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_rank);
@@ -38,7 +38,7 @@ public class RankControl {
     }
     @GetMapping(value = "/rank/class/distance", produces = "application/json")
     public String getClaRankNum(String class_id, String kind_rank){
-        kind_rank = kind_rank + "ClaDistance000";
+        kind_rank = kind_rank + "ClaDistance002";
         RankInfo rankInfo = this.positionRankServiceImp.numRankByClass_id(class_id, kind_rank);
         if (rankInfo != null){
             return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
@@ -48,7 +48,7 @@ public class RankControl {
     }
     @GetMapping(value = "/rank/student/invited", produces = "application/json")
     public String getInvitedRank(String student_id, String kind_rank){
-        kind_rank = kind_rank + "StuInvited000";
+        kind_rank = kind_rank + "StuInvited002";
 
         int num = this.rankListServerImp.rankListNum(kind_rank);
         User user = this.userServiceImp.selectUserInfo(student_id);
@@ -61,21 +61,21 @@ public class RankControl {
     }
     @GetMapping(value = "ranklist/student/distance", produces = "application/json")
     public String getStuRankList(String page,String kind_rank){
-        kind_rank = kind_rank + "StuDistance000";
+        kind_rank = kind_rank + "StuDistance002";
         int num = this.rankListServerImp.rankListNum(kind_rank);
         JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page,kind_rank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
     }
     @GetMapping(value = "/ranklist/class/distance", produces = "application/json")
     public String getClaRankList(String page,String kind_rank){
-        kind_rank = kind_rank + "ClaDistance000";
+        kind_rank = kind_rank + "ClaDistance002";
         int num = this.rankListServerImp.rankListNum(kind_rank);
         JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getClassRankDistance(page, kind_rank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS,num));
     }
     @GetMapping(value = "/rank/invite/student", produces = "application/json")
     public String getStuInvitedRankList(String page, String kind_rank){
-        kind_rank = kind_rank + "StuInvited000";
+        kind_rank = kind_rank + "StuInvited002";
         int num = this.rankListServerImp.rankListNum(kind_rank);
         JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankInvite(page, kind_rank));
         return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, num));
