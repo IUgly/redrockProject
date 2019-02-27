@@ -30,7 +30,7 @@ public class Control extends AbstractBaseController {
     private Config config;
 
     @PostMapping(value = "/edit",produces = "application/json")
-    public String index(@RequestBody JSONObject json){
+    public String edit(@RequestBody JSONObject json){
         String title = json.getString("title");
         switch (title){
             case "recomweblist":this.iServiceImp.changeWebsByKindAndType(json);break;
