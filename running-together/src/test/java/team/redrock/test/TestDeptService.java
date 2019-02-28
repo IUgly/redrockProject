@@ -4,25 +4,32 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import team.redrock.running.StartSpringBootMain;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.dao.UserDao;
 import team.redrock.running.service.serviceImp.*;
+import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 
-//@SpringBootTest(classes = StartSpringBootMain.class)
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@WebAppConfiguration
+@SpringBootTest(classes = StartSpringBootMain.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 public class TestDeptService {
     @Autowired
     private RedisTemplate redisTemplate;
@@ -62,7 +69,9 @@ public class TestDeptService {
 
     @Test
     public void rankInfo() throws Exception{
-        this.redisTemplate.opsForZSet().getOperations().delete(STU_MONTH_DISTANCE_RANK);
+
+        List<RankInfo> info = this.userDao.rankList("weekends", "student_distance_rank", 1);
+        System.out.println(new Gson().toJson(info));
     }
 
     @Test

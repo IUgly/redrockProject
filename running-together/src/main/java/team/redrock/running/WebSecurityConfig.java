@@ -46,16 +46,6 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
             String timestamp = request.getHeader("timestamp");
             String signature = request.getHeader("signature");
 
-
-            try {
-                System.out.println(strToken);
-                System.out.println(timestamp);
-                System.out.println(signature);
-
-                System.out.println(MD5Util.md5(strToken + "." + timestamp + "." + "runningtogether"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             boolean flag = false;
             try {
                 Token token = Token.CreateFrom(strToken);

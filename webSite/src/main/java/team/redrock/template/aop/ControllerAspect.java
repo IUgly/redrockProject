@@ -22,7 +22,6 @@ public class ControllerAspect {
     @Async
     @After(value = UpdateRunDistanceMethod)
     public void updateAfter(JoinPoint joinPoint){
-        System.out.println("执行aop");
         Object[] obj = joinPoint.getArgs();
         for (Object argItem : obj) {
             if (argItem instanceof JSONObject) {
