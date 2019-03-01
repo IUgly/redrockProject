@@ -35,6 +35,6 @@ public interface RecordDao {
     void overInvited(InviteInfo inviteInfo);
 
     @Update("update student_invitation_rank set all_invited_num =all_invited_num +1 where student_id = #{student_id}")
-    void addOneInvitedNum(String student_id);
+    void addOneInvitedNum(String studentOrClass_id);
 
 }

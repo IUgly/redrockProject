@@ -1,10 +1,11 @@
 package team.redrock.running.vo;
 
 import lombok.Data;
-import org.springframework.data.redis.core.ZSetOperations;
+
+import java.io.Serializable;
 
 @Data
-public class RankInfo implements ZSetOperations.TypedTuple<String>{
+public class RankInfo implements Serializable {
     private String student_id;
     private String class_id;
     private String kind_rank;
@@ -38,26 +39,4 @@ public class RankInfo implements ZSetOperations.TypedTuple<String>{
         this.prev_difference = prev_difference;
     }
 
-    @Override
-    public String toString() {
-        return this.student_id;
-    }
-
-    @Override
-    public String getValue() {
-        if (this.nickname==null){
-            return this.student_id;
-        }
-        return this.toString();
-    }
-
-    @Override
-    public Double getScore() {
-        return this.distance;
-    }
-
-    @Override
-    public int compareTo(ZSetOperations.TypedTuple<String> o) {
-        return (int) (this.distance-o.getScore());
-    }
 }

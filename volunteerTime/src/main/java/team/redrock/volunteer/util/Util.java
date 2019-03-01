@@ -35,6 +35,9 @@ import java.util.Map;
 @Component
 public class Util {
 
+    public static void main(String[] args) {
+    }
+
     @Autowired
     private Config config;
     private static Config configDouble;
@@ -74,6 +77,7 @@ public class Util {
         map.put("arg", "pad=1_s=gb2312_t=0");
 
         String str = send(url, map, "utf-8");
+        System.out.println(str);
 
         JsonObject returnData = new JsonParser().parse(str).getAsJsonObject();
         String json = String.valueOf(returnData.get("data"));

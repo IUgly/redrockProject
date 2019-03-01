@@ -1,7 +1,6 @@
 package team.redrock.test;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,8 +69,18 @@ public class TestDeptService {
     @Test
     public void rankInfo() throws Exception{
 
-        List<RankInfo> info = this.userDao.rankList("weekends", "student_distance_rank", 1);
-        System.out.println(new Gson().toJson(info));
+
+        this.redisTemplate.delete("student_invitation_rank"); //删除指定散列
+        String result = (String) this.redisTemplate.opsForHash().get("student_invitation_rank", "1");
+        if (result==null){
+            System.out.println("result is null");
+
+            List<RankInfo> info = this.userDao.rankList("months", "student_invitation_rank", 1);
+            this.redisTemplate.opsForHash().put("student_invitation_rank", "1", new Gson().toJson(info));
+            result = new Gson().toJson(info);
+        }
+        System.out.println(result);
+
     }
 
     @Test
@@ -134,18 +143,22 @@ public class TestDeptService {
 //        Set<ZSetOperations.TypedTuple<String>> rangeWithScores = redisTemplate.opsForZSet().rangeByScoreWithScores(SCORE_RANK, 0, 10);
         Long total = this.redisTemplate.opsForZSet().zCard(SCORE_RANK);
         Iterator<ZSetOperations.TypedTuple<String>> it = rangeWithScores.iterator();
-        JSONArray jsonArray = new JSONArray();
-        while (it.hasNext()) {
-            ZSetOperations.TypedTuple str = it.next();
-            JSONObject json = JSONObject.parseObject(str.getValue().toString());
-            json.put("rank", start+1);
-            json.put("total", total);
-            jsonArray.add(json);
-            start++;
-        }
-        System.out.println(jsonArray.toJSONString());
+//        JSONArray jsonArray = new JSONArray();
+//        while (it.hasNext()) {
+//            ZSetOperations.TypedTuple str = it.next();
+//            JSONObject json = JSONObject.parseObject(str.getValue().toString());
+//            json.put("rank", start+1);
+//            json.put("total", total);
+//            jsonArray.add(json);
+//            start++;
+//        }
+//        System.out.println(jsonArray.toJSONString());
 //        System.out.println("获取到的排行和分数列表:" + gson.toJson(rangeWithScores));
 
+        while (it.hasNext()){
+            ZSetOperations.TypedTuple str = it.next();
+            System.out.println(str.getValue());
+        }
     }
 
     /**
