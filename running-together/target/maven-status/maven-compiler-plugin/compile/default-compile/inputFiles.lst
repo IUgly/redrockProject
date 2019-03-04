@@ -3,7 +3,9 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/Util.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/enums/UnicomResponseEnums.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/dao/ScheduledDao.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/Vo.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/InviteInfo.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/dao/RankSQL.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/configuration/Config.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/controller/InvitedControl.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/UpdateScoreService.java
@@ -21,13 +23,13 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/Token.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/JwtUtils.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/dao/ClassDao.java
-/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/PositionRankServiceImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/WebSecurityConfig.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/StartSpringBootMain.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/controller/RankControl.java
-/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/RankListServerImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/aop/ControllerAspect.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/RecordServiceImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/IRecordService.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/RankInfo.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/exception/UnicomRuntimeException.java
@@ -36,7 +38,10 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/ClassRank.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/bean/RankResponseBean.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/IRankService.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/AbstractBaseController.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/InvitedService.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/dao/RecordSQL.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/configuration/WebMvcConfig.java
-/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/ClassService.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/dao/TableSizeSQL.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/RankServiceImp.java

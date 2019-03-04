@@ -8,9 +8,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import team.redrock.running.bean.RankResponseBean;
 import team.redrock.running.dao.RecordDao;
+import team.redrock.running.dao.ScheduledDao;
 import team.redrock.running.dto.InvitationSend;
+import team.redrock.running.enums.UnicomResponseEnums;
 import team.redrock.running.vo.InviteInfo;
+import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.User;
 
 import java.util.HashMap;
@@ -22,12 +26,14 @@ import java.util.Map;
 public class InvitedService {
     @Autowired
     private RedisTemplate redisTemplate;
-    public static final String USER_REDIS = "UserRedis";
+    public static final String USER_REDIS = "User005";
     public static final String INVITATION_REDIS = "InvitationRedis";
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
     private RecordDao recordDao;
+    @Autowired
+    private ScheduledDao scheduledDao;
 
     @Async
     public void insertInvitationToRedis(InviteInfo inviteInfo){
@@ -42,8 +48,10 @@ public class InvitedService {
                 (1, invitees.length()-1).split(",");
         for (String ids: student_ids){
             User user = this.userServiceImp.selectUserInfo(ids);
-            user.enQueueInvitation(invitationSend);
-            this.userServiceImp.insertUserToRedis(user.getStudent_id(), user);
+            if (user!=null){
+                user.enQueueInvitation(invitationSend);
+                this.redisTemplate.opsForHash().put(USER_REDIS, ids, user);
+            }
         }
     }
     @Async
@@ -59,20 +67,38 @@ public class InvitedService {
         }
         inviteInfo.setPassive_students(studentsJsonArr);
         this.recordDao.overInvited(inviteInfo);
+        invitationToMysql(inviteInfo.getInvited_studentId(), inviteInfo.getDistance());
 //        this.recordDao.addOneInvitedNum(inviteInfo.getInvited_studentId());
     }
+    public void invitationToMysql(String student_id, Double score){
+        User user = this.userServiceImp.selectUserInfo(student_id);
+        RankInfo rankInfo = new RankInfo(user);
+        rankInfo.setTotal(score);
+
+        this.scheduledDao.updateDayInviteScoreToStuMysql(rankInfo);
+    }
+
     public void startInvited(InviteInfo inviteInfo) {
         this.recordDao.insertInvitedRecord(inviteInfo);
     }
-    public JSONArray getInvitedHistory(String student_id){
-        List<InviteInfo> inviteInfoList = this.recordDao.selectInvitedRecordList(student_id);
+
+    public String getInvitedHistory(String student_id, Integer page){
+        List<InviteInfo> inviteInfoList = this.recordDao.selectInvitedRecordList(
+                student_id,
+                page,
+                "invited_record");
+        Integer this_pageSize = inviteInfoList.size();
         Gson gson = new Gson();
+        Integer sum = this.recordDao.recordSize("invited_record", student_id);
+
         JSONArray jsonArray = JSONArray.parseArray(gson.toJson(inviteInfoList));
-        return jsonArray;
+        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, sum, this_pageSize));
+
     }
 
     public JSONArray getInvitedResult(String student_id){
         User user = (User)this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+
         String invited_id = user.getInvitingNow();
         InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
         JSONArray jsonArray = new JSONArray();
@@ -87,7 +113,7 @@ public class InvitedService {
     @Async
     public void cancelInvited(String invited_id){
         this.redisTemplate.opsForHash().delete(INVITATION_REDIS, invited_id);
-        System.out.println(this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id).toString());
+        this.recordDao.cancelInvited(invited_id);
     }
 
 }

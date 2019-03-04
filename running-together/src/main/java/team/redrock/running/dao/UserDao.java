@@ -1,11 +1,12 @@
 package team.redrock.running.dao;
 
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
-import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
-import team.redrock.running.vo.Vo;
 
 import java.util.List;
 
@@ -38,20 +39,5 @@ public interface UserDao {
 
     @Select("select * from user where name = #{name}")
     List<User> getUserListByName(String name);
-
-    @Select("SELECT college,#{type} as total,nickname,student_id," +
-            "(SELECT count(DISTINCT #{type}) FROM student_distance_rank AS b WHERE a.#{type}<b.#{type})+1 AS rank," +
-            "IFNULL((SELECT b.#{type} FROM student_distance_rank AS b WHERE b.#{type}>a.#{type}" +
-            " ORDER BY b.#{type} LIMIT 1)-a.#{type}, 0) prev_difference " +
-            "FROM student_distance_rank as a ORDER BY rank LIMIT #{start},#{end}")
-    List<RankInfo> rank(Vo vo);
-
-    @SelectProvider(type = SelectSql.class, method = "rankList")
-    List<RankInfo> rankList(@Param("type") String type, @Param("table") String table,
-                            @Param("page") Integer page);
-//    @SelectProvider(type = SelectSql.class,method = "searchDogsCount")//通过类来反射sql语句
-//        Integer getYeSeTotaily(@Param("color") String color,@Param("type") String type,
-//                               @Param("shape") String shape,@Param("sex") String sex,@Param("flag") Integer flag);
-    //
 
 }

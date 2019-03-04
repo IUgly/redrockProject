@@ -24,16 +24,15 @@ public class RankServiceImp implements IRankService {
     public String rankList(String type, String table, Integer page) {
 
         String result = (String) this.redisTemplate.opsForHash().get(table, page);
-        List<RankInfo> info = new ArrayList<>();
         if (result==null){
-            System.out.println("redis 为空");
+            List<RankInfo> info = new ArrayList<>();
             info = this.rankDao.rankList(type, table, page);
             this.redisTemplate.opsForHash().put(table, page, new Gson().toJson(info));
             result = new Gson().toJson(info);
+            Integer sum = this.rankDao.rankNum(table);
+            return JSONObject.toJSONString(new RankResponseBean(JSONObject.parse(result), UnicomResponseEnums.SUCCESS, sum, info.size()));
         }
-        Integer sum = this.rankDao.rankNum(table);
-
-        return JSONObject.toJSONString(new RankResponseBean(JSONObject.parse(result), UnicomResponseEnums.SUCCESS, sum, info.size()));
+        return result;
     }
 
     @Override
@@ -41,7 +40,6 @@ public class RankServiceImp implements IRankService {
 
         RankInfo result = (RankInfo) this.redisTemplate.opsForHash().get(table+type, id);
         if (result==null){
-            System.out.println("redis is null");
             result = this.rankDao.rankPlace(type, table, id);
             this.redisTemplate.opsForHash().put(table+type, id, result);
         }

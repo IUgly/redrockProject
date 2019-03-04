@@ -13,16 +13,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
 import team.redrock.running.dao.RecordDao;
-import team.redrock.running.dao.UserDao;
-import team.redrock.running.service.serviceImp.*;
-import team.redrock.running.vo.RankInfo;
+import team.redrock.running.service.IRankService;
+import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 
@@ -32,8 +30,6 @@ import java.util.Set;
 public class TestDeptService {
     @Autowired
     private RedisTemplate redisTemplate;
-    @Autowired
-    private RankListServerImp rankListServerImp;
 
     public static final String SCORE_RANK = "dayRank";
     @Autowired
@@ -41,30 +37,14 @@ public class TestDeptService {
     @Autowired
     private RecordDao recordDao;
     @Autowired
-    private UserDao userDao;
-    @Autowired
-    private InvitedService invitedService;
-    @Autowired
-    private UserServiceImp userServiceImp;
-    public static final String INVITATION_REDIS = "InvitationRedis";
-    public static final String USER_REDIS = "UserRedis";
-    @Autowired
-    private RecordServiceImp recordServiceImp;
+    private IRankService iRankService;
 
-    //个人路程排行榜  日周月总
-    public static final String STU_DAY_DISTANCE_RANK = "daysStuDistance000";
-    public static final String STU_WEEK_DISTANCE_RANK = "weekendsStuDistance000";
-    public static final String STU_MONTH_DISTANCE_RANK = "monthsStuDistance000";
-
-    //班级路程排行榜   日周月总
-    public static final String CLA_DAY_DISTANCE_RANK = "daysClaDistance000";
-    public static final String CLA_WEEK_DISTANCE_RANK = "weekendsClaDistance000";
-    public static final String CLA_MONTH_DISTANCE_RANK = "monthsClaDistance000";
-
-    //个人邀约排行榜  日周月总
-    public static final String STU_DAY_INVITATION_RANK = "daysStuInvited000";
-    public static final String STU_WEEK_INVITATION_RANK = "weekendsStuInvited000";
-    public static final String STU_MONTH_INVITATION_RANK = "monthsStuInvited000";
+    @Test
+    public void tableSize (){
+        System.out.println(new Gson().toJson(
+                this.recordDao.size(
+                        "student_distance_rank", "day_distance",1)));
+    }
 
     @Test
     public void rankInfo() throws Exception{
@@ -75,7 +55,7 @@ public class TestDeptService {
         if (result==null){
             System.out.println("result is null");
 
-            List<RankInfo> info = this.userDao.rankList("months", "student_invitation_rank", 1);
+            String info = this.iRankService.rankList("months", "student_invitation_rank", 1);
             this.redisTemplate.opsForHash().put("student_invitation_rank", "1", new Gson().toJson(info));
             result = new Gson().toJson(info);
         }

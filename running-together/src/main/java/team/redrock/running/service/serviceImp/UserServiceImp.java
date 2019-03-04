@@ -17,7 +17,6 @@ import team.redrock.running.dao.UserDao;
 import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -27,12 +26,10 @@ public class UserServiceImp {
     private UserDao userDao;
     @Autowired
     private RedisTemplate redisTemplate;
-    public static final String USER_REDIS = "UserRedis";
+    public static final String USER_REDIS = "User005";
     @Async
     public void insertUserToRedis(String student_id, User userInfo) {
-        HashMap userHash = new HashMap();
-        userHash.put(student_id, userInfo);
-        this.redisTemplate.opsForHash().putAll(USER_REDIS, userHash);
+        this.redisTemplate.opsForHash().put(USER_REDIS, student_id, userInfo);
     }
 
 
@@ -62,22 +59,23 @@ public class UserServiceImp {
         }
 
     }
-//    @Async
-    public Boolean insertUser(User user) {
+    @Async
+    public void insertUser(User user) {
         if (this.userDao.selectSimpleUserInfo(user.getStudent_id())==null){
             if (user.getNickname()==null){
                 user.setNickname("取个昵称吧");
             }
-            return this.userDao.insertUser(user);
+            try {
+                this.redisTemplate.opsForHash().put(USER_REDIS, user.getStudent_id(), user);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            this.userDao.insertUser(user);
         }
-        return false;
     }
 
     public Boolean updateUserInfo(User user) {
-        HashMap userHash = new HashMap();
-        userHash.put(user.getStudent_id(), user);
-        this.redisTemplate.opsForHash().putAll(USER_REDIS, userHash);
-
+        this.redisTemplate.opsForHash().put(USER_REDIS, user.getStudent_id(), user);
         return this.userDao.updateUserInfo(user);
     }
 
@@ -88,17 +86,18 @@ public class UserServiceImp {
      */
 
     public User selectUserInfo(String student_id) {
-//        try {
-//            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-//            if (user!=null){
-//                return new User(user);
-//            }
-//        }catch (Exception e){
-            User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
-            this.insertUserToRedis(userFromDatabase.getStudent_id(), userFromDatabase);
-            return new User(userFromDatabase);
-//        }
-//        return null;
+        try {
+            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+            if (user!=null){
+                return new User(user);
+            }else {
+                User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
+                return new User(userFromDatabase);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
     public List<User> selectUserListByName(String name){
         return this.userDao.getUserListByName(name);

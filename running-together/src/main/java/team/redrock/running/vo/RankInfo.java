@@ -29,6 +29,8 @@ public class RankInfo implements Serializable {
     public RankInfo(Record record){
         this.student_id = record.getStudent_id();
         this.distance = record.getDistance();
+        this.class_id = record.getClass_id();
+        this.college = record.getCollege();
     }
 
     public RankInfo(String student_id, String nickname, int total, int rank, String prev_difference) {

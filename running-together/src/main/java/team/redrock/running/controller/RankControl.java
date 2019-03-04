@@ -20,77 +20,13 @@ public class RankControl {
     private IRankService iRankService;
     @Autowired
     private RedisTemplate redisTemplate;
-    @Autowired
-    private UserServiceImp userServiceImp;
-    @Autowired
-    private PositionRankServiceImp positionRankServiceImp;
-    @Autowired
-    private RankListServerImp rankListServerImp;
-    @Autowired
-    private RecordServiceImp recordServiceImp;
-    @GetMapping(value = "/rank/student/distance", produces = "application/json")
-    public String getStuRankNum(String student_id, String kind_rank){
-        kind_rank = kind_rank + "StuDistance002";
-        User user = this.userServiceImp.selectUserInfo(student_id);
-        if (user!=null){
-            RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_rank);
-            if (rankInfo!=null){
-                JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NOT_POSITION));
-            }
-            return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
-        }else {
-            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
-        }
-    }
-    @GetMapping(value = "/rank/class/distance", produces = "application/json")
-    public String getClaRankNum(String class_id, String kind_rank){
-        kind_rank = kind_rank + "ClaDistance002";
-        RankInfo rankInfo = this.positionRankServiceImp.numRankByClass_id(class_id, kind_rank);
-        if (rankInfo != null){
-            return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
-        }else {
-            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
-        }
-    }
-    @GetMapping(value = "/rank/student/invited", produces = "application/json")
-    public String getInvitedRank(String student_id, String kind_rank){
-        kind_rank = kind_rank + "StuInvited002";
-
-        int num = this.rankListServerImp.rankListNum(kind_rank);
-        User user = this.userServiceImp.selectUserInfo(student_id);
-        if (user!=null){
-            RankInfo rankInfo = this.positionRankServiceImp.NumRankByStudentId(user, kind_rank);
-            return JSONObject.toJSONString(new ResponseBean<>(rankInfo, UnicomResponseEnums.SUCCESS));
-        }else {
-            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.NO_USER_EXIST));
-        }
-    }
-    @GetMapping(value = "ranklist/student/distance", produces = "application/json")
-    public String getStuRankList(String page,String kind_rank){
-        kind_rank = kind_rank + "StuDistance002";
-        int num = this.rankListServerImp.rankListNum(kind_rank);
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankDistance(page,kind_rank));
-        return JSONObject.toJSONString(new RankResponseBean(jsonArray,UnicomResponseEnums.SUCCESS,num));
-    }
-    @GetMapping(value = "/ranklist/class/distance", produces = "application/json")
-    public String getClaRankList(String page,String kind_rank){
-        kind_rank = kind_rank + "ClaDistance002";
-        int num = this.rankListServerImp.rankListNum(kind_rank);
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getClassRankDistance(page, kind_rank));
-        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS,num));
-    }
-    @GetMapping(value = "/rank/invite/student", produces = "application/json")
-    public String getStuInvitedRankList(String page, String kind_rank){
-        kind_rank = kind_rank + "StuInvited002";
-        int num = this.rankListServerImp.rankListNum(kind_rank);
-        JSONArray jsonArray = JSONArray.parseArray(this.rankListServerImp.getPersonRankInvite(page, kind_rank));
-        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, num));
-    }
 
     @GetMapping(value = "/rank_list", produces = "application/json")
     public String rankList(String time, String rank, Integer page){
         this.redisTemplate.delete(rank); //删除指定散列
-
+        if (page == null){
+            page = 1;
+        }
         String result = this.iRankService.rankList(time, rank, page);
         if (result!=null){
             return result;

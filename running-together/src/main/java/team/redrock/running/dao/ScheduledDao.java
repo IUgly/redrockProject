@@ -37,9 +37,22 @@ public interface ScheduledDao {
      * @param rankInfo
      * @return
      */
-    @Insert("insert into student_distance_rank set student_id=#{student_id},nickname=#{nickname},day_distance=#{distance},week_distance=#{distance},month_distance=#{distance},all_distance=#{distance},college=#{college},duration=#{duration},class_id=#{class_id} on DUPLICATE key update day_distance=#{distance},week_distance = week_distance + #{distance},month_distance=month_distance+#{distance},all_distance=all_distance+#{distance}")
+    @Insert("insert into student_distance_rank " +
+            "set student_id=#{student_id},nickname=#{nickname}," +
+            "day_distance=#{distance},week_distance=#{distance}," +
+            "month_distance=#{distance},all_distance=#{distance}," +
+            "college=#{college},duration=#{duration},class_id=#{class_id} " +
+            "on DUPLICATE key update day_distance=#{distance}," +
+            "week_distance = week_distance + #{distance}," +
+            "month_distance=month_distance+#{distance}," +
+            "all_distance=all_distance+#{distance}")
     void updateDayDistanceScoreToStuMysql(RankInfo rankInfo);
-    @Insert("insert into class_distance_rank set class_id=#{class_id},day_distance=#{distance},week_distance=#{distance},month_distance=#{distance},all_distance=#{distance},college=#{college},duration=#{duration} on DUPLICATE key update day_distance=#{distance},week_distance = week_distance + #{distance},month_distance=month_distance+#{distance},all_distance=all_distance+#{distance}")
+    @Insert("insert into class_distance_rank set class_id=#{class_id}," +
+            "day_distance=#{distance},week_distance=#{distance}," +
+            "month_distance=#{distance},all_distance=#{distance}," +
+            "college=#{college},duration=#{duration} on DUPLICATE key " +
+            "update day_distance=#{distance},week_distance = week_distance + #{distance}," +
+            "month_distance=month_distance+#{distance},all_distance=all_distance+#{distance}")
     void updateDayDistanceScoreToClaMysql(RankInfo rankInfo);
 
     /**
@@ -47,6 +60,14 @@ public interface ScheduledDao {
      * @param rankInfo
      * @return
      */
-    @Insert("insert into student_invitation_rank set student_id=#{student_id},nickname=#{nickname},day_invitation=#{total},week_invitation=#{total},month_invitation=#{total},all_invitation=#{total},college=#{college},class_id=#{class_id} on DUPLICATE key update day_invitation=#{total},week_invitation = week_invitation + #{total},month_invitation=month_invitation+#{total},all_invitation=all_invitation+#{total}")
+    @Insert("insert into student_invitation_rank " +
+            "set student_id=#{student_id},nickname=#{nickname}," +
+            "day_invitation=#{total},week_invitation=#{total}," +
+            "month_invitation=#{total},all_invitation=#{total}," +
+            "college=#{college},class_id=#{class_id} on DUPLICATE key " +
+            "update day_invitation=#{total}," +
+            "week_invitation = week_invitation + #{total}," +
+            "month_invitation=month_invitation+#{total}," +
+            "all_invitation=all_invitation+#{total}")
     void updateDayInviteScoreToStuMysql(RankInfo rankInfo);
 }

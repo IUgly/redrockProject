@@ -38,10 +38,7 @@ public class InvitedControl {
     private InvitedService invitedService;
     @Autowired
     private UpdateScoreService updateScoreService;
-    @GetMapping(value = "/test")
-    public String test(){
-        return "hello";
-    }
+
     @PostMapping(value = "/invite/update", produces = "application/json")
     public String Upload(String student_id, String invitees){
         User invite_user= this.userServiceImp.selectUserInfo(student_id);
@@ -51,6 +48,7 @@ public class InvitedControl {
         this.invitedService.sendInvitations(invitees, inviteInfo);
         this.invitedService.insertInvitationToRedis(inviteInfo);
         invite_user.setInvitingNow(inviteInfo.getInvited_id());
+
         this.userServiceImp.insertUserToRedis(invite_user.getStudent_id(), invite_user);
         return JSONObject.toJSONString(new ResponseBean<>(inviteInfo.getInvited_id(), UnicomResponseEnums.SUCCESS));
     }
@@ -102,11 +100,8 @@ public class InvitedControl {
             if (resultMap.get(key).equals("1")){
                 Record record = new Record(json, invited_id, key);
                 this.updateScoreService.notInvitedUpdate(record);
-                //更新redis的个人和班级RSET集合（日周月总榜）
-                this.updateScoreService.insertOnceRunDataToRedis(record);
             }
         }
-        this.updateScoreService.insertOnceInvitedDataToRedis(inviteInfo);
         this.invitedService.OverInvitation(invited_id, inviteInfo);
         return JSONObject.toJSONString(new ResponseBean<>(new Record(json, invited_id), UnicomResponseEnums.SUCCESS));
     }
@@ -123,9 +118,16 @@ public class InvitedControl {
         return JSONObject.toJSONString(new ResponseBean<>(resultMap, UnicomResponseEnums.SUCCESS));
     }
     @GetMapping (value = "/invite/history", produces = "application/json")
-    public String invitedHistory(String student_id){
-        JSONArray invitedHistoryJsonArray = this.invitedService.getInvitedHistory(student_id);
-        return JSONObject.toJSONString(new ResponseBean<>(invitedHistoryJsonArray, UnicomResponseEnums.SUCCESS));
+    public String invitedHistory(String student_id, Integer page){
+        if (page == null){
+            page = 1;
+        }
+        String result = (String) this.redisTemplate.opsForHash().get(INVITATION_REDIS, student_id+page);
+        if (result == null){
+            result = this.invitedService.getInvitedHistory(student_id, page);
+            this.redisTemplate.opsForHash().put(INVITATION_REDIS, student_id+page, result);
+        }
+        return result;
     }
     //得到最近一次邀约结果
     @GetMapping(value = "/invite/history/result", produces = "application/json")

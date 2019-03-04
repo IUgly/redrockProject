@@ -3,6 +3,7 @@ package team.redrock.running.dao;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import team.redrock.running.vo.InviteInfo;
+import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
 
 import java.util.List;
@@ -11,13 +12,18 @@ import java.util.List;
 @Component
 public interface RecordDao {
 
-    @Insert("INSERT INTO distance_record set student_id=#{student_id},begin_time=#{begin_time},end_time=#{end_time},distance=#{distance},steps=#{steps},date=#{date},lat_lng=#{lat_lng, typeHandler=team.redrock.running.bean.JsonTypeHandler}")
+    @Insert("INSERT INTO distance_record " +
+            "set student_id=#{student_id},begin_time=#{begin_time}," +
+            "end_time=#{end_time},distance=#{distance},steps=#{steps}," +
+            "date=#{date},lat_lng=#{lat_lng, typeHandler=team.redrock.running.bean.JsonTypeHandler}")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertDistanceRecord(Record record);
-
-    @Select("select * from distance_record where student_id = #{student_id}")
+    
     @Results({@Result(column="lat_lng",property="lat_lng", typeHandler = team.redrock.running.bean.JsonTypeHandler.class)})
-    List<Record> selectDistanceRecordList(String student_id);
+    @SelectProvider(type = RecordSQL.class, method = "latLngOrDistance")
+    List<Record> selectDistanceRecordList(@Param("student_id") String student_id,
+                                          @Param("page") Integer page,
+                                          @Param("type") String type);
 
     @Results({@Result(column="lat_lng",property="lat_lng", typeHandler = team.redrock.running.bean.JsonTypeHandler.class)})
     @Select("select id,student_id,begin_time,end_time,distance,steps,date,lat_lng from distance_record where id = #{id}")
@@ -28,8 +34,10 @@ public interface RecordDao {
     void insertInvitedRecord(InviteInfo inviteInfo);
 
     @Results({@Result(column="passive_students",property="passive_students", typeHandler = team.redrock.running.bean.JsonTypeHandler.class)})
-    @Select("select distance,date,passive_students,invited_id from invited_record where invited_student_id=#{student_id}")
-    List<InviteInfo> selectInvitedRecordList(String student_id);
+    @SelectProvider(type = RecordSQL.class, method = "latLngOrDistance")
+    List<InviteInfo> selectInvitedRecordList(@Param("student_id") String student_id,
+                                             @Param("page") Integer page,
+                                             @Param("type") String type);
 
     @Update("update invited_record set distance=#{distance},state=#{state},passive_students=#{passive_students, typeHandler=team.redrock.running.bean.JsonTypeHandler} where invited_id=#{invited_id}")
     void overInvited(InviteInfo inviteInfo);
@@ -37,4 +45,60 @@ public interface RecordDao {
     @Update("update student_invitation_rank set all_invited_num =all_invited_num +1 where student_id = #{student_id}")
     void addOneInvitedNum(String studentOrClass_id);
 
+
+    @SelectProvider(type = RecordSQL.class, method = "addRecord")
+    void addRecord(@Param("RankInfo") RankInfo rankInfo);
+
+    /**
+     * 查询mysql中有无对应学生或者班级 路程的排名信息，没有则插入  //on DUPLICATE key update
+     * @param rankInfo
+     * @return
+     */
+    @Insert("insert into student_distance_rank " +
+            "set student_id=#{student_id},nickname=#{nickname}," +
+            "day_distance=#{distance},week_distance=#{distance}," +
+            "month_distance=#{distance},all_distance=#{distance}," +
+            "college=#{college},duration=#{duration},class_id=#{class_id} " +
+            "on DUPLICATE key update " +
+            "day_distance = day_distance + #{distance}," +
+            "week_distance = week_distance + #{distance}," +
+            "month_distance=month_distance+#{distance}," +
+            "all_distance=all_distance+#{distance}")
+    void updateDayDistanceScoreToStuMysql(RankInfo rankInfo);
+    @Insert("insert into class_distance_rank set class_id=#{class_id}," +
+            "day_distance=#{distance},week_distance=#{distance}," +
+            "month_distance=#{distance},all_distance=#{distance}," +
+            "college=#{college},duration=#{duration} on DUPLICATE key " +
+            "update day_distance = day_distance + #{distance}," +
+            "week_distance = week_distance + #{distance}," +
+            "month_distance=month_distance+#{distance},all_distance=all_distance+#{distance}")
+    void updateDayDistanceScoreToClaMysql(RankInfo rankInfo);
+
+    /**
+     * 查询mysql中有无对应学生或者班级 邀约的排名信息，没有则插入  //on DUPLICATE key update
+     * @param rankInfo
+     * @return
+     */
+    @Insert("insert into student_invitation_rank " +
+            "set student_id=#{student_id},nickname=#{nickname}," +
+            "day_invitation=#{total},week_invitation=#{total}," +
+            "month_invitation=#{total},all_invitation=#{total}," +
+            "college=#{college},class_id=#{class_id} on DUPLICATE key " +
+            "update day_invitation=#{total}," +
+            "week_invitation = week_invitation + #{total}," +
+            "month_invitation=month_invitation+#{total}," +
+            "all_invitation=all_invitation+#{total}")
+    void updateDayInviteScoreToStuMysql(RankInfo rankInfo);
+
+    @SelectProvider(type = TableSizeSQL.class, method = "tableSize")
+    Integer recordSize(@Param("table") String table,
+                       @Param("student_id") String student_id);
+
+    @Delete("DELETE FROM invited_record WHERE invited_id = #{invited_id}")
+    void cancelInvited(String invited_id);
+
+    @SelectProvider(type = RankSQL.class, method = "rankList")
+    List<RankInfo> size(@Param("table") String table,
+                 @Param("type") String type,
+                 @Param("page") Integer page);
 }

@@ -1,13 +1,12 @@
 package team.redrock.running.controller;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import team.redrock.running.bean.RankResponseBean;
 import team.redrock.running.bean.ResponseBean;
 import team.redrock.running.configuration.Config;
 import team.redrock.running.enums.UnicomResponseEnums;
@@ -31,6 +30,7 @@ import java.util.List;
 
 @RestController
 public class UserControl extends AbstractBaseController {
+    public static final String DISTANCE_RECORD = "distanceRecord";
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
@@ -38,17 +38,22 @@ public class UserControl extends AbstractBaseController {
     @Autowired
     private Config config;
     @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
     private RecordServiceImp recordServiceImp;
     @PostMapping(value = "/user/login", produces = "application/json")
     public String login(String student_id, String password){
+        //验证帐号密码是否正确
         User user = this.userServiceImp.login(student_id, password);
-        if (user.getStudent_id()!=null){
-            this.userServiceImp.insertUser(user);
+        if (user != null){
             User responseUser = this.userServiceImp.selectUserInfo(student_id);
+            if (responseUser ==null){
+                this.userServiceImp.insertUser(user);
+            }
             //token有效时间 30 min
             Token token = new Token(user.getName(), new Date());
             responseUser.setToken(token.CreateToken());
-            this.userServiceImp.insertUserToRedis(student_id, user);
+            this.userServiceImp.insertUserToRedis(student_id, responseUser);
             return JSONObject.toJSONString(new ResponseBean<>(responseUser, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(
@@ -76,16 +81,20 @@ public class UserControl extends AbstractBaseController {
     public String update(@RequestBody JSONObject json){
         //插入跑步数据到mysql
         Record record = new Record(json);
+//        this.iRecordService.addRecord("distance", record);
         this.updateScoreService.notInvitedUpdate(record);
-        //更新redis的个人和班级RSET集合（日周月总榜）
-        this.updateScoreService.insertOnceRunDataToRedis(record);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
     @GetMapping(value = "/user/lat_lng", produces = "application/json")
-    public String getLatLngList(String student_id,String page){
-        int num =0;
-        JSONArray jsonArray = this.recordServiceImp.getLatLngList(student_id, page, num);
-        return JSONObject.toJSONString(new RankResponseBean(jsonArray, UnicomResponseEnums.SUCCESS, num));
+    public String getLatLngList(String student_id,Integer page){
+        if (page == null){
+            page = 1;
+        }
+        String result = (String) this.redisTemplate.opsForHash().get(DISTANCE_RECORD, student_id + page);
+        if (result == null){
+            result =this.recordServiceImp.getLatLngList(student_id, page);
+        }
+        return result;
     }
     @GetMapping(value = "/user/history/detail", produces = "application/json")
     public String getHistoryDetail(String id){
@@ -124,9 +133,4 @@ public class UserControl extends AbstractBaseController {
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.UPLOAD_FAIL));
     }
 
-    @GetMapping("/delete")
-    public String deleteRedis(){
-        this.updateScoreService.deleteRedis();
-        return "OK";
-    }
 }
