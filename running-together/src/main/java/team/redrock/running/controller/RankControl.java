@@ -37,7 +37,6 @@ public class RankControl {
     @GetMapping(value = "/rank", produces = "application/json")
     public String rank(String time, String rank, String id){
         this.redisTemplate.delete(rank+time); //删除指定散列
-
         String result = this.iRankService.rankPlace(time,
                         rank,
                         id);

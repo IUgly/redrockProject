@@ -24,7 +24,6 @@ public class ControllerAspect {
                 JSONObject json = (JSONObject) argItem;
                 User user = this.userServiceImp.selectUserInfo(json.getString("student_id"));
             }
-            System.out.println("插入到班级排名表");
         }
 
     }

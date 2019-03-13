@@ -6,14 +6,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import team.redrock.volunteer.vo.Record;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 public class ReptileUtil {
 
-    public static List<Record> detail(String account, String pswd) throws IOException {
+    public static List<Record> detail(String account, String pswd) throws Exception {
 
         List<Record> recordList = new ArrayList<>();
 

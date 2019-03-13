@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -34,9 +33,6 @@ import java.util.Map;
 
 @Component
 public class Util {
-
-    public static void main(String[] args) {
-    }
 
     @Autowired
     private Config config;
@@ -68,21 +64,6 @@ public class Util {
         return json.toString();
     }
 
-    public static String getRSA(String upass) throws IOException {
-        String url = "http://tool.chacuo.net/cryptrsapubkey";
-        Map<String, String> map= new HashMap<>();
-
-        map.put("data", configDouble.getRsa() + upass);
-        map.put("type", "rsapubkey");
-        map.put("arg", "pad=1_s=gb2312_t=0");
-
-        String str = send(url, map, "utf-8");
-        System.out.println(str);
-
-        JsonObject returnData = new JsonParser().parse(str).getAsJsonObject();
-        String json = String.valueOf(returnData.get("data"));
-        return json.substring(2, json.length()-2);
-    }
 
     public static String login(String account, String password) throws Exception {
 
@@ -91,7 +72,7 @@ public class Util {
         Map<String, String> map= new HashMap<>();
 
         map.put("uname", account);
-        map.put("upass", Base64.encodeBase64String(Util.encrypt(password.getBytes(), configDouble.getRsa_pubK()) ));
+        map.put("upass", password);
         map.put("referer", "http%253A%252F%252Fwww.zycq.org%252Fapp%252Fuser%252Fhour.php");
 
         String str = send(url, map, "utf-8");
@@ -138,15 +119,6 @@ public class Util {
         return body;
     }
 
-    public static String messageDecrypt(String Base64String) throws Exception {
-
-        byte[] bt = Base64.decodeBase64(Base64String);
-
-
-        byte[] bt_original = decrypt(bt, configDouble.getStr_priK());
-        String str_original = new String(bt_original);
-        return str_original;
-    }
 
     public static byte[] decrypt(byte[] bt_encrypted, String str_key)throws Exception{
         PrivateKey privateKey = getPrivateKey(str_key);

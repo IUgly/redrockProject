@@ -1,8 +1,19 @@
 package team.redrock.volunteer.vo;
 
-import team.redrock.volunteer.util.Util;
+import org.springframework.beans.factory.annotation.Autowired;
+import team.redrock.volunteer.config.Config;
+
+import javax.annotation.PostConstruct;
 
 public class User {
+    @Autowired
+    private Config config;
+    private static Config configDouble;
+
+    @PostConstruct
+    public void init(){
+        configDouble = config;
+    }
     private String uid;
     private String account;
     private String password;
@@ -14,7 +25,7 @@ public class User {
     public User(String uid, String account, String password) throws Exception {
         this.uid = uid;
         this.account = account;
-        this.password = Util.messageDecrypt(password);
+        this.password = password;
     }
 
     public String getUid() {

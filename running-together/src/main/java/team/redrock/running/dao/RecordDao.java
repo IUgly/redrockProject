@@ -18,7 +18,7 @@ public interface RecordDao {
             "date=#{date},lat_lng=#{lat_lng, typeHandler=team.redrock.running.bean.JsonTypeHandler}")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertDistanceRecord(Record record);
-    
+
     @Results({@Result(column="lat_lng",property="lat_lng", typeHandler = team.redrock.running.bean.JsonTypeHandler.class)})
     @SelectProvider(type = RecordSQL.class, method = "latLngOrDistance")
     List<Record> selectDistanceRecordList(@Param("student_id") String student_id,

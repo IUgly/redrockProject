@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import team.redrock.volunteer.config.Config;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 
 @Component
 public class ImitateLogin {
@@ -24,9 +23,10 @@ public class ImitateLogin {
         configDouble = config;
     }
 
-    public static String ImitateLogin(String name, String pswd) throws IOException {
+    public static String ImitateLogin(String name, String pswd) throws Exception {
         String loginUrl = configDouble.getLoginUrl();
         String dataUrl = configDouble.getTimeUrl();
+        String key = configDouble.getRsa();
 
         HttpClient httpClient = new HttpClient();
 
@@ -34,8 +34,10 @@ public class ImitateLogin {
         PostMethod postMethod = new PostMethod(loginUrl);
 
         // 设置登陆时要求的信息，用户名和密码
+//        NameValuePair[] data = {new NameValuePair("uname", name),
+//                new NameValuePair("upass", Util.getRSA(pswd))};
         NameValuePair[] data = {new NameValuePair("uname", name),
-                new NameValuePair("upass", Util.getRSA(pswd))};
+                new NameValuePair("upass", pswd)};
         postMethod.setRequestBody(data);
         try {
             // 设置 HttpClient 接收 Cookie,用与浏览器一样的策略

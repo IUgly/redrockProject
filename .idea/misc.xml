@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/cheerleaders" />
     <file type="web" url="file://$PROJECT_DIR$/running-together" />
     <file type="web" url="file://$PROJECT_DIR$/template" />
     <file type="web" url="file://$PROJECT_DIR$/test" />
@@ -16,6 +17,7 @@
         <option value="$PROJECT_DIR$/volunteerTime/pom.xml" />
         <option value="$PROJECT_DIR$/webSite/pom.xml" />
         <option value="$PROJECT_DIR$/running-together/pom.xml" />
+        <option value="$PROJECT_DIR$/cheerleaders/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

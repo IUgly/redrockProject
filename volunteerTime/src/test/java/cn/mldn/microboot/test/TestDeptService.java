@@ -1,6 +1,6 @@
 package cn.mldn.microboot.test;
 
-import org.apache.commons.codec.binary.Base64;
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.volunteer.StartSpringBootMain;
 import team.redrock.volunteer.config.Config;
 import team.redrock.volunteer.service.impl.IServiceImp;
+import team.redrock.volunteer.util.ReptileUtil;
+import team.redrock.volunteer.vo.Record;
 
-import static team.redrock.volunteer.util.Util.decrypt;
-import static team.redrock.volunteer.util.Util.encrypt;
+import java.util.List;
 
 @SpringBootTest(classes = StartSpringBootMain.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,34 +26,29 @@ public class TestDeptService {
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private IServiceImp iServiceImp;
+
+    @Test
+    public void login() throws Exception {
+        List<Record> recordList =  ReptileUtil.detail("15223166166", "kk123456");
+        System.out.println(new Gson().toJson(recordList));
+    }
     @Test
     public void test() throws Exception {
-        String str_plaintext = "kk123456";
-        System.err.println("明文："+str_plaintext);
-        byte[] bt_cipher = encrypt(str_plaintext.getBytes(), config.getStr_pubK());
-        System.out.println("加密后："+ Base64.encodeBase64String(bt_cipher));
+//        String str_plaintext = "kk123456";
+//        System.err.println("明文："+str_plaintext);
+//        byte[] bt_cipher = encrypt(str_plaintext.getBytes(), config.getStr_pubK());
+//        System.out.println("加密后："+ Base64.encodeBase64String(bt_cipher));
 //        String account = "15223166166";
 //        String password = "kk123456";
 //        String info = Util.login(account, password);
 //        System.out.println(info);
 //        byte[] bt = Base64.decodeBase64(Base64.encodeBase64String(bt_cipher));
-        byte[] bt_original = decrypt(bt_cipher, config.getStr_priK());
-        String str_original = new String(bt_original);
-        System.out.println("解密结果:"+str_original);
+//        byte[] bt_original = decrypt(bt_cipher, config.getStr_priK());
+//        String str_original = new String(bt_original);
+//        System.out.println("解密结果:"+str_original);
 //        Util.messageDecrypt(Base64.encodeBase64String(bt_cipher));
     }
 
-    @Test
-    public void testList() throws Exception {
-        System.out.println(this.redisTemplate.opsForValue().get("2017211903"));
-        this.redisTemplate.delete("2017211903");
-        System.out.println(this.redisTemplate.opsForValue().get("2017211903"));
 
-//        String code = this.iServiceImp.login("15223166166", "kk123456");
-//        if (!code.equals("0")){
-//            System.out.println(Util.assembling("3", "该志愿者账号密码被修改，请重新绑定", ""));
-//        }
-//        System.out.println(Util.getRSA("kk123456"));
-    }
 
 }

@@ -50,7 +50,7 @@ public class UserControl extends AbstractBaseController {
             if (responseUser ==null){
                 this.userServiceImp.insertUser(user);
             }
-            //token有效时间 30 min
+            //token有效时间 4 h
             Token token = new Token(user.getName(), new Date());
             responseUser.setToken(token.CreateToken());
             this.userServiceImp.insertUserToRedis(student_id, responseUser);

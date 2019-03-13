@@ -26,6 +26,4 @@ public class InvitationSend implements Serializable {
                 '}';
     }
 
-    public InvitationSend() {
-    }
 }

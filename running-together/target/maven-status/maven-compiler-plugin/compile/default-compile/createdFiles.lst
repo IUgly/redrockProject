@@ -23,7 +23,6 @@ team/redrock/running/dao/RankDao.class
 team/redrock/running/aop/ControllerAspect.class
 team/redrock/running/bean/ResponseBean.class
 team/redrock/running/StartSpringBootMain.class
-team/redrock/running/util/JwtUtils.class
 team/redrock/running/vo/User.class
 team/redrock/running/controller/RankControl.class
 team/redrock/running/util/AbstractBaseController.class

@@ -105,7 +105,8 @@ public class InvitedService {
         Map<String, String> map = inviteInfo.getResult();
         for(String key:map.keySet()){
             JSONObject json = new JSONObject();
-            json.put(key, map.get(key));
+            json.put("student_id", key);
+            json.put("result", map.get(key));
             jsonArray.add(json);
         }
         return jsonArray;
