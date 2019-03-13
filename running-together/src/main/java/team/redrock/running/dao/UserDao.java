@@ -1,9 +1,6 @@
 package team.redrock.running.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
@@ -31,7 +28,8 @@ public interface UserDao {
     @Select("select * from user where student_id = #{student_id}")
     User selectUserByStudentId(String student_id);
 
-    @Select("select student_id,nickname from user where student_id = #{student_id}")
+    @ResultType(team.redrock.running.vo.User.class)
+    @Select("select nickname,student_id from user where student_id = #{student_id}")
     User selectSimpleUserInfo(String student_id);
 
     @Select("select * from user_other_info where student_id = #{student_id}")

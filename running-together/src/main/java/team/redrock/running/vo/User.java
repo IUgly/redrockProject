@@ -5,8 +5,7 @@ import lombok.Data;
 import team.redrock.running.dto.InvitationSend;
 
 import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 /**
  * Created by huangds on 2017/10/28.
@@ -81,4 +80,6 @@ public class User implements Serializable {
         this.nickname = user.getNickname();
         this.queueInvitations = user.queueInvitations;
     }
+
+
 }

@@ -10,9 +10,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.volunteer.StartSpringBootMain;
 import team.redrock.volunteer.config.Config;
+import team.redrock.volunteer.dao.Dao;
 import team.redrock.volunteer.service.impl.IServiceImp;
 import team.redrock.volunteer.util.ReptileUtil;
 import team.redrock.volunteer.vo.Record;
+import team.redrock.volunteer.vo.User;
 
 import java.util.List;
 
@@ -26,7 +28,14 @@ public class TestDeptService {
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private IServiceImp iServiceImp;
+    @Autowired
+    private Dao dao;
 
+    @Test
+    public void test2(){
+        User user =this.dao.selectUser("2017211903");
+        System.out.println(new Gson().toJson(user));
+    }
     @Test
     public void login() throws Exception {
         List<Record> recordList =  ReptileUtil.detail("15223166166", "kk123456");

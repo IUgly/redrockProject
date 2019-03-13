@@ -4,6 +4,7 @@ public enum UnicomResponseEnums {
 
 	SYSTEM_ERROR(-001,"系统异常"),
 	NO_INVITATION(23, "没有收到邀约"),
+	NO_SEND_INVITATION(-010,"没有发出邀约"),
 	NOT_POSITION(10,"没有排名数据"),
 	NOT_STUDENT_OR_NOT_REGISTER(-1001,"没有该学号或未使用约跑"),
 	NOT_INVITED_INFO(-1002, "没有邀约信息"),

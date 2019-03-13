@@ -17,7 +17,6 @@ import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.User;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +25,8 @@ import java.util.Map;
 public class InvitedService {
     @Autowired
     private RedisTemplate redisTemplate;
-    public static final String USER_REDIS = "User005";
-    public static final String INVITATION_REDIS = "InvitationRedis";
+    public static final String USER_REDIS = "User009";
+    public static final String INVITATION_REDIS = "InvitationRedis010";
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
@@ -35,13 +34,14 @@ public class InvitedService {
     @Autowired
     private ScheduledDao scheduledDao;
 
-    @Async
+//    @Async
     public void insertInvitationToRedis(InviteInfo inviteInfo){
-        HashMap invitationHash = new HashMap();
-        invitationHash.put(inviteInfo.getInvited_id(), inviteInfo);
-        this.redisTemplate.opsForHash().putAll(INVITATION_REDIS, invitationHash);
+        this.redisTemplate.opsForHash().put(
+                INVITATION_REDIS,
+                inviteInfo.getInvited_id(),
+                inviteInfo);
     }
-    @Async
+//    @Async
     public void sendInvitations(String invitees, InviteInfo inviteInfo){
         InvitationSend invitationSend = new InvitationSend(inviteInfo);
         String[] student_ids = invitees.substring
@@ -68,7 +68,6 @@ public class InvitedService {
         inviteInfo.setPassive_students(studentsJsonArr);
         this.recordDao.overInvited(inviteInfo);
         invitationToMysql(inviteInfo.getInvited_studentId(), inviteInfo.getDistance());
-//        this.recordDao.addOneInvitedNum(inviteInfo.getInvited_studentId());
     }
     public void invitationToMysql(String student_id, Double score){
         User user = this.userServiceImp.selectUserInfo(student_id);
@@ -100,16 +99,22 @@ public class InvitedService {
         User user = (User)this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
 
         String invited_id = user.getInvitingNow();
-        InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
-        JSONArray jsonArray = new JSONArray();
-        Map<String, String> map = inviteInfo.getResult();
-        for(String key:map.keySet()){
-            JSONObject json = new JSONObject();
-            json.put("student_id", key);
-            json.put("result", map.get(key));
-            jsonArray.add(json);
+        try {
+            InviteInfo inviteInfo = (InviteInfo) this.redisTemplate.opsForHash().get(INVITATION_REDIS, invited_id);
+            System.out.println("invitation："+ new Gson().toJson(inviteInfo));
+            JSONArray jsonArray = new JSONArray();
+            Map<String, String> map = inviteInfo.getResult();
+            for(String key:map.keySet()){
+                JSONObject json = new JSONObject();
+                json.put("student_id", key);
+                json.put("result", map.get(key));
+                jsonArray.add(json);
+            }
+            return jsonArray;
+        }catch (Exception e){
+            return null;
         }
-        return jsonArray;
+
     }
     @Async
     public void cancelInvited(String invited_id){

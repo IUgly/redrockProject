@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import team.redrock.running.StartSpringBootMain;
 import team.redrock.running.dao.RecordDao;
+import team.redrock.running.dao.UserDao;
+import team.redrock.running.dto.InvitationSend;
 import team.redrock.running.service.IRankService;
 import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.vo.Record;
@@ -38,6 +40,32 @@ public class TestDeptService {
     private RecordDao recordDao;
     @Autowired
     private IRankService iRankService;
+    @Autowired
+    private UserDao userDao;
+
+    @Test
+    public void redisTest(){
+        Gson gson = new Gson();
+        String student_id = "2017211903";
+        User user0 = this.userDao.selectUserByStudentId(student_id);
+
+        String redis = "uiaos";
+        this.redisTemplate.opsForHash().put(redis, student_id, user0);
+
+        User user = (User) this.redisTemplate.opsForHash().get(redis, student_id);
+        System.out.println("before:"+gson.toJson(user));
+
+        InvitationSend invitationSend = new InvitationSend("kk");
+        user.enQueueInvitation(invitationSend);
+        System.out.println(new Gson().toJson(user.deQueueInvitation()));
+        user.enQueueInvitation(invitationSend);
+        System.out.println("After"+gson.toJson(user));
+
+        this.redisTemplate.opsForHash().put(redis, student_id, user);
+
+        User user2 = (User) this.redisTemplate.opsForHash().get(redis, student_id);
+        System.out.println("In Redis:"+gson.toJson(user2));
+    }
 
     @Test
     public void tableSize (){

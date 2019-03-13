@@ -26,8 +26,8 @@ import java.util.Map;
 
 @RestController
 public class InvitedControl {
-    public static final String USER_REDIS = "UserRedis";
-    public static final String INVITATION_REDIS = "InvitationRedis";
+    public static final String USER_REDIS = "User009";
+    public static final String INVITATION_REDIS = "InvitationRedis010";
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
@@ -46,10 +46,12 @@ public class InvitedControl {
         this.invitedService.startInvited(inviteInfo);
         //异步处理
         this.invitedService.sendInvitations(invitees, inviteInfo);
-        this.invitedService.insertInvitationToRedis(inviteInfo);
+        this.redisTemplate.opsForHash().put(
+                INVITATION_REDIS,
+                inviteInfo.getInvited_id(),
+                inviteInfo);
         invite_user.setInvitingNow(inviteInfo.getInvited_id());
-
-        this.userServiceImp.insertUserToRedis(invite_user.getStudent_id(), invite_user);
+        this.redisTemplate.opsForHash().put(USER_REDIS, invite_user.getStudent_id(), invite_user);
         return JSONObject.toJSONString(new ResponseBean<>(inviteInfo.getInvited_id(), UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "invite/searchinfo", produces = "application/json")
@@ -133,6 +135,9 @@ public class InvitedControl {
     @GetMapping(value = "/invite/history/result", produces = "application/json")
     public String getInvitedResult(String student_id){
         JSONArray jsonArray = this.invitedService.getInvitedResult(student_id);
+        if (jsonArray == null){
+            return JSONObject.toJSONString(new ResponseBean(UnicomResponseEnums.NO_SEND_INVITATION));
+        }
         return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "/invite/cancel", produces = "application/json")

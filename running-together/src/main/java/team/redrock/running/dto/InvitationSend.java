@@ -17,6 +17,10 @@ public class InvitationSend implements Serializable {
         this.nickname = inviteInfo.getNickname();
     }
 
+    public InvitationSend(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
         return "InvitationSend{" +

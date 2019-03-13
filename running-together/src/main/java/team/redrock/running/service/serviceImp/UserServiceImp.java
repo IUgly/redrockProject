@@ -26,8 +26,8 @@ public class UserServiceImp {
     private UserDao userDao;
     @Autowired
     private RedisTemplate redisTemplate;
-    public static final String USER_REDIS = "User005";
-    @Async
+    public static final String USER_REDIS = "User009";
+//    @Async
     public void insertUserToRedis(String student_id, User userInfo) {
         this.redisTemplate.opsForHash().put(USER_REDIS, student_id, userInfo);
     }
@@ -86,18 +86,23 @@ public class UserServiceImp {
      */
 
     public User selectUserInfo(String student_id) {
+        User user = new User();
         try {
-            User user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
+            user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
             if (user!=null){
                 return new User(user);
             }else {
-                User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
-                return new User(userFromDatabase);
+                user = this.userDao.selectUserByStudentId(student_id);
+                return new User(user);
             }
         }catch (Exception e){
+            User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
             e.printStackTrace();
+            user = new User(userFromDatabase);
+            return user;
+        }finally {
+            this.redisTemplate.opsForHash().put(USER_REDIS, student_id, user);
         }
-        return null;
     }
     public List<User> selectUserListByName(String name){
         return this.userDao.getUserListByName(name);
