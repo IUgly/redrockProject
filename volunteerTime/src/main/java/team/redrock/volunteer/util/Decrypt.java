@@ -1,10 +1,15 @@
 package team.redrock.volunteer.util;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.ByteArrayInputStream;
-import java.io.ObjectInputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
@@ -12,44 +17,37 @@ import java.util.Base64;
  */
 public class Decrypt {
 
-    private static final byte[] seckey = {
-            0x33, 0x21, 0x27, 0x21,
-            0x26, 0x73, 0x12, 0x71,
-            0x62, 0x42, 0x73, 0x74,
-            0x72, 0x4c, 0x5f, 0x66
-    };
+    private static final String IV_STRING = "zhangshangcquptv";
+    private static final String charset = "UTF-8";
+    public static final String KEY = "redrockvolunteer";
 
-    private static final byte[] iv = {
-            0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00,
-    };
-
-    public Decrypt() {
+    public static String aesDecryptString(String content) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] encryptedBytes = decoder.decode(content);
+        byte[] keyBytes = KEY.getBytes(charset);
+        byte[] decryptedBytes = aesDecryptBytes(encryptedBytes, keyBytes);
+        return new String(decryptedBytes, charset);
     }
 
-    public static void main(String[] args) {
-        String sec = "BzHrwqeLMuBZSnLGZv2UiXyaNaGBvJXs3K92NxvyKfQ=";
+    public static void main(String[] args) throws Exception{
+        String sec = "Fh413oZXPKxA4G1+8Pif2tlX+Alqh+5M3sexC7bLzs8yntbQVkptd1Pzuk/kgNPJlk2gWO0Lgnw28njvFmMeOT1BmcMl7t8kexnRWH7+LX4HXqGxHvBnSuyw9sG+J7QekAgszX+WiQesil0vSRH+Wmoy3hSCJyIEX8kzKRSaYV4=";
 
-        String password = Decrypt.decrypt(sec);
-        System.out.println(password);
+        System.out.println(Decrypt.aesDecryptString(sec));
     }
 
-    public static String decrypt(String secret){
-        try {
-            Base64.Decoder b64decoder = Base64.getUrlDecoder();
-            byte[] sectoken = b64decoder.decode(secret);
+    public static byte[] aesDecryptBytes(byte[] contentBytes, byte[] keyBytes) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
+        return cipherOperation(contentBytes, keyBytes, Cipher.DECRYPT_MODE);
+    }
 
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            SecretKeySpec sKey = new SecretKeySpec(seckey, "AES");
-            cipher.init(Cipher.DECRYPT_MODE, sKey, new IvParameterSpec(iv));
-            byte[] rawtoken = cipher.doFinal(sectoken);
-            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(rawtoken));
-            return (String) ois.readObject();
-        }
-        catch(Exception e) {
-            return null;
-        }
+    private static byte[] cipherOperation(byte[] contentBytes, byte[] keyBytes, int mode) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+        SecretKeySpec secretKey = new SecretKeySpec(keyBytes, "AES");
+
+        byte[] initParam = IV_STRING.getBytes(charset);
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(initParam);
+
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(mode, secretKey, ivParameterSpec);
+
+        return cipher.doFinal(contentBytes);
     }
 }

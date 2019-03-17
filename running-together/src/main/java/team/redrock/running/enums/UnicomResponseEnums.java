@@ -2,6 +2,7 @@ package team.redrock.running.enums;
 
 public enum UnicomResponseEnums {
 
+	RUNDATA_ERROR(-012,"跑步数据异常"),
 	SYSTEM_ERROR(-001,"系统异常"),
 	NO_INVITATION(23, "没有收到邀约"),
 	NO_SEND_INVITATION(-010,"没有发出邀约"),

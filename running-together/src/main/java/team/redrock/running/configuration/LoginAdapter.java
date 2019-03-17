@@ -24,10 +24,8 @@ public class LoginAdapter extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(loginInterceptor)
 //				.addPathPatterns("/**")
 				.excludePathPatterns("/user/login")
-				.excludePathPatterns("/mobilerun/**.jpg")
-				.excludePathPatterns("/**.jpg")
-				.excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
- 
+				.excludePathPatterns("/mobilerun/head_img/**")
+				.excludePathPatterns("/head_img/**");
 		super.addInterceptors(registry);
 	}
  
@@ -43,6 +41,8 @@ public class LoginAdapter extends WebMvcConfigurerAdapter {
 				.addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**")
 				.addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("classpath:/WEB-INF/classes/head_img/");
+		registry.addResourceHandler("/head_img/");
  
 		super.addResourceHandlers(registry);
  

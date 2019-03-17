@@ -18,6 +18,7 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/bean/ResponseBean.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/inteceptor/LoginInterceptor.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/MD5Util.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/SerializeUtil.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/bean/JsonTypeHandler.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/Token.java
@@ -26,9 +27,7 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/StartSpringBootMain.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/controller/RankControl.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/aop/ControllerAspect.java
-/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/RecordServiceImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/UserServiceImp.java
-/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/IRecordService.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/RankInfo.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/UserOtherInfo.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/exception/UnicomRuntimeException.java

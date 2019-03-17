@@ -22,7 +22,7 @@ public class RankServiceImp implements IRankService {
     private RedisTemplate redisTemplate;
     @Override
     public String rankList(String type, String table, Integer page) {
-
+        this.redisTemplate.delete(table);
         String result = (String) this.redisTemplate.opsForHash().get(table, page);
         if (result==null){
             List<RankInfo> info = new ArrayList<>();
@@ -37,7 +37,7 @@ public class RankServiceImp implements IRankService {
 
     @Override
     public String rankPlace(String type, String table, String id) {
-
+        this.redisTemplate.delete(table);
         RankInfo result = (RankInfo) this.redisTemplate.opsForHash().get(table+type, id);
         if (result==null){
             result = this.rankDao.rankPlace(type, table, id);

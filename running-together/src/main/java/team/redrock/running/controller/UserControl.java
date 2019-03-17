@@ -3,7 +3,7 @@ package team.redrock.running.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -14,6 +14,7 @@ import team.redrock.running.service.serviceImp.RecordServiceImp;
 import team.redrock.running.service.serviceImp.UpdateScoreService;
 import team.redrock.running.service.serviceImp.UserServiceImp;
 import team.redrock.running.util.AbstractBaseController;
+import team.redrock.running.util.Decrypt;
 import team.redrock.running.util.Token;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
@@ -30,7 +31,8 @@ import java.util.List;
 
 @RestController
 public class UserControl extends AbstractBaseController {
-    public static final String DISTANCE_RECORD = "distanceRecord";
+    public static final String BaseURL = "111.230.169.17:8080/mobilerun/";
+    public static final String DISTANCE_RECORD = "distanceRecords";
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
@@ -38,7 +40,7 @@ public class UserControl extends AbstractBaseController {
     @Autowired
     private Config config;
     @Autowired
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private RecordServiceImp recordServiceImp;
     @PostMapping(value = "/user/login", produces = "application/json")
@@ -46,15 +48,12 @@ public class UserControl extends AbstractBaseController {
         //验证帐号密码是否正确
         User user = this.userServiceImp.login(student_id, password);
         if (user != null){
-            User responseUser = this.userServiceImp.selectUserInfo(student_id);
-            if (responseUser ==null){
-                this.userServiceImp.insertUser(user);
-            }
+            this.userServiceImp.insertUser(user);
             //token有效时间 4 h
             Token token = new Token(user.getName(), new Date());
-            responseUser.setToken(token.CreateToken());
-            this.userServiceImp.insertUserToRedis(student_id, responseUser);
-            return JSONObject.toJSONString(new ResponseBean<>(responseUser, UnicomResponseEnums.SUCCESS));
+            user.setToken(token.CreateToken());
+            this.userServiceImp.updateUserInfoToRedis(user);
+            return JSONObject.toJSONString(new ResponseBean<>(user, UnicomResponseEnums.SUCCESS));
         }else {
             return JSONObject.toJSONString(new ResponseBean<>(
                     UnicomResponseEnums.INVALID_PASSWORD));
@@ -77,10 +76,17 @@ public class UserControl extends AbstractBaseController {
                 this.userServiceImp.selectUserInfo(student_id),
                 UnicomResponseEnums.SUCCESS));
     }
+
     @PostMapping(value = "/user/distance/update", produces = "application/json")
-    public String update(@RequestBody JSONObject json){
+    public String update(String run_data){
+        String info = null;
+        try {
+            info = Decrypt.aesDecryptString(run_data);
+        }catch (Exception e){
+            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.RUNDATA_ERROR));
+        }
         //插入跑步数据到mysql
-        Record record = new Record(json);
+        Record record = new Record(JSONObject.parseObject(info));
 //        this.iRecordService.addRecord("distance", record);
         this.updateScoreService.notInvitedUpdate(record);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
@@ -90,9 +96,10 @@ public class UserControl extends AbstractBaseController {
         if (page == null){
             page = 1;
         }
-        String result = (String) this.redisTemplate.opsForHash().get(DISTANCE_RECORD, student_id + page);
+        String result = this.stringRedisTemplate.opsForValue().get(DISTANCE_RECORD+student_id+page);
         if (result == null){
             result =this.recordServiceImp.getLatLngList(student_id, page);
+            this.stringRedisTemplate.opsForValue().set(DISTANCE_RECORD+student_id+page, result);
         }
         return result;
     }
@@ -123,6 +130,7 @@ public class UserControl extends AbstractBaseController {
                         Path path = Paths.get(this.config.getPhoto() +"/"+ student_id+".jpg");
 //                        String url = this.config.getPhotoUrl()+"/"+student_id+".jpg";
                         Files.write(path, bytes);
+                        this.userServiceImp.updateHeadImg(BaseURL+student_id, student_id);
                         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -131,6 +139,12 @@ public class UserControl extends AbstractBaseController {
             }
         }
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.UPLOAD_FAIL));
+    }
+
+    @GetMapping("/headImg")
+    public String getHeadImg(String student_id){
+        String head_url = this.userServiceImp.head_img(student_id);
+        return "redirect:"+head_url;
     }
 
 }

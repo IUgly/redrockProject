@@ -29,7 +29,7 @@ public interface RecordDao {
     @Select("select id,student_id,begin_time,end_time,distance,steps,date,lat_lng from distance_record where id = #{id}")
     Record selectDistanceRecordById(String id);
 
-    @Insert("Insert into invited_record set invited_student_id = #{invited_studentId}, date=#{date}")
+    @Insert("Insert into invited_record set invited_student_id = #{invited_studentId}, date=#{date}, passive_students= #{resultString}")
     @Options(useGeneratedKeys=true, keyProperty="invited_id", keyColumn="invited_id")
     void insertInvitedRecord(InviteInfo inviteInfo);
 
@@ -56,22 +56,22 @@ public interface RecordDao {
      */
     @Insert("insert into student_distance_rank " +
             "set student_id=#{student_id},nickname=#{nickname}," +
-            "day_distance=#{distance},week_distance=#{distance}," +
-            "month_distance=#{distance},all_distance=#{distance}," +
+            "days=#{distance},weekends=#{distance}," +
+            "months=#{distance},alls=#{distance}," +
             "college=#{college},duration=#{duration},class_id=#{class_id} " +
             "on DUPLICATE key update " +
-            "day_distance = day_distance + #{distance}," +
-            "week_distance = week_distance + #{distance}," +
-            "month_distance=month_distance+#{distance}," +
-            "all_distance=all_distance+#{distance}")
+            "days = days + #{distance}," +
+            "weekends = weekends + #{distance}," +
+            "months = months +#{distance}," +
+            "alls =alls +#{distance}")
     void updateDayDistanceScoreToStuMysql(RankInfo rankInfo);
     @Insert("insert into class_distance_rank set class_id=#{class_id}," +
-            "day_distance=#{distance},week_distance=#{distance}," +
-            "month_distance=#{distance},all_distance=#{distance}," +
+            "days=#{distance},weekends=#{distance}," +
+            "months=#{distance},alls=#{distance}," +
             "college=#{college},duration=#{duration} on DUPLICATE key " +
-            "update day_distance = day_distance + #{distance}," +
-            "week_distance = week_distance + #{distance}," +
-            "month_distance=month_distance+#{distance},all_distance=all_distance+#{distance}")
+            "update days = days + #{distance}," +
+            "weekends = weekends + #{distance}," +
+            "months = months +#{distance},alls =alls+#{distance}")
     void updateDayDistanceScoreToClaMysql(RankInfo rankInfo);
 
     /**
@@ -81,13 +81,13 @@ public interface RecordDao {
      */
     @Insert("insert into student_invitation_rank " +
             "set student_id=#{student_id},nickname=#{nickname}," +
-            "day_invitation=#{total},week_invitation=#{total}," +
-            "month_invitation=#{total},all_invitation=#{total}," +
+            "days= #{total},weekends =#{total}," +
+            "months =#{total},alls =#{total}," +
             "college=#{college},class_id=#{class_id} on DUPLICATE key " +
-            "update day_invitation=#{total}," +
-            "week_invitation = week_invitation + #{total}," +
-            "month_invitation=month_invitation+#{total}," +
-            "all_invitation=all_invitation+#{total}")
+            "update days =#{total}," +
+            "weekends = weekends + #{total}," +
+            "months = months +#{total}," +
+            "alls = alls +#{total}")
     void updateDayInviteScoreToStuMysql(RankInfo rankInfo);
 
     @SelectProvider(type = TableSizeSQL.class, method = "tableSize")

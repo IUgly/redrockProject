@@ -1,11 +1,9 @@
 package team.redrock.running.service.serviceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import team.redrock.running.dao.ClassDao;
 import team.redrock.running.dao.RecordDao;
 import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.Record;
@@ -16,10 +14,6 @@ import team.redrock.running.vo.User;
 public class UpdateScoreService {
     @Autowired
     private RecordDao recordDao;
-    @Autowired
-    private ClassDao classDao;
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private UserServiceImp userServiceImp;
 
@@ -38,11 +32,6 @@ public class UpdateScoreService {
         this.recordDao.updateDayDistanceScoreToClaMysql(rankInfo);
         this.recordDao.updateDayDistanceScoreToStuMysql(rankInfo);
 
-//        if (this.classDao.selectClassById(record)!=null){
-//            this.classDao.updateClassDistance(record);
-//        }else {
-//            this.classDao.insertClassDistance(record);
-//        }
     }
 
 }

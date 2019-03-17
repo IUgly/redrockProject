@@ -1,6 +1,7 @@
 package team.redrock.running.vo;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,17 +20,23 @@ public class InviteInfo implements Serializable {
     private double distance;
     private String state;
     private String[] passive_studentArray;
+    private Integer acceptUsersNum;
     //邀请的用户 的回馈结果
     private Map<String, String> result = new HashMap<>();
+    private String resultString;
 
-    public int getSuccessInvitedPersonNum(){
-        int num =0;
-        for(String key:this.result.keySet()){
-            if (this.result.get(key).equals("1")){
-                num++;
-            }
-        }
-        return num;
+    public String getResultString() {
+        JSONArray jsonArray = new JSONArray();
+
+        result.forEach((s, r) -> {
+            JSONObject json = new JSONObject();
+            json.put("student_id", s);
+            json.put("result", r);
+
+            jsonArray.add(json);
+        });
+
+        return jsonArray.toJSONString();
     }
 
     public InviteInfo(){}
@@ -42,8 +49,13 @@ public class InviteInfo implements Serializable {
                 (1, passive_Students.length()-1).split(",");
         this.passive_studentArray = strings;
         for (String s: strings){
-            result.put(s,"0");
+            result.put(s, "0");
         }
+    }
+
+    public InviteInfo(String invited_id, String nickname) {
+        this.invited_id = invited_id;
+        this.nickname = nickname;
     }
 
     public InviteInfo(String result) {

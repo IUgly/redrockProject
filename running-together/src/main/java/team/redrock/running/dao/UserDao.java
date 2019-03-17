@@ -38,4 +38,9 @@ public interface UserDao {
     @Select("select * from user where name = #{name}")
     List<User> getUserListByName(String name);
 
+    @Update("update user set head_img = #{url} where student_id = #{student_id}")
+    void updateHead_img(String url, String student_id);
+
+    @Select("Select head_img from user where student_id #{student_id}")
+    String getHead_img(String student_id);
 }

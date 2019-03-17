@@ -44,4 +44,6 @@ public class ResponseBean <T>{
 		this.message=enums.getMessage();
 	}
 
+
+
 }

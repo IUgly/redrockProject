@@ -15,17 +15,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sun.misc.BASE64Decoder;
 import team.redrock.volunteer.config.Config;
 
 import javax.annotation.PostConstruct;
-import javax.crypto.Cipher;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,49 +113,21 @@ public class Util {
         return body;
     }
 
+    public static String agentWhat(HttpServletRequest request, String plainText){
+        String userPassword = request.getParameter(plainText);
+        String userAgent = request.getHeader("user-agent");
+        try {
+            if (userAgent.contains("Android")){
+                return Decrypt.aesDecryptString(userPassword);
+            }else if (userAgent.contains("IPhone")){
+                return AESCipher.aesEncryptString(userPassword, "redrockvolunteer");
+            }else {
+                return "error";
+            }
+        }catch (Exception e){
+            return "error";
+        }
 
-    public static byte[] decrypt(byte[] bt_encrypted, String str_key)throws Exception{
-        PrivateKey privateKey = getPrivateKey(str_key);
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        byte[] bt_original = cipher.doFinal(bt_encrypted);
-        return bt_original;
-    }
-
-    /**
-     *
-     * @param bt_plaintext  公匙加密
-     * @return
-     * @throws Exception
-     */
-
-    public static byte[] encrypt(byte[] bt_plaintext, String str_key)throws Exception{
-        PublicKey publicKey = getPublicKey(str_key);
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-        byte[] bt_encrypted = cipher.doFinal(bt_plaintext);
-        return bt_encrypted;
-    }
-    public static PublicKey getPublicKey(String key) throws Exception {
-        byte[] keyBytes;
-        keyBytes = (new BASE64Decoder()).decodeBuffer(key);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PublicKey publicKey = keyFactory.generatePublic(keySpec);
-        return publicKey;
-    }
-    /**
-     * 转换私钥
-     * @param key String to PrivateKey
-     * @throws Exception
-     */
-    public static PrivateKey getPrivateKey(String key) throws Exception {
-        byte[] keyBytes;
-        keyBytes = (new BASE64Decoder()).decodeBuffer(key);
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
-        return privateKey;
     }
 
 }

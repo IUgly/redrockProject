@@ -3,7 +3,6 @@ package team.redrock.running.service.serviceImp;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.bean.RankResponseBean;
@@ -16,8 +15,6 @@ import java.util.List;
 @Service
 @Component
 public class RecordServiceImp {
-    @Autowired
-    private StringRedisTemplate redisTemplate;
     @Autowired
     private RecordDao recordDao;
 

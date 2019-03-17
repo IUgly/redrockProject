@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import team.redrock.volunteer.config.Config;
 import team.redrock.volunteer.security.RSA;
 import team.redrock.volunteer.service.impl.IServiceImp;
-import team.redrock.volunteer.util.*;
+import team.redrock.volunteer.util.AbstractBaseController;
+import team.redrock.volunteer.util.Decrypt;
+import team.redrock.volunteer.util.ReptileUtil;
+import team.redrock.volunteer.util.Util;
 import team.redrock.volunteer.vo.Record;
 import team.redrock.volunteer.vo.User;
 
@@ -38,7 +41,7 @@ public class Control extends AbstractBaseController {
 
     @PostMapping(value = "/select", produces = "application/json;charset=UTF-8")
     public String Record(String uid) throws Exception {
-        String student_id = Decrypt.decrypt(uid);
+        String student_id = Decrypt.aesDecryptString(uid);
 
         String resp = this.redisTemplate.opsForValue().get(student_id);
         User user = this.iServiceImp.selectUser(student_id);
@@ -80,9 +83,8 @@ public class Control extends AbstractBaseController {
     @PostMapping(value = "/binding", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String binding(String uid, String account, String password) throws Exception {
-
         String passwordStr = RSA.encrypt(
-                Decrypt.decrypt(password),
+                Decrypt.aesDecryptString(password),
                 configDouble.getRsa());
         User user = new User(uid, account, passwordStr);
         String code = Util.login(user.getAccount(), user.getPassword());

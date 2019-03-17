@@ -13,6 +13,8 @@ public class Token implements Serializable, List<Object> {
     String userName;
     long expiredTime;
 
+
+
     private static final byte[] seckey = {
             0x33, 0x21, 0x27, 0x21,
             0x26, 0x73, 0x12, 0x71,
@@ -54,6 +56,8 @@ public class Token implements Serializable, List<Object> {
 
         return "";
     }
+
+
 
 
     public static Token CreateFrom(String token){

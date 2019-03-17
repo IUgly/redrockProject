@@ -65,7 +65,6 @@ public class RankSQL {
             sql.append("class_id=").append(id);
         }
 
-
         return sql.toString();
     }
 }

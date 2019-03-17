@@ -78,7 +78,9 @@ public class User implements Serializable {
         this.student_id = user.getStudent_id();
         this.name = user.getName();
         this.nickname = user.getNickname();
-        this.queueInvitations = user.queueInvitations;
+        this.queueInvitations = user.getQueueInvitations();
+        this.invitingNow = user.getInvitingNow();
+        this.state = user.getState();
     }
 
 

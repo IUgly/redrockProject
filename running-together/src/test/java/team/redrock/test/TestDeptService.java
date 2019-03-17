@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -17,6 +18,8 @@ import team.redrock.running.dao.UserDao;
 import team.redrock.running.dto.InvitationSend;
 import team.redrock.running.service.IRankService;
 import team.redrock.running.service.serviceImp.UpdateScoreService;
+import team.redrock.running.util.SerializeUtil;
+import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
@@ -32,7 +35,7 @@ import java.util.Set;
 public class TestDeptService {
     @Autowired
     private RedisTemplate redisTemplate;
-
+    public static final String INVITATION_REDIS = "InvitationRedis011";
     public static final String SCORE_RANK = "dayRank";
     @Autowired
     private UpdateScoreService updateScoreService;
@@ -42,6 +45,23 @@ public class TestDeptService {
     private IRankService iRankService;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+
+    @Test
+    public void testInvited(){
+        InviteInfo inviteInfo = new InviteInfo("123321","crown");
+        System.out.println("i1:" +inviteInfo.toString());
+        String invited_id = inviteInfo.getInvited_id();
+        String strInvitedInfo = SerializeUtil.serialize(inviteInfo);
+
+        this.stringRedisTemplate.opsForValue().set(INVITATION_REDIS+invited_id, strInvitedInfo);
+        InviteInfo inviteInfo2 = (InviteInfo) SerializeUtil.deserialize
+                (this.stringRedisTemplate.opsForValue().get(INVITATION_REDIS+invited_id));
+        System.out.println(inviteInfo2.getNickname());
+
+    }
 
     @Test
     public void redisTest(){
@@ -53,6 +73,7 @@ public class TestDeptService {
         this.redisTemplate.opsForHash().put(redis, student_id, user0);
 
         User user = (User) this.redisTemplate.opsForHash().get(redis, student_id);
+
         System.out.println("before:"+gson.toJson(user));
 
         InvitationSend invitationSend = new InvitationSend("kk");
@@ -64,6 +85,7 @@ public class TestDeptService {
         this.redisTemplate.opsForHash().put(redis, student_id, user);
 
         User user2 = (User) this.redisTemplate.opsForHash().get(redis, student_id);
+
         System.out.println("In Redis:"+gson.toJson(user2));
     }
 

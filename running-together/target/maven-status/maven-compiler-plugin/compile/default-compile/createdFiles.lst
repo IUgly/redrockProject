@@ -28,7 +28,6 @@ team/redrock/running/controller/RankControl.class
 team/redrock/running/util/AbstractBaseController.class
 team/redrock/running/configuration/WebMvcConfig.class
 team/redrock/running/WebSecurityConfig$SecurityInterceptor.class
-team/redrock/running/service/IRecordService.class
 team/redrock/running/dto/InvitationSend.class
 team/redrock/running/dao/RecordDao.class
 team/redrock/running/dao/TableSizeSQL.class
@@ -38,11 +37,11 @@ team/redrock/running/service/serviceImp/RecordServiceImp.class
 team/redrock/running/service/serviceImp/InvitedService.class
 team/redrock/running/dao/UserDao.class
 team/redrock/running/service/IRankService.class
+team/redrock/running/util/SerializeUtil.class
 team/redrock/running/util/Util.class
 team/redrock/running/util/Token.class
 team/redrock/running/vo/UserOtherInfo.class
 team/redrock/running/dao/RecordSQL.class
 team/redrock/running/util/MD5Util.class
-team/redrock/running/service/RecordServiceImp.class
 team/redrock/running/dao/RankSQL.class
 team/redrock/running/exception/SpringExceptionHandle.class

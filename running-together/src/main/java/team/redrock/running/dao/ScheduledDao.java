@@ -16,20 +16,20 @@ public interface ScheduledDao {
     /**
      *  每周定时更新个人和班级的周路程到月路程，总路程。周路程清零
      */
-    @Update("update student_distance_rank  set week_distance=0")
+    @Update("update student_distance_rank  set weekends=0")
     void timingUpdateWeekDistanceScore();
-    @Update("update class_distance_rank set week_distance=0")
+    @Update("update class_distance_rank set weekends=0")
     void timingUpdateWeekDistanceScoreClass();
-    @Update("update student_invitation_rank set week_invitation=0")
+    @Update("update student_invitation_rank set weekends=0")
     void timingUpdateWeekInvitation();
     /**
      *  每月定时更新个人和班级的月路程到总路程。月路程清零
      */
-    @Update("update student_distance_rank set month_distance=0")
+    @Update("update student_distance_rank set months=0")
     void timingUpdateMonthDistanceScore();
-    @Update("update class_distance_rank set month_distance=0")
+    @Update("update class_distance_rank set months=0")
     void timingUpdateMonthDistanceScoreClass();
-    @Update("update student_invitation_rank set month_invitation=0")
+    @Update("update student_invitation_rank set months=0")
     void timingUpdateMonthInvitation();
 
     /**
@@ -56,18 +56,18 @@ public interface ScheduledDao {
     void updateDayDistanceScoreToClaMysql(RankInfo rankInfo);
 
     /**
-     * 查询mysql中有无对应学生或者班级 邀约的排名信息，没有则插入  //on DUPLICATE key update
+     * 查询mysql中有无对应学生    邀约的排名信息，没有则插入  //on DUPLICATE key update
      * @param rankInfo
      * @return
      */
     @Insert("insert into student_invitation_rank " +
             "set student_id=#{student_id},nickname=#{nickname}," +
-            "day_invitation=#{total},week_invitation=#{total}," +
-            "month_invitation=#{total},all_invitation=#{total}," +
+            "days=#{total},weekends=#{total}," +
+            "months=#{total},alls=#{total}," +
             "college=#{college},class_id=#{class_id} on DUPLICATE key " +
-            "update day_invitation=#{total}," +
-            "week_invitation = week_invitation + #{total}," +
-            "month_invitation=month_invitation+#{total}," +
-            "all_invitation=all_invitation+#{total}")
+            "update days=#{total}," +
+            "weekends = weekends + #{total}," +
+            "months=months+#{total}," +
+            "alls=alls+#{total}")
     void updateDayInviteScoreToStuMysql(RankInfo rankInfo);
 }

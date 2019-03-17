@@ -1,6 +1,5 @@
 package cn.mldn.microboot.test;
 
-import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,6 @@ import team.redrock.volunteer.StartSpringBootMain;
 import team.redrock.volunteer.config.Config;
 import team.redrock.volunteer.dao.Dao;
 import team.redrock.volunteer.service.impl.IServiceImp;
-import team.redrock.volunteer.util.ReptileUtil;
-import team.redrock.volunteer.vo.Record;
-import team.redrock.volunteer.vo.User;
-
-import java.util.List;
 
 @SpringBootTest(classes = StartSpringBootMain.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,13 +27,13 @@ public class TestDeptService {
 
     @Test
     public void test2(){
-        User user =this.dao.selectUser("2017211903");
-        System.out.println(new Gson().toJson(user));
+//        User user =this.dao.selectUser("2017211903");
+//        System.out.println(new Gson().toJson(user));
     }
     @Test
     public void login() throws Exception {
-        List<Record> recordList =  ReptileUtil.detail("15223166166", "kk123456");
-        System.out.println(new Gson().toJson(recordList));
+//        List<Record> recordList =  ReptileUtil.detail("15223166166", "kk123456");
+//        System.out.println(new Gson().toJson(recordList));
     }
     @Test
     public void test() throws Exception {

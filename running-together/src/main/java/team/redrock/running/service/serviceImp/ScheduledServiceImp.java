@@ -8,7 +8,6 @@ import team.redrock.running.dao.ScheduledDao;
 @Service
 @Component
 public class ScheduledServiceImp {
-
     @Autowired
     private ScheduledDao scheduledDao;
     /**

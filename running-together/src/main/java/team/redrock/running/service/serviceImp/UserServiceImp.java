@@ -2,7 +2,7 @@ package team.redrock.running.service.serviceImp;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,6 +14,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import team.redrock.running.dao.UserDao;
+import team.redrock.running.util.SerializeUtil;
 import team.redrock.running.vo.User;
 import team.redrock.running.vo.UserOtherInfo;
 
@@ -22,14 +23,25 @@ import java.util.List;
 @Service
 @Component
 public class UserServiceImp {
+    public static final String USER_REDIS = "User016";
     @Autowired
     private UserDao userDao;
     @Autowired
-    private RedisTemplate redisTemplate;
-    public static final String USER_REDIS = "User009";
-//    @Async
-    public void insertUserToRedis(String student_id, User userInfo) {
-        this.redisTemplate.opsForHash().put(USER_REDIS, student_id, userInfo);
+    private StringRedisTemplate stringRedisTemplate;
+    @Async
+    public void updateUserInfoToRedis(User userInfo) {
+        String student_id = userInfo.getStudent_id();
+        String strUserInfo = SerializeUtil.serialize(userInfo);
+        this.stringRedisTemplate.opsForValue().set(USER_REDIS+student_id, strUserInfo);
+    }
+
+    public String head_img(String student_id){
+        return this.userDao.getHead_img(student_id);
+    }
+
+    @Async
+    public void updateHeadImg(String url, String student_id){
+        this.userDao.updateHead_img(url, student_id);
     }
 
 
@@ -52,8 +64,15 @@ public class UserServiceImp {
                 return null;
             }
             JSONObject json = response.getBody().getJSONObject("data");
+            User user = new User(json);
 
-            return new User(json);
+            User userForData = selectUserInfo(student_id);
+            if (userForData==null){
+                user.setNickname("取个昵称吧");
+                return user;
+            }else {
+                return userForData;
+            }
         }catch (Exception e){
             return null;
         }
@@ -66,7 +85,7 @@ public class UserServiceImp {
                 user.setNickname("取个昵称吧");
             }
             try {
-                this.redisTemplate.opsForHash().put(USER_REDIS, user.getStudent_id(), user);
+                updateUserInfo(user);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -75,7 +94,7 @@ public class UserServiceImp {
     }
 
     public Boolean updateUserInfo(User user) {
-        this.redisTemplate.opsForHash().put(USER_REDIS, user.getStudent_id(), user);
+        updateUserInfoToRedis(user);
         return this.userDao.updateUserInfo(user);
     }
 
@@ -84,24 +103,19 @@ public class UserServiceImp {
      * @param student_id
      * @return
      */
-
     public User selectUserInfo(String student_id) {
         User user = new User();
-        try {
-            user = (User) this.redisTemplate.opsForHash().get(USER_REDIS, student_id);
-            if (user!=null){
-                return new User(user);
-            }else {
-                user = this.userDao.selectUserByStudentId(student_id);
+        String strUserInfo = this.stringRedisTemplate.opsForValue().get(USER_REDIS + student_id);
+        if (strUserInfo != null){
+            user = (User) SerializeUtil.deserialize(strUserInfo);
+            return new User(user);
+        }else {
+            user = this.userDao.selectUserByStudentId(student_id);
+            if (user != null){
+                updateUserInfoToRedis(user);
                 return new User(user);
             }
-        }catch (Exception e){
-            User userFromDatabase = this.userDao.selectUserByStudentId(student_id);
-            e.printStackTrace();
-            user = new User(userFromDatabase);
-            return user;
-        }finally {
-            this.redisTemplate.opsForHash().put(USER_REDIS, student_id, user);
+            return null;
         }
     }
     public List<User> selectUserListByName(String name){

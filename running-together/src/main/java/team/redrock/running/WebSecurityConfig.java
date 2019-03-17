@@ -46,6 +46,10 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
             String timestamp = request.getHeader("timestamp");
             String signature = request.getHeader("signature");
 
+            System.out.println("token: "+strToken);
+            System.out.println("time: "+timestamp);
+            System.out.println("signature: "+signature);
+
             boolean flag = false;
             try {
                 Token token = Token.CreateFrom(strToken);
@@ -60,7 +64,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
                 response.getWriter().write("token error");
                 return false;
             } else {
-                if ((Long.parseLong(timestamp) + 1000) < System.currentTimeMillis() / 1000) {
+                if ((Long.parseLong(timestamp) + 2) < System.currentTimeMillis()/1000 ) {
                     response.getWriter().write("duplicate commit");
                     return false;
                 } else {
