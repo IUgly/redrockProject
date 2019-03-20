@@ -1,5 +1,7 @@
 package team.redrock.running.util;
 
+import com.alibaba.fastjson.JSONObject;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -17,9 +19,21 @@ import java.util.Base64;
  */
 public class Encrypt {
 
-    private static final String IV_STRING = "zhangshangcquptv";
+    private static final String IV_STRING = "running-together";
     private static final String charset = "UTF-8";
-    public static final String KEY = "redrockvolunteer";
+    public static final String KEY = "redrockmobilerun";
+
+    public static void main(String[] args) throws Exception{
+        //加密解密
+        String run_data = "{\"student_id\":\"2018212639\",\"begin_time\":1478075935,\"end_time\":1478079295,\"lat_lng\":[{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972}],\"distance\":8.88,\"steps\":2000,\"date\":\"2016-11-12\"}";
+        String sec = Encrypt.aesEncryptString(run_data);
+        System.out.println(sec);
+
+        String data = Decrypt.aesDecryptString(sec);
+        JSONObject json = JSONObject.parseObject(data);
+
+        System.out.println(json.toJSONString());
+    }
 
     public static String aesEncryptString(String content) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
         byte[] contentBytes = content.getBytes(charset);

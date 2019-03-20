@@ -30,12 +30,14 @@ public class RecordServiceImp {
         JSONArray jsonArray = new JSONArray();
 
         jsonArray.add(recordList);
+        System.out.println(jsonArray.toJSONString());
 
         return JSONObject.toJSONString(new RankResponseBean(
                 jsonArray,
                 UnicomResponseEnums.SUCCESS,
                 sum,
                 this_pageSize));
+
     }
     public Record getRecordById(String id){
         Record record = this.recordDao.selectDistanceRecordById(id);

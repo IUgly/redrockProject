@@ -42,12 +42,14 @@ public class InviteInfo implements Serializable {
     public InviteInfo(){}
 
     public InviteInfo(User invited_user, String passive_Students) {
-        this.invited_studentId = invited_user.getStudent_id();
+        String invited_studentId = invited_user.getStudent_id();
+        this.invited_studentId = invited_studentId;
         this.nickname = invited_user.getNickname();
         this.date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
         String[] strings = passive_Students.substring
                 (1, passive_Students.length()-1).split(",");
         this.passive_studentArray = strings;
+        result.put(invited_studentId, "1");
         for (String s: strings){
             result.put(s, "0");
         }

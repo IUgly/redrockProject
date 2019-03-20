@@ -86,8 +86,8 @@ public class UserControl extends AbstractBaseController {
             return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.RUNDATA_ERROR));
         }
         //插入跑步数据到mysql
-        Record record = new Record(JSONObject.parseObject(info));
-//        this.iRecordService.addRecord("distance", record);
+        JSONObject json = JSONObject.parseObject(info);
+        Record record = new Record(json);
         this.updateScoreService.notInvitedUpdate(record);
         return JSONObject.toJSONString(new ResponseBean<>(record,UnicomResponseEnums.SUCCESS));
     }
@@ -96,6 +96,7 @@ public class UserControl extends AbstractBaseController {
         if (page == null){
             page = 1;
         }
+        this.stringRedisTemplate.delete(DISTANCE_RECORD+student_id+page);
         String result = this.stringRedisTemplate.opsForValue().get(DISTANCE_RECORD+student_id+page);
         if (result == null){
             result =this.recordServiceImp.getLatLngList(student_id, page);

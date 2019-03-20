@@ -25,8 +25,7 @@ public enum UnicomResponseEnums {
 	LOGOUT_SUCCESS(003,"已退出登录"),
 	FILEUPLOAD_SUCCESS(022,"上传成功"),
 	NOLOGIN(023,"未登陆,或token无效或过期"),
-	ILLEGAL_ARGUMENT(024,"参数不合法"),
-	ERROR_IDCODE(025,"验证码不正确");
+	INVITATION_NOTEXIT(82, "邀约已经不存在");
 
 	private int status;
 	private String message;

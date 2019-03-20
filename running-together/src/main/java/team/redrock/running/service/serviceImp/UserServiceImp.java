@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 @Component
 public class UserServiceImp {
-    public static final String USER_REDIS = "User016";
+    public static final String USER_REDIS = "User018";
     @Autowired
     private UserDao userDao;
     @Autowired

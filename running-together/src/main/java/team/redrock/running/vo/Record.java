@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 
 @Data
@@ -14,9 +13,9 @@ public class Record implements Serializable {
     private String class_id;
     private long begin_time;
     private long end_time;
-    private int steps;
-    private double distance;
-    private Date date;
+    private Integer steps;
+    private Double distance;
+    private String date;
     private JSONArray lat_lng;
     private String id;
     private String invited_id;
@@ -30,7 +29,7 @@ public class Record implements Serializable {
         this.end_time = Long.parseLong(json.getString("end_time"));
         this.steps = Integer.parseInt(json.getString("steps"));
         this.distance = Double.valueOf(json.getString("distance"));
-        this.date = Date.valueOf(json.getString("date"));
+//        this.date = new Timestamp(new Date().getTime());
         this.setLat_lng(json.getJSONArray("lat_lng"));
         this.invited_id = invited_id;
     }
@@ -40,7 +39,7 @@ public class Record implements Serializable {
         this.end_time = Long.parseLong(json.getString("end_time"));
         this.steps = Integer.parseInt(json.getString("steps"));
         this.distance = Double.valueOf(json.getString("distance"));
-        this.date = Date.valueOf(json.getString("date"));
+//        this.date = new Timestamp(new Date().getTime());
         this.setLat_lng(json.getJSONArray("lat_lng"));
         this.invited_id = invited_id;
         this.student_id = student_id;
@@ -56,8 +55,10 @@ public class Record implements Serializable {
         this.end_time = Long.parseLong(json.getString("end_time"));
         this.steps = Integer.parseInt(json.getString("steps"));
         this.distance = Double.valueOf(json.getString("distance"));
-        this.date = Date.valueOf(json.getString("date"));
+//        this.date = new Timestamp(new Date().getTime());
         this.setLat_lng(json.getJSONArray("lat_lng"));
     }
+
+
 
 }

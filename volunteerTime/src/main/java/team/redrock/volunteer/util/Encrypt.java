@@ -23,7 +23,7 @@ public class Encrypt {
 
     public static void main(String[] args) throws Exception{
         //加密
-        String str = "2017210129";
+        String str = "2017211903";
         String sec = Encrypt.aesEncryptString(str);
 
         System.out.println(sec);

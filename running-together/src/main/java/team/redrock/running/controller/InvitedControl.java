@@ -24,8 +24,8 @@ import java.util.List;
 
 @RestController
 public class InvitedControl {
-    public static final String USER_REDIS = "User016";
-    public static final String INVITATION_REDIS = "InvitationRedis016";
+    public static final String USER_REDIS = "User018";
+    public static final String INVITATION_REDIS = "InvitationRedis018";
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
@@ -85,6 +85,11 @@ public class InvitedControl {
     @PostMapping(value = "/invite/result", produces = "application/json")
     public String receiveOrOther(String invited_id, String student_id, String result){
         InviteInfo inviteInfo = this.invitedService.getInvitedById(invited_id);
+        if (inviteInfo == null){
+            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.INVITATION_NOTEXIT));
+        }else if (inviteInfo.getResult().get(student_id) == null){
+            return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.INVITATION_NOTEXIT));
+        }
         inviteInfo.getResult().put(student_id, result);
         this.invitedService.updateInvitationInfo(inviteInfo);
 
@@ -94,7 +99,7 @@ public class InvitedControl {
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
     @PostMapping(value = "/invite/update_data", produces = "application/json")
-    public String inviteUpdateRunData(String student_id, String invited_id, String run_data){
+    public String inviteUpdateRunData(String invited_id, String run_data){
         String info = null;
         try {
             info = Decrypt.aesDecryptString(run_data);
@@ -104,11 +109,13 @@ public class InvitedControl {
         JSONObject json = JSONObject.parseObject(info);
         InviteInfo inviteInfo = this.invitedService.getInvitedById(invited_id);
 
+        String student_id = json.getString("student_id");
         Record record = new Record(json, invited_id, student_id);
         this.updateScoreService.notInvitedUpdate(record);
 
         Double score = Double.parseDouble(json.getString("distance"));
-        this.invitedService.invitationToMysql(student_id, score/100 * inviteInfo.getAcceptUsersNum());
+        Double invitationScore = score/100 * inviteInfo.getResult().size();
+        this.invitedService.invitationToMysql(student_id, invitationScore);
         return JSONObject.toJSONString(new ResponseBean<>(new Record(json, invited_id), UnicomResponseEnums.SUCCESS));
     }
 

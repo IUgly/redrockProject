@@ -19,12 +19,14 @@ import team.redrock.running.vo.RankInfo;
 import team.redrock.running.vo.User;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Component
 public class InvitedService {
-    public static final String INVITATION_REDIS = "InvitationRedis016";
-    public static final String USER_REDIS = "User016";
+    public static final String INVITATION_REDIS = "InvitationRedis018";
+    public static final String USER_REDIS = "User018";
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
@@ -111,7 +113,17 @@ public class InvitedService {
     }
     @Async
     public void cancelInvited(String invited_id){
-        this.stringRedisTemplate.opsForValue().getOperations().delete(INVITATION_REDIS+invited_id);
-        this.recordDao.cancelInvited(invited_id);
+        InviteInfo inviteInfo = (InviteInfo) SerializeUtil.deserialize(this.stringRedisTemplate.opsForValue().get(INVITATION_REDIS+invited_id));
+        Map<String,String> resultMap = inviteInfo.getResult();
+
+        Map<String, String> result =
+                        resultMap.entrySet().stream()
+                        .filter(map -> map.getValue().equals("1"))
+                        .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+
+        inviteInfo.setResult(result);
+
+        this.stringRedisTemplate.opsForValue().set
+                (INVITATION_REDIS+invited_id, SerializeUtil.serialize(inviteInfo));
     }
 }

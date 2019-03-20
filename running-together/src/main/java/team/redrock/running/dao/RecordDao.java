@@ -15,7 +15,7 @@ public interface RecordDao {
     @Insert("INSERT INTO distance_record " +
             "set student_id=#{student_id},begin_time=#{begin_time}," +
             "end_time=#{end_time},distance=#{distance},steps=#{steps}," +
-            "date=#{date},lat_lng=#{lat_lng, typeHandler=team.redrock.running.bean.JsonTypeHandler}")
+            "lat_lng=#{lat_lng, typeHandler=team.redrock.running.bean.JsonTypeHandler}")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertDistanceRecord(Record record);
 
@@ -38,16 +38,6 @@ public interface RecordDao {
     List<InviteInfo> selectInvitedRecordList(@Param("student_id") String student_id,
                                              @Param("page") Integer page,
                                              @Param("type") String type);
-
-    @Update("update invited_record set distance=#{distance},state=#{state},passive_students=#{passive_students, typeHandler=team.redrock.running.bean.JsonTypeHandler} where invited_id=#{invited_id}")
-    void overInvited(InviteInfo inviteInfo);
-
-    @Update("update student_invitation_rank set all_invited_num =all_invited_num +1 where student_id = #{student_id}")
-    void addOneInvitedNum(String studentOrClass_id);
-
-
-    @SelectProvider(type = RecordSQL.class, method = "addRecord")
-    void addRecord(@Param("RankInfo") RankInfo rankInfo);
 
     /**
      * 查询mysql中有无对应学生或者班级 路程的排名信息，没有则插入  //on DUPLICATE key update
@@ -93,9 +83,6 @@ public interface RecordDao {
     @SelectProvider(type = TableSizeSQL.class, method = "tableSize")
     Integer recordSize(@Param("table") String table,
                        @Param("student_id") String student_id);
-
-    @Delete("DELETE FROM invited_record WHERE invited_id = #{invited_id}")
-    void cancelInvited(String invited_id);
 
     @SelectProvider(type = RankSQL.class, method = "rankList")
     List<RankInfo> size(@Param("table") String table,

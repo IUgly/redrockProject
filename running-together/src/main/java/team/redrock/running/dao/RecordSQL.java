@@ -26,7 +26,9 @@ public class RecordSQL {
                     "where invited_student_id="+ student_id +
                     " LIMIT "+start + ", " + end;
         }else if (type.equals("distance_record")){
-            sql = "select * from distance_record where student_id = " +student_id +
+
+            sql = "select student_id,id,distance,date,lat_lng " +
+                    "from distance_record where student_id = " +student_id +
                     " LIMIT "+ start + ", " + end;
         }
 

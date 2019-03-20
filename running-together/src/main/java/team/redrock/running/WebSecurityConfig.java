@@ -31,14 +31,17 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
-//        addInterceptor.excludePathPatterns("/error");
-//        addInterceptor.excludePathPatterns("/user/login");
+        addInterceptor.excludePathPatterns("/error");
+        addInterceptor.excludePathPatterns("/user/login");
         addInterceptor.addPathPatterns("/user/distance/update");
         addInterceptor.addPathPatterns("/invite/update_data");
         addInterceptor.addPathPatterns("/mobilerun/user/distance/update");
         addInterceptor.addPathPatterns("/mobilerun/invite/update_data");
     }
 
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis()/1000);
+    }
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
@@ -46,9 +49,6 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
             String timestamp = request.getHeader("timestamp");
             String signature = request.getHeader("signature");
 
-            System.out.println("token: "+strToken);
-            System.out.println("time: "+timestamp);
-            System.out.println("signature: "+signature);
 
             boolean flag = false;
             try {

@@ -1,7 +1,6 @@
 package team.redrock.running.service.serviceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import team.redrock.running.dao.RecordDao;
@@ -18,7 +17,7 @@ public class UpdateScoreService {
     private UserServiceImp userServiceImp;
 
     //个人 班级排行榜  日周月总
-    @Async
+//    @Async
     public void notInvitedUpdate(Record record) {
         this.recordDao.insertDistanceRecord(record);
         String student_id = record.getStudent_id();

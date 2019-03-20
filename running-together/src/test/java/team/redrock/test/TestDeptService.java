@@ -23,7 +23,6 @@ import team.redrock.running.vo.InviteInfo;
 import team.redrock.running.vo.Record;
 import team.redrock.running.vo.User;
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -118,7 +117,7 @@ public class TestDeptService {
         Record record = new Record();
         record.setBegin_time(System.currentTimeMillis());
         record.setStudent_id("2017211903");
-        record.setDate(Date.valueOf("2016-11-12"));
+//        record.setDate(Date.valueOf("2016-11-12"));
         record.setEnd_time(System.currentTimeMillis());
         JSONArray latLing = JSONArray.parseArray("[{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972}]");
         record.setLat_lng(latLing);
