@@ -25,7 +25,7 @@ public class Encrypt {
 
     public static void main(String[] args) throws Exception{
         //加密解密
-        String run_data = "{\"student_id\":\"2018212639\",\"begin_time\":1478075935,\"end_time\":1478079295,\"lat_lng\":[{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972}],\"distance\":8.88,\"steps\":2000,\"date\":\"2016-11-12\"}";
+        String run_data = "{\"student_id\":\"2015211878\",\"begin_time\":1478079445,\"end_time\":1478079945,\"lat_lng\":[{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972},{\"longitude\":39.999391,\"latitude\":116.135972}],\"distance\":66.66,\"steps\":2000,\"date\":\"2016-11-12\"}";
         String sec = Encrypt.aesEncryptString(run_data);
         System.out.println(sec);
 

@@ -88,4 +88,7 @@ public interface RecordDao {
     List<RankInfo> size(@Param("table") String table,
                  @Param("type") String type,
                  @Param("page") Integer page);
+
+    @Delete("delete from invited_record where invited_id = #{invited_id}")
+    void deleteInvitationRecord(String invited_id);
 }

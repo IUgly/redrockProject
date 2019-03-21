@@ -51,7 +51,7 @@ public class InvitedControl {
     public String getInvitedResult(String student_id){
         JSONArray jsonArray = this.invitedService.getInvitedResult(student_id);
         if (jsonArray == null){
-            return JSONObject.toJSONString(new ResponseBean(UnicomResponseEnums.NO_SEND_INVITATION));
+            return JSONObject.toJSONString(new ResponseBean(UnicomResponseEnums.INVITATION_NOTEXIT));
         }
         return JSONObject.toJSONString(new ResponseBean<>(jsonArray, UnicomResponseEnums.SUCCESS));
     }
@@ -111,7 +111,7 @@ public class InvitedControl {
 
         String student_id = json.getString("student_id");
         Record record = new Record(json, invited_id, student_id);
-        this.updateScoreService.notInvitedUpdate(record);
+        this.updateScoreService.invitationUpdate(record);
 
         Double score = Double.parseDouble(json.getString("distance"));
         Double invitationScore = score/100 * inviteInfo.getResult().size();
@@ -145,8 +145,8 @@ public class InvitedControl {
     }
 
     @PostMapping(value = "/invite/cancel", produces = "application/json")
-    public String cancelInvitation(String invited_id){
-        this.invitedService.cancelInvited(invited_id);
+    public String cancelInvitation(String invited_id, String student_id){
+        this.invitedService.cancelInvited(invited_id, student_id);
         return JSONObject.toJSONString(new ResponseBean<>(UnicomResponseEnums.SUCCESS));
     }
 }

@@ -16,13 +16,13 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/controller/UserControl.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/configuration/LoginAdapter.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/bean/ResponseBean.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/Encrypt.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/inteceptor/LoginInterceptor.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/MD5Util.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/SerializeUtil.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/RecordServiceImp.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/bean/JsonTypeHandler.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/Token.java
-/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/dao/ClassDao.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/WebSecurityConfig.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/StartSpringBootMain.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/controller/RankControl.java
@@ -35,6 +35,7 @@
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/domain/ScheduledTasks.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/vo/ClassRank.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/serviceImp/ScheduledServiceImp.java
+/Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/Decrypt.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/bean/RankResponseBean.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/service/IRankService.java
 /Users/kuangjunlin/Desktop/study/redrockProject/running-together/src/main/java/team/redrock/running/util/AbstractBaseController.java

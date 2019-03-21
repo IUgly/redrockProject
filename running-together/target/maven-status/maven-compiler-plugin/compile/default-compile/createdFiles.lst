@@ -10,7 +10,6 @@ team/redrock/running/vo/Vo.class
 team/redrock/running/bean/RankResponseBean.class
 team/redrock/running/enums/UnicomResponseEnums.class
 team/redrock/running/controller/UserControl.class
-team/redrock/running/dao/ClassDao.class
 team/redrock/running/WebSecurityConfig.class
 team/redrock/running/vo/RankInfo.class
 team/redrock/running/service/serviceImp/UpdateScoreService.class
@@ -37,7 +36,9 @@ team/redrock/running/service/serviceImp/RecordServiceImp.class
 team/redrock/running/service/serviceImp/InvitedService.class
 team/redrock/running/dao/UserDao.class
 team/redrock/running/service/IRankService.class
+team/redrock/running/util/Decrypt.class
 team/redrock/running/util/SerializeUtil.class
+team/redrock/running/util/Encrypt.class
 team/redrock/running/util/Util.class
 team/redrock/running/util/Token.class
 team/redrock/running/vo/UserOtherInfo.class

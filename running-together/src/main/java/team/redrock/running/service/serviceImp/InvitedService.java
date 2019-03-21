@@ -20,7 +20,6 @@ import team.redrock.running.vo.User;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @Component
@@ -102,28 +101,41 @@ public class InvitedService {
 
     //得到最近一次邀约结果
     public JSONArray getInvitedResult(String student_id){
-        User user = this.userServiceImp.selectUserInfo(student_id);
-        String invited_id = user.getInvitingNow();
-        if (invited_id == null){
+        try {
+            User user = this.userServiceImp.selectUserInfo(student_id);
+            String invited_id = user.getInvitingNow();
+            if (invited_id == null){
+                return null;
+            }
+            InviteInfo result = getInvitedById(invited_id);
+            String resultString = result.getResultString();
+            return JSONArray.parseArray(resultString);
+        }catch (Exception e){
             return null;
         }
-        InviteInfo result = getInvitedById(invited_id);
-        String resultString = result.getResultString();
-        return JSONArray.parseArray(resultString);
     }
-    @Async
-    public void cancelInvited(String invited_id){
+//    @Async
+    public void cancelInvited(String invited_id, String student_id){
         InviteInfo inviteInfo = (InviteInfo) SerializeUtil.deserialize(this.stringRedisTemplate.opsForValue().get(INVITATION_REDIS+invited_id));
-        Map<String,String> resultMap = inviteInfo.getResult();
+        if (inviteInfo.getInvited_studentId().equals(student_id)){
+            this.stringRedisTemplate.delete(INVITATION_REDIS+invited_id);
+            this.recordDao.deleteInvitationRecord(invited_id);
+            return;
+        }else {
+            Map<String,String> resultMap = inviteInfo.getResult();
+            resultMap.remove(student_id);
+            inviteInfo.setResult(resultMap);
 
-        Map<String, String> result =
-                        resultMap.entrySet().stream()
-                        .filter(map -> map.getValue().equals("1"))
-                        .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+            this.stringRedisTemplate.opsForValue().set
+                    (INVITATION_REDIS+invited_id, SerializeUtil.serialize(inviteInfo));
 
-        inviteInfo.setResult(result);
-
-        this.stringRedisTemplate.opsForValue().set
-                (INVITATION_REDIS+invited_id, SerializeUtil.serialize(inviteInfo));
+            User user = this.userServiceImp.selectUserInfo(student_id);
+            user.setInvitingNow("");
+            this.userServiceImp.updateUserInfoToRedis(user);
+        }
+//        Map<String, String> result =
+//                        resultMap.entrySet().stream()
+//                        .filter(map -> map.getValue().equals("1"))
+//                        .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 }
